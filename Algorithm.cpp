@@ -1,4 +1,5 @@
 #include "Algorithm.hpp"
+#include "InputProcessor.hpp"
 #include "Trie.hpp"
 #include <iostream>
 #include <algorithm>
@@ -44,7 +45,7 @@ void dfs(const size_t row, const size_t col,
 }
 
 // Finds and prints all the words occuring in the letters grid.
-void find_words(const std::vector<std::vector<char>>& letters, const std::vector<std::string>& words)
+void find_words(const std::vector<std::vector<char>>& letters)
 {
     if (std::any_of(letters.begin(), letters.end(), [&](const auto& row) { return row.size() != letters.size(); }))
     {
@@ -53,9 +54,8 @@ void find_words(const std::vector<std::vector<char>>& letters, const std::vector
 
     const std::vector<std::string> found_words = [&]()
     {
+        const std::vector<std::string> words = get_list_of_words();
         const Trie trie(words); // inserts every word in words to the trie
-        std::string current_word = "";
-        std::vector<std::vector<bool>> visited(letters.size(), std::vector<bool>(letters.size(), false));
         std::vector<std::string> found_words;
 
         for (size_t i = 0; i < letters.size(); ++i)
@@ -63,6 +63,8 @@ void find_words(const std::vector<std::vector<char>>& letters, const std::vector
             for (size_t j = 0; j < letters.size(); ++j)
             {
                 // Find all the words that start at the (i, j) cell.
+                std::string current_word = "";
+                std::vector<std::vector<bool>> visited(letters.size(), std::vector<bool>(letters.size(), false));
                 dfs(i, j, current_word, trie.root->children[letters[i][j] - 'a'], visited, found_words, letters);
             }
         }

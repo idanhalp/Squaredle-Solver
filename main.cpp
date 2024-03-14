@@ -1,4 +1,3 @@
-#include "InputProcessor.hpp"
 #include "Algorithm.hpp"
 
 int main()
@@ -8,7 +7,5 @@ int main()
                                                     {'i','e','u','a'},
                                                     {'m','n','g','q'}};
 
-    const std::vector<std::string> words = get_list_of_words();
-
-    find_words(letters, words);
+    find_words(letters);
 }
