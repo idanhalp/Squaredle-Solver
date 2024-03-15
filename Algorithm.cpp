@@ -44,7 +44,9 @@ namespace Algorithm
                 const size_t next_row = row + direction[0];
                 const size_t next_col = col + direction[1];
 
-                if (next_row < letters.size() && next_col < letters.size() && !visited[next_row][next_col])
+                if (next_row < letters.size() && next_col < letters.size() && 
+                    !visited[next_row][next_col] &&
+                    letters[next_row][next_col] != InputOutputProcessor::EMPTY_CELL)
                 {
                     dfs(next_row, next_col, current_word, trie_node->children[letters[next_row][next_col] - 'a'], visited, found_words, letters);
                 }

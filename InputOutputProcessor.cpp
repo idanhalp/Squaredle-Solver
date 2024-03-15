@@ -4,7 +4,7 @@
 #include <algorithm>
 
 namespace InputOutputProcessor
-{
+{    
     /**
     * The original list of words contained their definitions, which is redundant for our purposes.
     * This function creates a new text file with a single word in every line.
@@ -78,10 +78,19 @@ namespace InputOutputProcessor
      */
     std::vector<std::vector<char>> process_input()
     {
-        const std::vector<std::vector<char>> letters{   {'q','g','n','t'},
-                                                        {'a','u','e','i'},
-                                                        {'i','e','u','a'},
-                                                        {'m','n','g','q'}};
+        const char XXX = EMPTY_CELL;
+        
+        const std::vector<std::vector<char>> letters{   {XXX,'h','d','i',XXX},
+                                                        {'c','e',XXX,'e','c'},
+                                                        {'r',XXX,'s',XXX,'a'},
+                                                        {'m','a',XXX,'t','a'},
+                                                        {XXX,'w','e','b',XXX}};
+
+        // const std::vector<std::vector<char>> letters{   {'q','g','n','t'},
+        //                                                 {'a','u','e','i'},
+        //                                                 {'i','e','u','a'},
+        //                                                 {'m','n','g','q'}};
+
         return letters;
     }
 
