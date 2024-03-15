@@ -1,7 +1,7 @@
 #include "Algorithm.hpp"
 #include "InputOutputProcessor.hpp"
+#include "Parameters.hpp"
 #include "Trie.hpp"
-#include <iostream>
 #include <algorithm>
 #include <stdexcept>
 
@@ -46,7 +46,7 @@ namespace Algorithm
 
                 if (next_row < letters.size() && next_col < letters.size() && 
                     !visited[next_row][next_col] &&
-                    letters[next_row][next_col] != InputOutputProcessor::EMPTY_CELL)
+                    letters[next_row][next_col] != Parameters::EMPTY_CELL)
                 {
                     dfs(next_row, next_col, current_word, trie_node->children[letters[next_row][next_col] - 'a'], visited, found_words, letters);
                 }

@@ -1,4 +1,5 @@
 #include "InputOutputProcessor.hpp"
+#include "Parameters.hpp"
 #include <fstream>
 #include <iostream>
 #include <algorithm>
@@ -54,13 +55,12 @@ namespace InputOutputProcessor
             return {};
         }
 
-        const size_t MIN_WORD_LENGTH = 4;
         std::string s;
         std::vector<std::string> words;
 
         while (getline(input, s))
         {
-            if (s.length() >= MIN_WORD_LENGTH)
+            if (s.length() >= Parameters::MIN_WORD_LENGTH)
             {
                 words.push_back(s);
             }
@@ -78,7 +78,7 @@ namespace InputOutputProcessor
      */
     std::vector<std::vector<char>> process_input()
     {
-        const char XXX = EMPTY_CELL;
+        const char XXX = Parameters::EMPTY_CELL;
         
         const std::vector<std::vector<char>> letters{   {XXX,'h','d','i',XXX},
                                                         {'c','e',XXX,'e','c'},
