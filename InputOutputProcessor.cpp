@@ -80,18 +80,18 @@ namespace InputOutputProcessor
     {
         const char XXX = Parameters::EMPTY_CELL;
         
-        const std::vector<std::vector<char>> letters{   {XXX,'h','d','i',XXX},
+        const std::vector<std::vector<char>> grid{   {XXX,'h','d','i',XXX},
                                                         {'c','e',XXX,'e','c'},
                                                         {'r',XXX,'s',XXX,'a'},
                                                         {'m','a',XXX,'t','a'},
                                                         {XXX,'w','e','b',XXX}};
 
-        // const std::vector<std::vector<char>> letters{   {'q','g','n','t'},
+        // const std::vector<std::vector<char>> grid{   {'q','g','n','t'},
         //                                                 {'a','u','e','i'},
         //                                                 {'i','e','u','a'},
         //                                                 {'m','n','g','q'}};
 
-        return letters;
+        return grid;
     }
 
     /**

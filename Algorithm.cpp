@@ -19,19 +19,19 @@ namespace Algorithm
      * @param trie_node current position in the trie.
      * @param visited indicates wether some cell was already visited
      * @param found_words words that were found during the grid traversal.
-     * @param letters input grid. 
+     * @param grid input grid. 
      */
     void dfs(const size_t row, const size_t col, 
             std::string& current_word, 
             const TrieNode* const trie_node, 
             std::vector<std::vector<bool>>& visited, 
             std::vector<std::string>& found_words,
-            const std::vector<std::vector<char>>& letters)
+            const std::vector<std::vector<char>>& grid)
     {
         if (trie_node) // current_word is still a valid prefix
         {
             visited[row][col] = true;
-            current_word.push_back(letters[row][col]);
+            current_word.push_back(grid[row][col]);
 
             if (trie_node->is_full_word)
             {
@@ -44,11 +44,11 @@ namespace Algorithm
                 const size_t next_row = row + direction[0];
                 const size_t next_col = col + direction[1];
 
-                if (next_row < letters.size() && next_col < letters.size() && 
+                if (next_row < grid.size() && next_col < grid.size() && 
                     !visited[next_row][next_col] &&
-                    letters[next_row][next_col] != Parameters::EMPTY_CELL)
+                    grid[next_row][next_col] != Parameters::EMPTY_CELL)
                 {
-                    dfs(next_row, next_col, current_word, trie_node->children[letters[next_row][next_col] - 'a'], visited, found_words, letters);
+                    dfs(next_row, next_col, current_word, trie_node->children[grid[next_row][next_col] - 'a'], visited, found_words, grid);
                 }
             }
 
@@ -61,12 +61,12 @@ namespace Algorithm
     /**
      * @brief Finds the words that occur in the letters grid.
      * 
-     * @param letters a 2d grid filled with letters.
+     * @param grid a 2d grid filled with letters.
      * @return a list with all the words in the grid (might contain duplicates).
      */
-    std::vector<std::string> find_words(const std::vector<std::vector<char>>& letters)
+    std::vector<std::string> find_words(const std::vector<std::vector<char>>& grid)
     {
-        if (std::any_of(letters.begin(), letters.end(), [&](const auto& row) { return row.size() != letters.size(); }))
+        if (std::any_of(grid.begin(), grid.end(), [&](const auto& row) { return row.size() != grid.size(); }))
         {
             throw std::invalid_argument("Grid must be square!\n");
         }
@@ -75,16 +75,16 @@ namespace Algorithm
         const Trie trie(dictionary); // inserts every word in words to the trie
         std::vector<std::string> found_words;
 
-        for (size_t i = 0; i < letters.size(); ++i)
+        for (size_t i = 0; i < grid.size(); ++i)
         {
-            for (size_t j = 0; j < letters.size(); ++j)
+            for (size_t j = 0; j < grid.size(); ++j)
             {
-                if (letters[i][j] != Parameters::EMPTY_CELL)
+                if (grid[i][j] != Parameters::EMPTY_CELL)
                 {
                     // Find all the words that start at the (i, j) cell.
                     std::string current_word = "";
-                    std::vector<std::vector<bool>> visited(letters.size(), std::vector<bool>(letters.size(), false));
-                    dfs(i, j, current_word, trie.root->children[letters[i][j] - 'a'], visited, found_words, letters);
+                    std::vector<std::vector<bool>> visited(grid.size(), std::vector<bool>(grid.size(), false));
+                    dfs(i, j, current_word, trie.root->children[grid[i][j] - 'a'], visited, found_words, grid);
                 }
             }
         }
