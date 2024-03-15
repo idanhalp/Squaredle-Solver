@@ -79,10 +79,13 @@ namespace Algorithm
         {
             for (size_t j = 0; j < letters.size(); ++j)
             {
-                // Find all the words that start at the (i, j) cell.
-                std::string current_word = "";
-                std::vector<std::vector<bool>> visited(letters.size(), std::vector<bool>(letters.size(), false));
-                dfs(i, j, current_word, trie.root->children[letters[i][j] - 'a'], visited, found_words, letters);
+                if (letters[i][j] != Parameters::EMPTY_CELL)
+                {
+                    // Find all the words that start at the (i, j) cell.
+                    std::string current_word = "";
+                    std::vector<std::vector<bool>> visited(letters.size(), std::vector<bool>(letters.size(), false));
+                    dfs(i, j, current_word, trie.root->children[letters[i][j] - 'a'], visited, found_words, letters);
+                }
             }
         }
 
