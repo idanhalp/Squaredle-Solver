@@ -4,6 +4,9 @@
 #include <vector>
 #include <string>
 
-void find_words(const std::vector<std::vector<char>>& letters);
+namespace Algorithm
+{
+    std::vector<std::string> find_words(const std::vector<std::vector<char>>& letters);
+}
 
 #endif

@@ -36,7 +36,7 @@ void Trie::insert(const std::string& word)
 
 bool Trie::contains_word(const std::string& word) const
 {
-    TrieNode* node = root;
+    TrieNode const* node = root;
 
     for (const char c : word)
     {
@@ -55,7 +55,7 @@ bool Trie::contains_word(const std::string& word) const
 
 bool Trie::contains_prefix(const std::string& prefix) const
 {
-    TrieNode* node = root;
+    TrieNode const* node = root;
 
     for (const char c : prefix)
     {
