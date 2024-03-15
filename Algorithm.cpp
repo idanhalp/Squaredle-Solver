@@ -7,11 +7,11 @@
 
 namespace Algorithm
 {
-    // We can move down, up, left, right and in 4 diagonals
+    // We can move down, up, left, right and in 4 diagonals.
     const std::vector<std::vector<int>> DIRECTIONS{{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
 
     /**
-     * @brief Traverses the grid and adds occuring words to found_words.
+     * @brief Traverses the grid and adds occurring words to found_words.
      * 
      * @param row current row.
      * @param col current column.

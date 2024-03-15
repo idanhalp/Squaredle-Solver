@@ -90,7 +90,7 @@ namespace InputOutputProcessor
      *
      * Prints the words found in the grid, ordered by their length.
      *
-     * @param found_words The words occuring in the input.
+     * @param found_words The words occurring in the input.
      */
     void process_output(std::vector<std::string>& found_words)
     {
