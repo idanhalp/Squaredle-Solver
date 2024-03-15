@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+#include <stdexcept>
 
 namespace InputOutputProcessor
 {    
@@ -80,16 +81,22 @@ namespace InputOutputProcessor
     {
         const char XXX = Parameters::EMPTY_CELL;
         
-        const std::vector<std::vector<char>> grid{   {XXX,'h','d','i',XXX},
-                                                        {'c','e',XXX,'e','c'},
-                                                        {'r',XXX,'s',XXX,'a'},
-                                                        {'m','a',XXX,'t','a'},
-                                                        {XXX,'w','e','b',XXX}};
+        const std::vector<std::vector<char>> grid{  
+                                                    {XXX,'h','d','i',XXX},
+                                                    {'c','e',XXX,'e','c'},
+                                                    {'r',XXX,'s',XXX,'a'},
+                                                    {'m','a',XXX,'t','a'},
+                                                    {XXX,'w','e','b',XXX}};
 
-        // const std::vector<std::vector<char>> grid{   {'q','g','n','t'},
-        //                                                 {'a','u','e','i'},
-        //                                                 {'i','e','u','a'},
-        //                                                 {'m','n','g','q'}};
+        // const std::vector<std::vector<char>> grid{  {'q','g','n','t'},
+        //                                             {'a','u','e','i'},
+        //                                             {'i','e','u','a'},
+        //                                             {'m','n','g','q'}};
+
+        if (std::any_of(grid.begin(), grid.end(), [&](const auto& row) { return row.size() != grid.size(); }))
+        {
+            throw std::invalid_argument("Grid must be square!\n");
+        }
 
         return grid;
     }

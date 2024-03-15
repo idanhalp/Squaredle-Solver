@@ -2,8 +2,7 @@
 #include "InputOutputProcessor.hpp"
 #include "Parameters.hpp"
 #include "Trie.hpp"
-#include <algorithm>
-#include <stdexcept>
+
 
 namespace Algorithm
 {
@@ -65,12 +64,7 @@ namespace Algorithm
      * @return a list with all the words in the grid (might contain duplicates).
      */
     std::vector<std::string> find_words(const std::vector<std::vector<char>>& grid)
-    {
-        if (std::any_of(grid.begin(), grid.end(), [&](const auto& row) { return row.size() != grid.size(); }))
-        {
-            throw std::invalid_argument("Grid must be square!\n");
-        }
-        
+    {        
         const std::vector<std::string> dictionary = InputOutputProcessor::get_list_of_valid_words();
         const Trie trie(dictionary); // inserts every word in words to the trie
         std::vector<std::string> found_words;
