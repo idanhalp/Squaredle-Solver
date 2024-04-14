@@ -1,19 +1,22 @@
 #ifndef TRIE_H
 #define TRIE_H
 
+#include <array>
 #include <vector>
 #include <string>
 
 class TrieNode
 {
+private:
+    static const size_t NUM_OF_LETTERS = 26;
+
 public:
     bool is_full_word;
-    std::vector<TrieNode*> children;
+    std::array<TrieNode*, NUM_OF_LETTERS> children;
 
     TrieNode() : is_full_word(false)
     {
-        const int num_of_letters = 'z' - 'a' + 1;
-        children.resize(num_of_letters);
+        std::fill(children.begin(), children.end(), nullptr);
     }
 
     ~TrieNode()
