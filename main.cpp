@@ -4,7 +4,7 @@
 #include <iostream>
 
 int main()
-{    
+{
     const auto start_time = std::chrono::high_resolution_clock::now();
 
     const std::vector<std::vector<char>> grid = InputOutputProcessor::process_input();
