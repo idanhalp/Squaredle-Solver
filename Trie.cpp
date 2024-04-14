@@ -6,30 +6,30 @@ Trie::Trie() : root(new TrieNode)
 
 Trie::Trie(const std::vector<std::string> words) : root(new TrieNode)
 {
-    for (const std::string& word : words)
-    {
-        insert(word);
-    }
+	for (const std::string& word : words)
+	{
+		insert(word);
+	}
 }
 
 Trie::~Trie()
 {
-    delete root;
+	delete root;
 }
 
 void Trie::insert(const std::string& word)
 {
-    TrieNode* node = root;
+	TrieNode* node = root;
 
-    for (const char c : word)
-    {
-        if (!node->children[c - 'a']) // if the prefix appears for the first time
-        {
-            node->children[c - 'a'] = new TrieNode();
-        }
+	for (const char c : word)
+	{
+		if (!node->children[c - 'a']) // if the prefix appears for the first time
+		{
+			node->children[c - 'a'] = new TrieNode();
+		}
 
-        node = node->children[c - 'a'];
-    }
+		node = node->children[c - 'a'];
+	}
 
-    node->is_full_word = true;
+	node->is_full_word = true;
 }
