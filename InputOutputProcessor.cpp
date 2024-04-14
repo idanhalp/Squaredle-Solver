@@ -73,25 +73,28 @@ namespace InputOutputProcessor
     /**
      * Reads the input.
      *
-     * Currently the input is given explicitly.
+     * Currently the input is hardcoded.
      *
      * @return a 2d grid filled with letters.
      */
     std::vector<std::vector<char>> process_input()
     {
-        const char XXX = Parameters::EMPTY_CELL;
+        /* Example of an input with empty cells:
         
+        const char XXX = Parameters::EMPTY_CELL;
         const std::vector<std::vector<char>> grid{  
                                                     {XXX,'h','d','i',XXX},
                                                     {'c','e',XXX,'e','c'},
                                                     {'r',XXX,'s',XXX,'a'},
                                                     {'m','a',XXX,'t','a'},
                                                     {XXX,'w','e','b',XXX}};
+        */
 
-        // const std::vector<std::vector<char>> grid{  {'q','g','n','t'},
-        //                                             {'a','u','e','i'},
-        //                                             {'i','e','u','a'},
-        //                                             {'m','n','g','q'}};
+        // Squaredle of 14.4.2024
+        const std::vector<std::vector<char>> grid{  {'v','r','u','g'},
+                                                    {'d','a','g','e'},
+                                                    {'i','e','r','a'},
+                                                    {'w','b','v','o'}};
 
         if (std::any_of(grid.begin(), grid.end(), [&](const auto& row) { return row.size() != grid.size(); }))
         {
