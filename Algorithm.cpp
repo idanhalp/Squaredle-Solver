@@ -27,34 +27,37 @@ namespace Algorithm
             std::vector<std::string>& found_words,
             const std::vector<std::vector<char>>& grid)
     {
-        if (trie_node) // current_word is still a valid prefix
+        // Make sure that current_word is a valid prefix of some word in the original dictionary.
+        if (!trie_node)
         {
-            visited[row][col] = true;
-            current_word.push_back(grid[row][col]);
-
-            if (trie_node->is_full_word)
-            {
-                found_words.push_back(current_word);
-            }
-
-            // Try continuing in every direction.
-            for (const std::vector<int>& direction : DIRECTIONS)
-            {
-                const size_t next_row = row + direction[0];
-                const size_t next_col = col + direction[1];
-
-                if (next_row < grid.size() && next_col < grid.size() && 
-                    !visited[next_row][next_col] &&
-                    grid[next_row][next_col] != Parameters::EMPTY_CELL)
-                {
-                    dfs(next_row, next_col, current_word, trie_node->children[grid[next_row][next_col] - 'a'], visited, found_words, grid);
-                }
-            }
-
-            // Backtrack
-            visited[row][col] = false;
-            current_word.pop_back();
+            return;
         }
+        
+        visited[row][col] = true;
+        current_word.push_back(grid[row][col]);
+
+        if (trie_node->is_full_word)
+        {
+            found_words.push_back(current_word);
+        }
+
+        // Try continuing in every direction.
+        for (const std::vector<int>& direction : DIRECTIONS)
+        {
+            const size_t next_row = row + direction[0];
+            const size_t next_col = col + direction[1];
+
+            if (next_row < grid.size() && next_col < grid.size() && 
+                !visited[next_row][next_col] &&
+                grid[next_row][next_col] != Parameters::EMPTY_CELL)
+            {
+                dfs(next_row, next_col, current_word, trie_node->children[grid[next_row][next_col] - 'a'], visited, found_words, grid);
+            }
+        }
+
+        // Backtrack
+        visited[row][col] = false;
+        current_word.pop_back();
     }
 
     /**
