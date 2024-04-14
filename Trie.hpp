@@ -21,11 +21,11 @@ public:
 
     ~TrieNode()
     {
-        for (auto* child : children)
+        for (TrieNode* child : children)
         {
             if (child)
             {
-                delete child;
+                delete child; // Recursive destructor 😲
                 child = nullptr;
             }
         }
@@ -43,8 +43,6 @@ public:
     Trie(const std::vector<std::string> words);
     ~Trie();
     void insert(const std::string& word);
-    bool contains_word(const std::string& word) const;
-    bool contains_prefix(const std::string& prefix) const;
 };
 
 #endif
