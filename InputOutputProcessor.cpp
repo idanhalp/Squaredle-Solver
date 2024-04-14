@@ -96,8 +96,7 @@ namespace InputOutputProcessor
 												  {'i', 'e', 'r', 'a'},
 												  {'w', 'b', 'v', 'o'}};
 
-		if (std::any_of(grid.begin(), grid.end(), [&](const auto& row)
-						{ return row.size() != grid.size(); }))
+		if (std::any_of(grid.begin(), grid.end(), [&](const auto& row) { return row.size() != grid.size(); }))
 		{
 			throw std::invalid_argument("Grid must be square!\n");
 		}
@@ -116,7 +115,7 @@ namespace InputOutputProcessor
 	{
 		// Sort the words by length (tie break by lexicographic order) and remove duplicates.
 		std::sort(found_words.begin(), found_words.end(), [](const std::string& word1, const std::string& word2)
-				  {
+		{
             if (word1.length() != word2.length())
             {
                 return word1.length() < word2.length();
@@ -124,7 +123,8 @@ namespace InputOutputProcessor
             else
             {
                 return word1 < word2; // by lexicographic order
-            } });
+            } 
+		});
 
 		found_words.erase(std::unique(found_words.begin(), found_words.end()), found_words.end()); // remove duplicates
 
