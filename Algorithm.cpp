@@ -45,13 +45,22 @@ namespace Algorithm
 		{
 			const size_t next_row = row + direction[0];
 			const size_t next_col = col + direction[1];
+			const bool is_within_grid = next_row < grid.size() && next_col < grid.size();
 
-			if (next_row < grid.size() && next_col < grid.size() &&
-				!visited[next_row][next_col] &&
-				grid[next_row][next_col] != Parameters::EMPTY_CELL)
+			if (!is_within_grid)
 			{
-				dfs(next_row, next_col, current_word, trie_node->children[grid[next_row][next_col] - 'a'], visited, found_words, grid);
+				continue;
 			}
+
+			const int is_empty_cell = grid[next_row][next_col] == Parameters::EMPTY_CELL;
+			const bool is_already_visited = visited[next_row][next_col];
+
+			if (is_empty_cell || is_already_visited)
+			{
+				continue;
+			}
+
+			dfs(next_row, next_col, current_word, trie_node->children[grid[next_row][next_col] - 'a'], visited, found_words, grid);
 		}
 
 		// Backtrack
@@ -71,16 +80,16 @@ namespace Algorithm
 		const Trie trie(dictionary); // inserts every word in words to the trie
 		std::vector<std::string> found_words;
 
-		for (size_t i = 0; i < grid.size(); ++i)
+		for (size_t row = 0; row < grid.size(); ++row)
 		{
-			for (size_t j = 0; j < grid.size(); ++j)
+			for (size_t col = 0; col < grid.size(); ++col)
 			{
-				if (grid[i][j] != Parameters::EMPTY_CELL)
+				if (grid[row][col] != Parameters::EMPTY_CELL)
 				{
 					// Find all the words that start at the (i, j) cell.
 					std::string current_word = "";
 					std::vector<std::vector<bool>> visited(grid.size(), std::vector<bool>(grid.size(), false));
-					dfs(i, j, current_word, trie.root->children[grid[i][j] - 'a'], visited, found_words, grid);
+					dfs(row, col, current_word, trie.root->children[grid[row][col] - 'a'], visited, found_words, grid);
 				}
 			}
 		}
