@@ -52,7 +52,7 @@ namespace Algorithm
 				continue;
 			}
 
-			const int is_empty_cell = grid[next_row][next_col] == Parameters::EMPTY_CELL;
+			const bool is_empty_cell = grid[next_row][next_col] == Parameters::EMPTY_CELL;
 			const bool is_already_visited = visited[next_row][next_col];
 
 			if (is_empty_cell || is_already_visited)
@@ -84,13 +84,15 @@ namespace Algorithm
 		{
 			for (size_t col = 0; col < grid.size(); ++col)
 			{
-				if (grid[row][col] != Parameters::EMPTY_CELL)
+				if (grid[row][col] == Parameters::EMPTY_CELL)
 				{
-					// Find all the words that start at the (i, j) cell.
-					std::string current_word = "";
-					std::vector<std::vector<bool>> visited(grid.size(), std::vector<bool>(grid.size(), false));
-					dfs(row, col, current_word, trie.root->children[grid[row][col] - 'a'], visited, found_words, grid);
+					continue;
 				}
+
+				// Find all the words that start at the (i, j) cell.
+				std::string current_word = "";
+				std::vector<std::vector<bool>> visited(grid.size(), std::vector<bool>(grid.size(), false));
+				dfs(row, col, current_word, trie.root->children[grid[row][col] - 'a'], visited, found_words, grid);
 			}
 		}
 
