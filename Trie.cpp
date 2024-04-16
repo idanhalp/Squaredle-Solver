@@ -1,9 +1,5 @@
 #include "Trie.hpp"
 
-Trie::Trie() : root(new TrieNode)
-{
-}
-
 Trie::Trie(const std::vector<std::string> words) : root(new TrieNode)
 {
 	for (const std::string& word : words)
