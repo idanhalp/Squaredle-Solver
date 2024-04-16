@@ -76,7 +76,7 @@ namespace Algorithm
 	 */
 	std::vector<std::string> find_words(const std::vector<std::vector<char>>& grid)
 	{
-		const std::vector<std::string> dictionary = InputOutputProcessor::get_list_of_valid_words();
+		const std::vector<std::string>& dictionary = InputOutputProcessor::get_list_of_valid_words();
 		const Trie trie(dictionary); // inserts every word in words to the trie
 		std::vector<std::string> found_words;
 
