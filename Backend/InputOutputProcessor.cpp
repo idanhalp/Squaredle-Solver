@@ -21,8 +21,7 @@ namespace InputOutputProcessor
 
 		if (!input_file.is_open())
 		{
-			std::cout << "Cannot open file!";
-			return;
+			throw std::invalid_argument("Cannot open " + raw_input_file_name + "!\n");
 		}
 
 		std::ofstream output_file(processed_input_file_name);
@@ -54,7 +53,7 @@ namespace InputOutputProcessor
 
 		if (!input.is_open())
 		{
-			throw std::invalid_argument("Cannot open words file!\n");
+			throw std::invalid_argument("Cannot open " + processed_input_file_name + "!\n");
 		}
 
 		std::string s;
