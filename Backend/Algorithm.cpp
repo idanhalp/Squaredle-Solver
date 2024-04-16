@@ -5,8 +5,14 @@
 
 namespace Algorithm
 {
-	// We can move down, up, left, right and in 4 diagonals.
-	const std::vector<std::vector<int>> DIRECTIONS{{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
+	const std::array<std::pair<int, int>, 8> DIRECTIONS = {std::make_pair(-1, 0),  // up
+														   std::make_pair(1, 0),   // down
+														   std::make_pair(0, -1),  // left
+														   std::make_pair(0, 1),   // right
+														   std::make_pair(-1, -1), // up and left
+														   std::make_pair(-1, 1),  // up and right
+														   std::make_pair(1, -1),  // down and left
+														   std::make_pair(1, 1)};  // down and right
 
 	/**
 	 * @brief Traverses the grid and adds occurring words to found_words.
@@ -41,10 +47,13 @@ namespace Algorithm
 		}
 
 		// Try continuing in every direction.
-		for (const std::vector<int>& direction : DIRECTIONS)
+		for (const auto& direction : DIRECTIONS)
 		{
-			const size_t next_row = row + direction[0];
-			const size_t next_col = col + direction[1];
+			const int row_direction = direction.first;
+			const int col_direction = direction.second;
+			const size_t next_row = row + row_direction;
+			const size_t next_col = col + col_direction;
+
 			const bool is_within_grid = next_row < grid.size() && next_col < grid.size();
 
 			if (!is_within_grid)
