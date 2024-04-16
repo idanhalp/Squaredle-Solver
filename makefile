@@ -5,7 +5,7 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -pedantic -Werror -O3
 
 # Source files
-SRCS = main.cpp InputOutputProcessor.cpp Trie.cpp Algorithm.cpp
+SRCS = Backend/main.cpp Backend/InputOutputProcessor.cpp Backend/Trie.cpp Backend/Algorithm.cpp
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)

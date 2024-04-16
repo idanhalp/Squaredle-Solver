@@ -7,6 +7,9 @@
 
 namespace InputOutputProcessor
 {
+	const std::string raw_input_file_name = "Backend/wordsWithDefinitions.txt";
+	const std::string processed_input_file_name = "Backend/words.txt";
+	
 	/**
 	 * The original list of words contained their definitions, which is redundant for our purposes.
 	 * This function creates a new text file with a single word in every line.
@@ -14,8 +17,7 @@ namespace InputOutputProcessor
 	 */
 	void remove_definitions()
 	{
-		const std::string input_file_name = "wordsWithDefinitions.txt";
-		std::ifstream input_file(input_file_name);
+		std::ifstream input_file(raw_input_file_name);
 
 		if (!input_file.is_open())
 		{
@@ -23,7 +25,7 @@ namespace InputOutputProcessor
 			return;
 		}
 
-		std::ofstream output_file("words.txt");
+		std::ofstream output_file(processed_input_file_name);
 		std::string s;
 
 		while (getline(input_file, s))
@@ -48,12 +50,11 @@ namespace InputOutputProcessor
 	{
 		// remove_definitions(); // done beforehand
 
-		std::ifstream input("words.txt");
+		std::ifstream input(processed_input_file_name);
 
 		if (!input.is_open())
 		{
-			std::cout << "Cannot open words.txt!\n";
-			return {};
+			throw std::invalid_argument("Cannot open words file!\n");
 		}
 
 		std::string s;
@@ -90,11 +91,11 @@ namespace InputOutputProcessor
 													{XXX,'w','e','b',XXX}};
 		*/
 
-		// Squaredle of 14.4.2024
-		const std::vector<std::vector<char>> grid{{'v', 'r', 'u', 'g'},
-												  {'d', 'a', 'g', 'e'},
-												  {'i', 'e', 'r', 'a'},
-												  {'w', 'b', 'v', 'o'}};
+		// Squaredle of 15.4.2024
+		const std::vector<std::vector<char>> grid{{'n', 'm', 'a', 'b'},
+												  {'i', 'b', 'n', 'g'},
+												  {'a', 'u', 'e', 'n'},
+												  {'n', 'q', 'a', 't'}};
 
 		if (std::any_of(grid.begin(), grid.end(), [&](const auto& row) { return row.size() != grid.size(); }))
 		{
