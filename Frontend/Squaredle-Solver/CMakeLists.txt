@@ -10,6 +10,11 @@ qt_standard_project_setup(REQUIRES 6.5)
 
 qt_add_executable(appSquaredle-Solver
     main.cpp
+    ../../Backend/Algorithm.cpp ../../Backend/Algorithm.hpp
+    ../../Backend/InputOutputProcessor.cpp ../../Backend/InputOutputProcessor.hpp
+    ../../Backend/Trie.cpp ../../Backend/Trie.hpp
+    ../../Backend/TrieNode.hpp
+    ../../Backend/Parameters.hpp
 )
 
 qt_add_qml_module(appSquaredle-Solver
