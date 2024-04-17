@@ -9,6 +9,7 @@ namespace InputOutputProcessor
 {
 	const std::string raw_input_file_name = "Backend/wordsWithDefinitions.txt";
 	const std::string processed_input_file_name = "Backend/words.txt";
+	const std::vector<std::string> list_of_valid_words = create_list_of_valid_words();
 	
 	/**
 	 * The original list of words contained their definitions, which is redundant for our purposes.
@@ -45,7 +46,7 @@ namespace InputOutputProcessor
 		}
 	}
 
-	std::vector<std::string> get_list_of_valid_words()
+	std::vector<std::string> create_list_of_valid_words()
 	{
 		// remove_definitions(); // done beforehand
 
@@ -68,6 +69,11 @@ namespace InputOutputProcessor
 		}
 
 		return words;
+	}
+
+	const std::vector<std::string>& get_list_of_valid_words()
+	{
+		return list_of_valid_words;
 	}
 
 	/**
