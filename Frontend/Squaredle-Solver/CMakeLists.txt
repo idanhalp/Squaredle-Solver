@@ -8,6 +8,8 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
+set(CMAKE_AUTORCC ON)
+
 qt_add_executable(appSquaredle-Solver
     main.cpp
     ../../Backend/Algorithm.cpp ../../Backend/Algorithm.hpp
