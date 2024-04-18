@@ -12,6 +12,7 @@ set(CMAKE_AUTORCC ON)
 
 qt_add_executable(appSquaredle-Solver
     main.cpp
+    gridmodel.h gridmodel.cpp
     ../../Backend/Algorithm.cpp ../../Backend/Algorithm.hpp
     ../../Backend/InputOutputProcessor.cpp ../../Backend/InputOutputProcessor.hpp
     ../../Backend/Trie.cpp ../../Backend/Trie.hpp
@@ -24,7 +25,7 @@ qt_add_qml_module(appSquaredle-Solver
     URI Squaredle-Solver
     VERSION 1.0
     QML_FILES
-        Main.qml
+        Main.qml 
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
