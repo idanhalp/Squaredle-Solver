@@ -61,12 +61,12 @@ void GridModel::removeAllRows()
 
 void GridModel::solve()
 {
-    std::vector<std::vector<char>> grid(4, std::vector<char>(4, ' '));
+    std::vector<std::vector<char>> grid(m_rows, std::vector<char>(m_columns, ' '));
     int k = 0;
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < m_rows; i++)
     {
-        for (int j = 0; j < 4; j++)
+        for (int j = 0; j < m_columns; j++)
         {
             grid[i][j] = m_grid[k];
             k++;
