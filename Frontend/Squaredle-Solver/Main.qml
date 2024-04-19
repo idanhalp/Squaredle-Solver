@@ -23,14 +23,30 @@ Window {
             height: 100
             color: "grey"
 
-            TextInput {
+            TextField {
                 anchors.centerIn: parent
-                text: " "
                 color: "black"
                 font.pixelSize: 26
-
-                onAccepted: console.log(text, index)
+                onTextChanged: GridModel.updateGrid(text[0], index)
+                background: Rectangle {
+                    color: "transparent"
+                }
+                validator: RegularExpressionValidator{
+                    regularExpression: /^[a-z-/]+$/
+                }
             }
         }
+    }
+
+    Button {
+        anchors {
+            top: grid.bottom
+            horizontalCenter: grid.horizontalCenter
+
+        }
+
+        text: "Solve!"
+        onClicked: GridModel.solve()
+
     }
 }

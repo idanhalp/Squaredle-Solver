@@ -20,6 +20,10 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
+public slots:
+    void updateGrid(QString c, int index);
+    void solve();
+
 private:
     QList<char> m_grid;
     int m_size;
