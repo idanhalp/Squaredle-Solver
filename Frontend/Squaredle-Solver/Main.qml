@@ -25,6 +25,7 @@ Window {
 
             TextField {
                 anchors.centerIn: parent
+                maximumLength: 1
                 color: "black"
                 font.pixelSize: 26
                 onTextChanged: GridModel.updateGrid(text[0], index)
@@ -32,8 +33,9 @@ Window {
                     color: "transparent"
                 }
                 validator: RegularExpressionValidator{
-                    regularExpression: /^[a-z-/]+$/
+                    regularExpression: /^[a-z-]+$/ // Only allows a-z and -
                 }
+
             }
         }
     }
