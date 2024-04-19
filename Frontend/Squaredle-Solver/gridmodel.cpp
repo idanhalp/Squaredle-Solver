@@ -3,10 +3,11 @@
 #include "../../Backend/InputOutputProcessor.hpp"
 
 GridModel::GridModel(QObject *parent)
-    : QAbstractListModel(parent),
-    m_size(16)
+    : QAbstractListModel(parent)
 {
-    buildGrid(m_size);
+    setRows(4);
+    setColumns(4);
+    buildGrid(m_rows, m_columns);
 }
 
 int GridModel::rowCount(const QModelIndex &parent) const
@@ -38,9 +39,9 @@ void GridModel::updateGrid(QString c, int index)
     m_grid[index] = c.toStdString()[0];
 }
 
-void GridModel::buildGrid(int size)
+void GridModel::buildGrid(int rows, int columns)
 {
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < m_rows * m_columns; i++)
     {
         addCell();
     }
@@ -74,4 +75,38 @@ void GridModel::solve()
 
     std::vector<std::string> found_words = Algorithm::find_words(grid);
     InputOutputProcessor::process_output(found_words);
+}
+
+void GridModel::resizeGrid(int rows, int columns)
+{
+    removeAllRows();
+    setRows(rows);
+    setColumns(columns);
+    buildGrid(rows, columns);
+}
+
+int GridModel::rows() const
+{
+    return m_rows;
+}
+
+void GridModel::setRows(int newRows)
+{
+    if (m_rows == newRows)
+        return;
+    m_rows = newRows;
+    emit rowsChanged();
+}
+
+int GridModel::columns() const
+{
+    return m_columns;
+}
+
+void GridModel::setColumns(int newColumns)
+{
+    if (m_columns == newColumns)
+        return;
+    m_columns = newColumns;
+    emit columnsChanged();
 }

@@ -8,19 +8,49 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
+
+    Text {
+        anchors {
+            top: slider.bottom
+            horizontalCenter: grid.horizontalCenter
+            topMargin: 10
+        }
+
+        text: "Grid size is " + GridModel.rows + " X " + GridModel.columns
+        font.pixelSize: 20
+        color: "black"
+    }
+
+    Slider {
+        id: slider
+
+        anchors {
+            top: parent.top
+            horizontalCenter: grid.horizontalCenter
+            topMargin: 20
+        }
+
+        from: 3
+        value: 4
+        to: 6
+        stepSize: 1
+
+        onMoved: GridModel.resizeGrid(value, value);
+    }
+
     GridView {
 
         anchors.centerIn: parent
         id: grid
         width: 500
         height: 500
-        cellHeight: grid.height / 4
-        cellWidth: grid.width / 4
+        cellHeight: grid.height / GridModel.rows
+        cellWidth: grid.width / GridModel.columns
 
         model: GridModel
         delegate: Rectangle {
-            width: 100
-            height: 100
+            width: 400 / GridModel.rows
+            height: 400 / GridModel.columns
             color: "grey"
 
             TextField {
