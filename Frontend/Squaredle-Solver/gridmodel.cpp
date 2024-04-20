@@ -97,6 +97,9 @@ void GridModel::solve()
 
 void GridModel::resizeGrid(int rows, int columns)
 {
+    m_isNotValidInput = false;
+    emit isNotValidInputChanged();
+
     removeAllRows();
     setRows(rows);
     setColumns(columns);
