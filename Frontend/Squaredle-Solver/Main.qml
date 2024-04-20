@@ -34,6 +34,7 @@ Window {
         value: 4
         to: 6
         stepSize: 1
+        snapMode: Slider.SnapAlways
 
         onMoved: GridModel.resizeGrid(value, value);
     }
