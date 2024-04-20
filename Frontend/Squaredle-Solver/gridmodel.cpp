@@ -1,13 +1,17 @@
 #include "gridmodel.h"
 #include "../../Backend/Algorithm.hpp"
 #include "../../Backend/InputOutputProcessor.hpp"
+#include "../../Backend/Parameters.hpp"
+#include <QRegularExpression>
 
 GridModel::GridModel(QObject *parent)
-    : QAbstractListModel(parent)
+    : QAbstractListModel(parent),
+    m_isNotValidInput(false)
 {
     setRows(4);
     setColumns(4);
     buildGrid(m_rows, m_columns);
+    setEmptyCellChar(Parameters::EMPTY_CELL);
 }
 
 int GridModel::rowCount(const QModelIndex &parent) const
@@ -36,7 +40,21 @@ QVariant GridModel::data(const QModelIndex &index, int role) const
 
 void GridModel::updateGrid(QString c, int index)
 {
-    m_grid[index] = c.toStdString()[0];
+    std::string regex = "[a-z";
+    regex.append(&Parameters::EMPTY_CELL);
+    regex.append("]");
+    QRegularExpression re(QString::fromStdString(regex));
+    if (re.match(c).hasMatch() || c == "")
+    {
+        m_grid[index] = c.toStdString()[0];
+        m_isNotValidInput = false;
+        emit isNotValidInputChanged();
+    }
+    else
+    {
+        m_isNotValidInput = true;
+        emit isNotValidInputChanged();
+    }
 }
 
 void GridModel::buildGrid(int rows, int columns)
@@ -109,4 +127,22 @@ void GridModel::setColumns(int newColumns)
         return;
     m_columns = newColumns;
     emit columnsChanged();
+}
+
+QChar GridModel::emptyCellChar() const
+{
+    return m_emptyCellChar;
+}
+
+void GridModel::setEmptyCellChar(QChar newEmptyCellChar)
+{
+    if (m_emptyCellChar == newEmptyCellChar)
+        return;
+    m_emptyCellChar = newEmptyCellChar;
+    emit emptyCellCharChanged();
+}
+
+bool GridModel::isNotValidInput() const
+{
+    return m_isNotValidInput;
 }

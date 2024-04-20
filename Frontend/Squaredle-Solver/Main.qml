@@ -63,15 +63,13 @@ Window {
                 background: Rectangle {
                     color: "transparent"
                 }
-                validator: RegularExpressionValidator{
-                    regularExpression: /^[a-z-]+$/ // Only allows a-z and -
-                }
-
             }
         }
     }
 
     Button {
+
+        id: solve
         anchors {
             top: grid.bottom
             horizontalCenter: grid.horizontalCenter
@@ -82,4 +80,19 @@ Window {
         onClicked: GridModel.solve()
 
     }
+
+    Text {
+        anchors {
+            top: solve.bottom
+            horizontalCenter: grid.horizontalCenter
+            topMargin: 15
+        }
+
+        text: "Only a-z and " + GridModel.emptyCellChar.toString() + " are allowed"
+        font.pixelSize: 20
+        color: "red"
+
+        visible: GridModel.isNotValidInput
+    }
+
 }
