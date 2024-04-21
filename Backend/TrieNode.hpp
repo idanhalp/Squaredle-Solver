@@ -1,5 +1,5 @@
-#ifndef TRIE_NODE_H
-#define TRIE_NODE_H
+#ifndef TRIE_NODE_HPP
+#define TRIE_NODE_HPP
 
 #include <array>
 

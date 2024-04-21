@@ -1,5 +1,5 @@
-#ifndef TRIE_H
-#define TRIE_H
+#ifndef TRIE_HPP
+#define TRIE_HPP
 
 #include "TrieNode.hpp" 
 #include <vector>
