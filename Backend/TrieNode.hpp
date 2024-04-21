@@ -3,6 +3,17 @@
 
 #include <array>
 
+/*
+	This implementation assumes the words inserted to the trie
+	contain only lowercase letters.
+
+	The letter 'a' is assigned to the child node at index 0,
+	the letter 'b' is assigned to the child node at index 1,
+	.
+	.
+	.
+	the letter 'z' is assigned to the child node at index 25.
+*/ 
 class TrieNode
 {
 private:
