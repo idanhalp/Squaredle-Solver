@@ -76,6 +76,8 @@ Window {
 
         }
 
+        enabled: !GridModel.isNotValidInput
+
         text: "Solve!"
         onClicked: GridModel.solve()
 
