@@ -48,9 +48,9 @@ namespace Algorithm
 			const size_t next_row = row + row_direction;
 			const size_t next_col = col + col_direction;
 
-			const bool is_within_grid = next_row < grid.size() && next_col < grid.size();
+			const bool is_outside_grid = next_row >= grid.size() || next_col >= grid.size();
 
-			if (!is_within_grid)
+			if (is_outside_grid)
 			{
 				continue;
 			}
