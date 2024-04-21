@@ -44,7 +44,7 @@ void GridModel::updateGrid(QString c, int index)
     regex += Parameters::EMPTY_CELL;
     regex += "]";
     QRegularExpression re(QString::fromStdString(regex));
-    if (re.match(c).hasMatch() || c == "")
+    if (re.match(c).hasMatch())
     {
         m_grid[index] = c.toStdString()[0];
         m_isNotValidInput = false;
