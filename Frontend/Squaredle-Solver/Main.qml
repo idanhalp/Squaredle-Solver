@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
-import GridModel
+// import GridModel
+import SquaredleSolver
 
 Window {
     width: 640
@@ -8,6 +9,9 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
+    MainModule {
+        id: mainModule
+    }
 
     Text {
         anchors {
@@ -16,7 +20,7 @@ Window {
             topMargin: 10
         }
 
-        text: "Grid size is " + GridModel.rows + " X " + GridModel.columns
+        text: "Grid size is " + mainModule.gridModel.rows + " X " + mainModule.gridModel.columns
         font.pixelSize: 20
         color: "black"
     }
@@ -36,7 +40,7 @@ Window {
         stepSize: 1
         snapMode: Slider.SnapAlways
 
-        onMoved: GridModel.resizeGrid(value, value);
+        onMoved: mainModule.gridModel.resizeGrid(value, value);
     }
 
     GridView {
@@ -45,13 +49,13 @@ Window {
         id: grid
         width: 500
         height: 500
-        cellHeight: grid.height / GridModel.rows
-        cellWidth: grid.width / GridModel.columns
+        cellHeight: grid.height / mainModule.gridModel.rows
+        cellWidth: grid.width / mainModule.gridModel.columns
 
-        model: GridModel
+        model: mainModule.gridModel
         delegate: Rectangle {
-            width: 400 / GridModel.rows
-            height: 400 / GridModel.columns
+            width: 400 / mainModule.gridModel.rows
+            height: 400 / mainModule.gridModel.columns
             color: "grey"
 
             TextField {
@@ -59,7 +63,7 @@ Window {
                 maximumLength: 1
                 color: "black"
                 font.pixelSize: 26
-                onTextChanged: GridModel.updateGrid(text[0], index)
+                onTextChanged: mainModule.gridModel.updateGrid(text[0], index)
                 background: Rectangle {
                     color: "transparent"
                 }
@@ -76,10 +80,10 @@ Window {
 
         }
 
-        enabled: !GridModel.isNotValidInput
+        enabled: !mainModule.gridModel.isNotValidInput
 
         text: "Solve!"
-        onClicked: GridModel.solve()
+        onClicked: mainModule.gridModel.solve()
 
     }
 
@@ -90,11 +94,11 @@ Window {
             topMargin: 15
         }
 
-        text: "Only a-z and " + GridModel.emptyCellChar.toString() + " are allowed"
+        text: "Only a-z and " + mainModule.gridModel.emptyCellChar.toString() + " are allowed"
         font.pixelSize: 20
         color: "red"
 
-        visible: GridModel.isNotValidInput
+        visible: mainModule.gridModel.isNotValidInput
     }
 
 }
