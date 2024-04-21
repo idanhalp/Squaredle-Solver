@@ -41,8 +41,8 @@ QVariant GridModel::data(const QModelIndex &index, int role) const
 void GridModel::updateGrid(QString c, int index)
 {
     std::string regex = "[a-z";
-    regex.append(&Parameters::EMPTY_CELL);
-    regex.append("]");
+    regex += Parameters::EMPTY_CELL;
+    regex += "]";
     QRegularExpression re(QString::fromStdString(regex));
     if (re.match(c).hasMatch() || c == "")
     {
