@@ -36,9 +36,10 @@ public:
 
     bool isNotValidInput() const;
 
+    QList<char> getGrid();
+
 public slots:
     void updateGrid(QString c, int index);
-    void solve();
     void resizeGrid(int rows, int columns);
 
 signals:

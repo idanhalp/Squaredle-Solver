@@ -77,24 +77,6 @@ void GridModel::removeAllRows()
     removeRows(0, rowCount(), index(0,0));
 }
 
-void GridModel::solve()
-{
-    std::vector<std::vector<char>> grid(m_rows, std::vector<char>(m_columns, ' '));
-    int k = 0;
-
-    for (int i = 0; i < m_rows; i++)
-    {
-        for (int j = 0; j < m_columns; j++)
-        {
-            grid[i][j] = m_grid[k];
-            k++;
-        }
-    }
-
-    std::vector<std::string> found_words = Algorithm::find_words(grid);
-    InputOutputProcessor::process_output(found_words);
-}
-
 void GridModel::resizeGrid(int rows, int columns)
 {
     m_isNotValidInput = false;
@@ -148,4 +130,9 @@ void GridModel::setEmptyCellChar(QChar newEmptyCellChar)
 bool GridModel::isNotValidInput() const
 {
     return m_isNotValidInput;
+}
+
+QList<char> GridModel::getGrid()
+{
+    return m_grid;
 }

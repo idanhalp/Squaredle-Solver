@@ -21,6 +21,9 @@ public:
     ResultsModel *resultsModel() const;
     void setResultsModel(ResultsModel *newResultsModel);
 
+public slots:
+    void solve();
+
 signals:
     void gridModelChanged();
 

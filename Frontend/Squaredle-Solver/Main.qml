@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-// import GridModel
 import SquaredleSolver
 
 Window {
@@ -83,7 +82,7 @@ Window {
         enabled: !mainModule.gridModel.isNotValidInput
 
         text: "Solve!"
-        onClicked: mainModule.gridModel.solve()
+        onClicked: mainModule.solve()
 
     }
 
