@@ -32,12 +32,6 @@ namespace Algorithm
 			 std::vector<std::string>& found_words,
 			 const std::vector<std::vector<char>>& grid)
 	{
-		// Make sure that current_word is a valid prefix of some word in the original dictionary.
-		if (!trie_node)
-		{
-			return;
-		}
-
 		visited[row][col] = true;
 		current_word.push_back(grid[row][col]);
 
@@ -63,8 +57,9 @@ namespace Algorithm
 
 			const bool is_empty_cell = grid[next_row][next_col] == Parameters::EMPTY_CELL;
 			const bool is_already_visited = visited[next_row][next_col];
+			const bool is_invalid_prefix = trie_node->children[grid[next_row][next_col] - 'a'] == nullptr;
 
-			if (is_empty_cell || is_already_visited)
+			if (is_empty_cell || is_already_visited || is_invalid_prefix)
 			{
 				continue;
 			}
