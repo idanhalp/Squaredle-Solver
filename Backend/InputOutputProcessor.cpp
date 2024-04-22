@@ -108,13 +108,11 @@ namespace InputOutputProcessor
     }
 
     /**
-	 * Presents the output in the desired manner.
-	 *
-	 * Prints the words found in the grid, ordered by their length.
+     * Returns the words found in the grid, ordered by their length without duplicates.
 	 *
 	 * @param found_words The words occurring in the input.
 	 */
-    void process_output(std::vector<std::string>& found_words)
+    std::vector<std::string> process_output(std::vector<std::string>& found_words)
     {
         // Sort the words by length (tie break by lexicographic order) and remove duplicates.
         std::sort(found_words.begin(), found_words.end(), [](const std::string& word1, const std::string& word2)
@@ -132,18 +130,20 @@ namespace InputOutputProcessor
         found_words.erase(std::unique(found_words.begin(), found_words.end()), found_words.end()); // remove duplicates
 
         // Print the results.
-        std::cout << "Found " << found_words.size() << " words!\n";
+        // std::cout << "Found " << found_words.size() << " words!\n";
 
-        for (size_t i = 0, previous_word_length = 0, word_index = 0; i < found_words.size(); ++i, ++word_index)
-        {
-            if (found_words[i].length() != previous_word_length)
-            {
-                std::cout << "\nwords with " << found_words[i].length() << " letters:\n";
-                previous_word_length = found_words[i].length();
-                word_index = 1;
-            }
+        // for (size_t i = 0, previous_word_length = 0, word_index = 0; i < found_words.size(); ++i, ++word_index)
+        // {
+        //     if (found_words[i].length() != previous_word_length)
+        //     {
+        //         std::cout << "\nwords with " << found_words[i].length() << " letters:\n";
+        //         previous_word_length = found_words[i].length();
+        //         word_index = 1;
+        //     }
 
-            std::cout << word_index << ") " << found_words[i] << "\n";
-        }
+        //     std::cout << word_index << ") " << found_words[i] << "\n";
+        // }
+
+        return found_words;
     }
 }
