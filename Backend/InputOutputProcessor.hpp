@@ -1,5 +1,5 @@
-#ifndef INPUT_PROCESSOR_H
-#define INPUT_PROCESSOR_H
+#ifndef INPUT_PROCESSOR_HPP
+#define INPUT_PROCESSOR_HPP
 
 #include <vector>
 #include <string>
