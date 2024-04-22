@@ -1,6 +1,4 @@
 #include "gridmodel.h"
-#include "../../Backend/Algorithm.hpp"
-#include "../../Backend/InputOutputProcessor.hpp"
 #include "../../Backend/Parameters.hpp"
 #include <QRegularExpression>
 
