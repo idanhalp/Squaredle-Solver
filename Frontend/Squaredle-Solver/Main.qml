@@ -100,4 +100,39 @@ Window {
         visible: mainModule.gridModel.isNotValidInput
     }
 
+    Component {
+        id: sectionHeading
+        Rectangle {
+            width: ListView.view.width
+            height: childrenRect.height
+            color: "lightsteelblue"
+
+            required property string section
+
+            Text {
+                text: parent.section + " letters"
+                font.bold: true
+                font.pixelSize: 16
+            }
+        }
+    }
+
+    ListView {
+
+        height: 1000
+        width: 500
+
+        model: mainModule.resultsModel
+        delegate: Text {
+            text: model.word
+            color: "black"
+            font.pixelSize: 15
+        }
+
+        section.property: "length"
+        section.criteria: ViewSection.FullString
+        section.delegate: sectionHeading
+
+    }
+
 }

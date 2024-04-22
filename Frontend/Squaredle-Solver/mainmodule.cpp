@@ -43,5 +43,7 @@ void MainModule::solve()
     }
 
     std::vector<std::string> found_words = Algorithm::find_words(grid);
-    InputOutputProcessor::process_output(found_words);
+    std::vector<std::string> filtered_words = InputOutputProcessor::process_output(found_words);
+
+    m_resultsModel->createResults(filtered_words);
 }
