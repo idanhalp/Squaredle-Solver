@@ -13,8 +13,8 @@ namespace InputOutputProcessor
 	/**
 	 * The original list of words contained their definitions, which is redundant for our purposes.
 	 * This function creates a new text file with a single word in every line.
-	 * Has no use if the original list is already modified.
 	 */
+	[[deprecated("The original list was already processed.")]]
 	void remove_definitions()
 	{
 		std::ifstream input_file(raw_input_file_name);
