@@ -111,7 +111,7 @@ namespace InputOutputProcessor
 	 *
 	 * @param found_words The words occurring in the input.
 	 */
-	void process_output(std::vector<std::string>& found_words)
+	void process_output_withput_indices(std::vector<std::string>& found_words)
 	{
 		// Sort the words by length (tie break by lexicographic order) and remove duplicates.
 		std::sort(found_words.begin(), found_words.end(), [](const std::string& word1, const std::string& word2)
@@ -141,6 +141,93 @@ namespace InputOutputProcessor
 			}
 
 			std::cout << word_index << ") " << found_words[i] << "\n";
+		}
+	}
+
+	void process_output_with_indices(	std::vector<std::vector<std::pair<size_t, size_t>>>& found_words_indices, 
+									const std::vector<std::vector<char>>& grid)
+	{
+		// Each list of indices represents a word. This lambda helps recreate it.
+		const auto create_word_from_indices = [&grid] (const auto& indices)
+		{
+			std::string output;
+			output.reserve(indices.size());
+
+			for (const auto& row_and_col : indices)
+			{
+				const size_t row = row_and_col.first;
+				const size_t col = row_and_col.second;
+				output += grid[row][col];
+			}
+
+			return output;
+		};
+
+		// Sort the indices lists by length, (tie break by lexicographic order of their representative words) 
+		// and make sure no two list represent the same word.
+		std::sort(found_words_indices.begin(), found_words_indices.end(), [&] (const auto& indices1, const auto& indices2)
+		{
+			if (indices1.size() != indices2.size())
+			{
+				return indices1.size() < indices2.size();
+			}
+			else 
+			{
+				// Compare the words represents by the indices by lexicographic order.
+				return create_word_from_indices(indices1) < create_word_from_indices(indices2);
+			}
+		});
+
+		// Remove redundant lists of indices.
+
+		// Every list of indices that represent a word which was already seen is moved to the end of the vector.
+		const auto duplicate_indices = std::unique(found_words_indices.begin(), found_words_indices.end(), [&](const auto& indices1, const auto& indices2)
+		{
+			return create_word_from_indices(indices1) == create_word_from_indices(indices2);
+		});
+
+		found_words_indices.erase(duplicate_indices, found_words_indices.end());
+
+		// **FOR DEBUG**
+		// Print the results.
+		std::cout << "Found " << found_words_indices.size() << " words!\n";
+
+		const auto create_string_representing_indices = [](const auto& indices)
+		{
+			const std::string arrow = " ==> ";
+			std::string output;
+
+			for (const auto& row_and_col : indices)
+			{
+				const size_t row = row_and_col.first;
+				const size_t col = row_and_col.second;
+				output += "(" + std::to_string(row) + ", " + std::to_string(col) + ")" + arrow;
+			}
+
+			output.erase(output.length() - arrow.length()); // Remove the last arrow.
+
+			return output;			
+		};
+
+		size_t previous_word_length = 0u;
+		size_t word_index = 0u;
+
+		for (const auto indices : found_words_indices)
+		{
+			if (indices.size() != previous_word_length)
+			{
+				std::cout << "\nwords with " << indices.size() << " letters:\n";
+				previous_word_length = indices.size();
+				word_index = 1;
+			}
+
+			const std::string representative_word = create_word_from_indices(indices);
+			const std::string indices_as_string = create_string_representing_indices(indices);
+
+			std::cout << word_index << ") " << representative_word << "\n";
+			std::cout << "Indices: " << indices_as_string << "\n";
+
+			++word_index;
 		}
 	}
 }
