@@ -20,10 +20,10 @@ private:
 	static const size_t NUM_OF_LETTERS = 26;
 
 public:
-	bool is_full_word;
+	bool is_complete_word;
 	std::array<TrieNode* , NUM_OF_LETTERS> children;
 
-	TrieNode() : is_full_word(false)
+	TrieNode() : is_complete_word(false)
 	{
 		std::fill(children.begin(), children.end(), nullptr);
 	}

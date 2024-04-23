@@ -42,7 +42,7 @@ namespace AlgorithmVersionWithoutIndices
 		visited[row][col] = true;
 		current_word.push_back(grid[row][col]);
 
-		if (trie_node->is_full_word)
+		if (trie_node->is_complete_word)
 		{
 			found_words.push_back(current_word);
 		}
@@ -152,7 +152,7 @@ namespace AlgorithmVersionWithIndices
 		visited[row][col] = true;
 		current_word_indices.push_back(std::make_pair(row, col));
 
-		if (trie_node->is_full_word)
+		if (trie_node->is_complete_word)
 		{
 			found_words_indices.push_back(current_word_indices);
 		}

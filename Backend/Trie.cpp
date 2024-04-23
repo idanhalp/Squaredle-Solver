@@ -27,5 +27,5 @@ void Trie::insert(const std::string& word)
 		node = node->children[c - 'a'];
 	}
 
-	node->is_full_word = true;
+	node->is_complete_word = true;
 }
