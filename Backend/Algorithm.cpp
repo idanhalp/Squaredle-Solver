@@ -17,13 +17,13 @@ namespace AlgorithmVersionWithoutIndices
 	/**
 	 * @brief Traverses the grid and adds occurring words to found_words.
 	 *
-	 * @param row current row.
-	 * @param col current column.
-	 * @param current_word string representing the current path in the grid.
-	 * @param trie_node current position in the trie.
-	 * @param visited indicates wether some cell was already visited
-	 * @param found_words words that were found during the grid traversal.
-	 * @param grid input grid.
+	 * @param row 			Current row.
+	 * @param col 			Current column.
+	 * @param current_word 	String representing the current path in the grid.
+	 * @param trie_node 	Current position in the trie.
+	 * @param visited 		Indicates wether some cell was already visited
+	 * @param found_words 	Words that were found during the grid traversal.
+	 * @param grid 			Input grid.
 	 */
 	void dfs(const size_t row, const size_t col,
 			 std::string& current_word,
@@ -76,6 +76,7 @@ namespace AlgorithmVersionWithoutIndices
 	 * @brief Finds the words that occur in the letters grid.
 	 *
 	 * @param grid a 2d grid filled with letters.
+	 * 
 	 * @return a list with all the words in the grid (might contain duplicates).
 	 */
 	std::vector<std::string> find_words(const std::vector<std::vector<char>>& grid)
@@ -106,25 +107,27 @@ namespace AlgorithmVersionWithoutIndices
 
 namespace AlgorithmVersionWithIndices
 {
-	const std::array<std::pair<int, int>, 8> DIRECTIONS = {std::make_pair(-1, 0),  // up
-														   std::make_pair(1, 0),   // down
-														   std::make_pair(0, -1),  // left
-														   std::make_pair(0, 1),   // right
-														   std::make_pair(-1, -1), // up and left
-														   std::make_pair(-1, 1),  // up and right
-														   std::make_pair(1, -1),  // down and left
-														   std::make_pair(1, 1)};  // down and right
+	const std::array<std::pair<int, int>, 8> DIRECTIONS = {std::make_pair(-1, 0),  // Up
+														   std::make_pair(1, 0),   // Down
+														   std::make_pair(0, -1),  // Left
+														   std::make_pair(0, 1),   // Right
+														   std::make_pair(-1, -1), // Up and left
+														   std::make_pair(-1, 1),  // Up and right
+														   std::make_pair(1, -1),  // Down and left
+														   std::make_pair(1, 1)};  // Down and right
 
 	/**
 	 * @brief Traverses the grid and adds occurring words to found_words.
 	 *
-	 * @param row current row.
-	 * @param col current column.
-	 * @param current_word string representing the current path in the grid.
-	 * @param trie_node current position in the trie.
-	 * @param visited indicates wether some cell was already visited
-	 * @param found_words words that were found during the grid traversal.
-	 * @param grid input grid.
+	 * @param row 					Current row.
+	 * @param col 					Current column.
+	 * @param current_word 			String representing the current path in the grid.
+	 * @param trie_node 			Current position in the trie.
+	 * @param visited 				Indicates wether some cell was already visited
+	 * @param found_words_indices 	Lists of indices of words that were found during the grid traversal.
+	 * @param grid 					Input grid.
+	 * 
+	 * @return Nothing. The ouput is inserted to `found_words_indices`.
 	 */
 	void dfs(const size_t row, const size_t col,
 			 std::vector<std::pair<size_t, size_t>>& current_word_indices,
@@ -181,9 +184,10 @@ namespace AlgorithmVersionWithIndices
 	}
 
 	/**
-	 * @brief Finds the words that occur in the letters grid.
+	 * @brief Finds the indices of the words that occur in the letters grid.
 	 *
 	 * @param grid a 2d grid filled with letters.
+	 * 
 	 * @return a list with all the words in the grid (might contain duplicates).
 	 */
 	std::vector<std::vector<std::pair<size_t, size_t>>> find_words_indices(const std::vector<std::vector<char>>& grid)
