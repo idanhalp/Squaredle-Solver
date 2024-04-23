@@ -32,6 +32,13 @@ namespace AlgorithmVersionWithoutIndices
 			 std::vector<std::string>& found_words,
 			 const std::vector<std::vector<char>>& grid)
 	{
+		const bool prefix_not_in_dictionary = trie_node == nullptr;
+
+		if (prefix_not_in_dictionary)
+		{
+			return;
+		}
+
 		visited[row][col] = true;
 		current_word.push_back(grid[row][col]);
 
@@ -57,9 +64,8 @@ namespace AlgorithmVersionWithoutIndices
 
 			const bool is_empty_cell = grid[next_row][next_col] == Parameters::EMPTY_CELL;
 			const bool is_already_visited = visited[next_row][next_col];
-			const bool is_invalid_prefix = trie_node->children[grid[next_row][next_col] - 'a'] == nullptr;
 
-			if (is_empty_cell || is_already_visited || is_invalid_prefix)
+			if (is_empty_cell || is_already_visited)
 			{
 				continue;
 			}
