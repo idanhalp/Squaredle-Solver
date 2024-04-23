@@ -111,7 +111,7 @@ namespace InputOutputProcessor
 	 *
 	 * @param found_words The words occurring in the input.
 	 */
-	void process_output_withput_indices(std::vector<std::string>& found_words)
+	void process_output_without_indices(std::vector<std::string>& found_words)
 	{
 		// Sort the words by length (tie break by lexicographic order) and remove duplicates.
 		std::sort(found_words.begin(), found_words.end(), [](const std::string& word1, const std::string& word2)
@@ -144,6 +144,15 @@ namespace InputOutputProcessor
 		}
 	}
 
+	/** 
+	 * Removes lists of indices whose representative word is already represented by 
+	 * another list.
+	 * Also sorts the lists by their length and the lexicographic order of the words
+	 * they represent
+	 *
+	 * @param found_words_indices 	Lists of indices of words occurring in the input.
+	 * @param grid					The input grid.
+	 */
 	void process_output_with_indices(	std::vector<std::vector<std::pair<size_t, size_t>>>& found_words_indices, 
 									const std::vector<std::vector<char>>& grid)
 	{
@@ -164,7 +173,7 @@ namespace InputOutputProcessor
 		};
 
 		// Sort the indices lists by length, (tie break by lexicographic order of their representative words) 
-		// and make sure no two list represent the same word.
+		// and make sure no two lists represent the same word.
 		std::sort(found_words_indices.begin(), found_words_indices.end(), [&] (const auto& indices1, const auto& indices2)
 		{
 			if (indices1.size() != indices2.size())
@@ -180,12 +189,12 @@ namespace InputOutputProcessor
 
 		// Remove redundant lists of indices.
 
-		// Every list of indices that represent a word which was already seen is moved to the end of the vector.
-		const auto duplicate_indices = std::unique(found_words_indices.begin(), found_words_indices.end(), [&](const auto& indices1, const auto& indices2)
+		const auto indices_represent_same_word = [&](const auto& indices1, const auto& indices2)
 		{
 			return create_word_from_indices(indices1) == create_word_from_indices(indices2);
-		});
-
+		};
+		
+		const auto duplicate_indices = std::unique(found_words_indices.begin(), found_words_indices.end(), indices_represent_same_word);
 		found_words_indices.erase(duplicate_indices, found_words_indices.end());
 
 		// **FOR DEBUG**

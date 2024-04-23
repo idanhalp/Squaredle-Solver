@@ -172,7 +172,6 @@ namespace AlgorithmVersionWithIndices
 			}
 
 			const TrieNode* const next_trie_node = trie_node->children[grid[next_row][next_col] - 'a'];
-
 			dfs(next_row, next_col, current_word_indices, next_trie_node, visited, found_words_indices, grid);
 		}
 

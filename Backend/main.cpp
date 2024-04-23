@@ -18,7 +18,7 @@ int main()
 	else
 	{
 		auto found_words = AlgorithmVersionWithoutIndices::find_words(grid);
-		InputOutputProcessor::process_output_withput_indices(found_words);
+		InputOutputProcessor::process_output_without_indices(found_words);
 	}
 
 	const auto end_time = std::chrono::high_resolution_clock::now();
