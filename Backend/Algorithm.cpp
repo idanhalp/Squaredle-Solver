@@ -3,6 +3,22 @@
 #include "Parameters.hpp"
 #include "Trie.hpp"
 
+/**
+ * @brief Given a lowercase alphabetic letter, return its index in the alphabet.
+ * 
+ * @param letter A lowercase alphabetic letter.
+ * 
+ * @return Its index in the alphabet (Starting from 0).
+ * 
+ * @example letter_to_index('a') == 0
+ * @example letter_to_index('b') == 1
+ * @example letter_to_index('z') == 25
+*/
+inline size_t letter_to_index(char letter)
+{
+	return letter - 'a';
+}
+
 namespace AlgorithmVersionWithoutIndices
 {
 	const std::array<std::pair<int, int>, 8> DIRECTIONS = {std::make_pair(-1, 0),  // up
@@ -70,7 +86,8 @@ namespace AlgorithmVersionWithoutIndices
 				continue;
 			}
 
-			dfs(next_row, next_col, current_word, trie_node->children[grid[next_row][next_col] - 'a'], visited, found_words, grid);
+			const char next_letter = grid[next_row][next_col];
+			dfs(next_row, next_col, current_word, trie_node->children[letter_to_index(next_letter)], visited, found_words, grid);
 		}
 
 		// Backtrack
@@ -81,9 +98,9 @@ namespace AlgorithmVersionWithoutIndices
 	/**
 	 * @brief Finds the words that occur in the letters grid.
 	 *
-	 * @param grid a 2d grid filled with letters.
+	 * @param grid 2d grid filled with letters.
 	 * 
-	 * @return a list with all the words in the grid (might contain duplicates).
+	 * @return List with all the words in the grid (might contain duplicates).
 	 */
 	std::vector<std::string> find_words(const std::vector<std::vector<char>>& grid)
 	{
@@ -103,7 +120,7 @@ namespace AlgorithmVersionWithoutIndices
 				// Find all the words that start at the (i, j) cell.
 				std::string current_word = "";
 				std::vector<std::vector<bool>> visited(grid.size(), std::vector<bool>(grid.size(), false));
-				dfs(row, col, current_word, trie.root->children[grid[row][col] - 'a'], visited, found_words, grid);
+				dfs(row, col, current_word, trie.root->children[letter_to_index(grid[row][col])], visited, found_words, grid);
 			}
 		}
 
@@ -180,7 +197,8 @@ namespace AlgorithmVersionWithIndices
 				continue;
 			}
 
-			const TrieNode* const next_trie_node = trie_node->children[grid[next_row][next_col] - 'a'];
+			const char next_letter = grid[next_row][next_col];
+			const TrieNode* const next_trie_node = trie_node->children[letter_to_index(next_letter)];
 			dfs(next_row, next_col, current_word_indices, next_trie_node, visited, found_words_indices, grid);
 		}
 
@@ -192,14 +210,14 @@ namespace AlgorithmVersionWithIndices
 	/**
 	 * @brief Finds the indices of the words that occur in the letters grid.
 	 *
-	 * @param grid a 2d grid filled with letters.
+	 * @param grid 2d grid filled with letters.
 	 * 
-	 * @return a list with all the words in the grid (might contain duplicates).
+	 * @return List with all the words in the grid (might contain duplicates).
 	 */
 	std::vector<std::vector<std::pair<size_t, size_t>>> find_words_indices(const std::vector<std::vector<char>>& grid)
 	{
 		static const std::vector<std::string> dictionary = InputOutputProcessor::get_list_of_valid_words();
-		static const Trie trie(dictionary); // inserts every word in words to the trie
+		static const Trie trie(dictionary);
 		std::vector<std::vector<std::pair<size_t, size_t>>> found_words_indices;
 
 		for (size_t row = 0; row < grid.size(); ++row)
@@ -214,7 +232,7 @@ namespace AlgorithmVersionWithIndices
 				// Find all the words that start at the (i, j) cell.
 				std::vector<std::pair<size_t, size_t>> current_word_indices;
 				std::vector<std::vector<bool>> visited(grid.size(), std::vector<bool>(grid.size(), false));
-				dfs(row, col, current_word_indices, trie.root->children[grid[row][col] - 'a'], visited, found_words_indices, grid);
+				dfs(row, col, current_word_indices, trie.root->children[letter_to_index(grid[row][col])], visited, found_words_indices, grid);
 			}
 		}
 
