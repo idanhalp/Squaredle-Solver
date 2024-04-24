@@ -19,12 +19,12 @@ void Trie::insert(const std::string& word)
 
 	for (const char c : word)
 	{
-		if (!node->children[c - 'a']) // if the prefix appears for the first time
+		if (!node->children[TrieNode::letter_to_index(c)]) // if the prefix appears for the first time
 		{
-			node->children[c - 'a'] = new TrieNode();
+			node->children[TrieNode::letter_to_index(c)] = new TrieNode();
 		}
 
-		node = node->children[c - 'a'];
+		node = node->children[TrieNode::letter_to_index(c)];
 	}
 
 	node->is_complete_word = true;

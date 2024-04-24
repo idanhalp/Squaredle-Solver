@@ -34,6 +34,22 @@ public:
 			}
 		}
 	}
+
+	/**
+	 * @brief Given a lowercase alphabetic letter, return its index in the alphabet.
+	 * 
+	 * @param letter A lowercase alphabetic letter.
+	 * 
+	 * @return Its index in the alphabet (Starting from 0).
+	 * 
+	 * @example letter_to_index('a') == 0
+	 * @example letter_to_index('b') == 1
+	 * @example letter_to_index('z') == 25
+	*/
+	static inline size_t letter_to_index(char letter)
+	{
+		return letter - 'a';
+	}
 };
 
 #endif

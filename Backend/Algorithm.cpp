@@ -3,22 +3,6 @@
 #include "Parameters.hpp"
 #include "Trie.hpp"
 
-/**
- * @brief Given a lowercase alphabetic letter, return its index in the alphabet.
- * 
- * @param letter A lowercase alphabetic letter.
- * 
- * @return Its index in the alphabet (Starting from 0).
- * 
- * @example letter_to_index('a') == 0
- * @example letter_to_index('b') == 1
- * @example letter_to_index('z') == 25
-*/
-inline size_t letter_to_index(char letter)
-{
-	return letter - 'a';
-}
-
 namespace AlgorithmVersionWithoutIndices
 {
 	const std::array<std::pair<int, int>, 8> DIRECTIONS = {std::make_pair(-1, 0),  // up
@@ -87,7 +71,8 @@ namespace AlgorithmVersionWithoutIndices
 			}
 
 			const char next_letter = grid[next_row][next_col];
-			dfs(next_row, next_col, current_word, trie_node->children[letter_to_index(next_letter)], visited, found_words, grid);
+			const TrieNode* const next_trie_node = trie_node->children[TrieNode::letter_to_index(next_letter)];
+			dfs(next_row, next_col, current_word, next_trie_node, visited, found_words, grid);
 		}
 
 		// Backtrack
@@ -120,7 +105,8 @@ namespace AlgorithmVersionWithoutIndices
 				// Find all the words that start at the (i, j) cell.
 				std::string current_word = "";
 				std::vector<std::vector<bool>> visited(grid.size(), std::vector<bool>(grid.size(), false));
-				dfs(row, col, current_word, trie.root->children[letter_to_index(grid[row][col])], visited, found_words, grid);
+				const TrieNode* const next_trie_node = trie.root->children[TrieNode::letter_to_index(grid[row][col])];
+				dfs(row, col, current_word, next_trie_node, visited, found_words, grid);
 			}
 		}
 
@@ -144,7 +130,7 @@ namespace AlgorithmVersionWithIndices
 	 *
 	 * @param row 					Current row.
 	 * @param col 					Current column.
-	 * @param current_word 			String representing the current path in the grid.
+	 * @param current_word_indices 	List of indices of the current path in the grid.
 	 * @param trie_node 			Current position in the trie.
 	 * @param visited 				Indicates wether some cell was already visited
 	 * @param found_words_indices 	Lists of indices of words that were found during the grid traversal.
@@ -198,7 +184,7 @@ namespace AlgorithmVersionWithIndices
 			}
 
 			const char next_letter = grid[next_row][next_col];
-			const TrieNode* const next_trie_node = trie_node->children[letter_to_index(next_letter)];
+			const TrieNode* const next_trie_node = trie_node->children[TrieNode::letter_to_index(next_letter)];
 			dfs(next_row, next_col, current_word_indices, next_trie_node, visited, found_words_indices, grid);
 		}
 
@@ -232,7 +218,8 @@ namespace AlgorithmVersionWithIndices
 				// Find all the words that start at the (i, j) cell.
 				std::vector<std::pair<size_t, size_t>> current_word_indices;
 				std::vector<std::vector<bool>> visited(grid.size(), std::vector<bool>(grid.size(), false));
-				dfs(row, col, current_word_indices, trie.root->children[letter_to_index(grid[row][col])], visited, found_words_indices, grid);
+				const TrieNode* const next_trie_node = trie.root->children[TrieNode::letter_to_index(grid[row][col])];
+				dfs(row, col, current_word_indices, next_trie_node, visited, found_words_indices, grid);
 			}
 		}
 
