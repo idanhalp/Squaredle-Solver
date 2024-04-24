@@ -132,9 +132,7 @@ Window {
                 Layout.topMargin: 15
                 text: "Only a-z and " + mainModule.gridModel.emptyCellChar.toString() + " are allowed"
                 font.pixelSize: 20
-                color: "red"
-
-                visible: mainModule.gridModel.isNotValidInput
+                color: mainModule.gridModel.isNotValidInput ? "red" : "transparent"
             }
 
 
