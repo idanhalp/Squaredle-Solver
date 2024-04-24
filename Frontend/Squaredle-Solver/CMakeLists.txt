@@ -43,7 +43,7 @@ set_target_properties(appSquaredle-Solver PROPERTIES
 )
 
 target_link_libraries(appSquaredle-Solver
-    PRIVATE Qt6::Quick
+    PRIVATE Qt6::Quick Qt6::qquicklayoutsplugin
 )
 
 include(GNUInstallDirs)

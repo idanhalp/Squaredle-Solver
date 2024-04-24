@@ -25,25 +25,25 @@ QVariant ResultsModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    const QString word = m_results[index.row()];
-    if (role == WordRole)
+    Words result = m_results[index.row()];
+    if (role == WordsRole)
     {
-        return word;
+        return result.words;
     }
     else if (role == LengthRole)
     {
-        return word.length();
+        return result.length;
     }
 
     return QVariant();
 }
 
-QList<QString> ResultsModel::results() const
+QList<Words> ResultsModel::results() const
 {
     return m_results;
 }
 
-void ResultsModel::setResults(const QList<QString> &newResults)
+void ResultsModel::setResults(const QList<Words> &newResults)
 {
     m_results = newResults;
 }
@@ -55,25 +55,28 @@ void ResultsModel::createResults(std::vector<std::string> &found_words)
         erasePreviousResults();
     }
 
-    for (int i = 0; i < found_words.size(); i++)
+    QStringList temp;
+    size_t previous_word_length = found_words[0].length();
+    for (size_t i = 0; i < found_words.size(); ++i)
     {
-        addResultToList(found_words[i]);
+        if (found_words[i].length() != previous_word_length)
+        {
+            beginInsertRows(QModelIndex(), rowCount(), rowCount());
+            m_results << Words{static_cast<int>(previous_word_length), temp};
+            endInsertRows();
+            temp.clear();
+            previous_word_length = found_words[i].length();
+        }
+        temp << QString::fromStdString(found_words[i]);
     }
 }
 
 QHash<int, QByteArray> ResultsModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
-    roles[WordRole] = "word";
+    roles[WordsRole] = "words";
     roles[LengthRole] = "length";
     return roles;
-}
-
-void ResultsModel::addResultToList(std::string word)
-{
-    beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    m_results << QString::fromStdString(word);
-    endInsertRows();
 }
 
 void ResultsModel::erasePreviousResults()

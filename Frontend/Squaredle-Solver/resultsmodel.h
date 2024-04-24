@@ -2,6 +2,12 @@
 #define RESULTSMODEL_H
 
 #include <QAbstractListModel>
+#include <QStringListModel>
+
+struct Words {
+    int length;
+    QStringList words;
+};
 
 class ResultsModel : public QAbstractListModel
 {
@@ -9,7 +15,7 @@ class ResultsModel : public QAbstractListModel
 
 public:
     enum {
-        WordRole = Qt::UserRole + 1,
+        WordsRole = Qt::UserRole + 1,
         LengthRole
     };
     explicit ResultsModel(QObject *parent = nullptr);
@@ -21,19 +27,18 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    QList<QString> results() const;
-    void setResults(const QList<QString> &newResults);
+
+    void setResults(const QList<Words> &newResults);
 
     void createResults(std::vector<std::string>& found_words);
 
     QHash<int, QByteArray> roleNames() const override;
 
-    //void
+    QList<Words> results() const;
 
 private:
-    QList<QString> m_results;
+    QList<Words> m_results;
 
-    void addResultToList(std::string word);
     void erasePreviousResults();
 
 };

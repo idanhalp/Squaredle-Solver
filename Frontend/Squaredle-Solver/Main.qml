@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import SquaredleSolver
 
 Window {
@@ -12,127 +13,132 @@ Window {
         id: mainModule
     }
 
-    Text {
-        anchors {
-            top: slider.bottom
-            horizontalCenter: grid.horizontalCenter
-            topMargin: 10
+
+    RowLayout {
+
+        anchors.fill: parent
+
+        ListView {
+            id: results
+            height: 500
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            width: 500
+            model: delegateModel
+            spacing: 25
+            interactive: false
         }
 
-        text: "Grid size is " + mainModule.gridModel.rows + " X " + mainModule.gridModel.columns
-        font.pixelSize: 20
-        color: "black"
-    }
+        DelegateModel {
+            id: delegateModel
 
-    Slider {
-        id: slider
+            model: mainModule.resultsModel
 
-        anchors {
-            top: parent.top
-            horizontalCenter: grid.horizontalCenter
-            topMargin: 20
-        }
+            delegate: ColumnLayout {
+                width: 500
 
-        from: 3
-        value: 4
-        to: 6
-        stepSize: 1
-        snapMode: Slider.SnapAlways
+                spacing: 5
+                Text {
+                    text: length + " letters"
+                    color: "red"
+                    font.pixelSize: 30
+                }
 
-        onMoved: mainModule.gridModel.resizeGrid(value, value);
-    }
+                GridLayout {
+                    width: 300
+                    columns: 5
+                    Repeater {
+                        model: words
 
-    GridView {
-
-        anchors.centerIn: parent
-        id: grid
-        width: 500
-        height: 500
-        cellHeight: grid.height / mainModule.gridModel.rows
-        cellWidth: grid.width / mainModule.gridModel.columns
-
-        model: mainModule.gridModel
-        delegate: Rectangle {
-            width: 400 / mainModule.gridModel.rows
-            height: 400 / mainModule.gridModel.columns
-            color: "grey"
-
-            TextField {
-                anchors.centerIn: parent
-                maximumLength: 1
-                color: "black"
-                font.pixelSize: 26
-                onTextChanged: mainModule.gridModel.updateGrid(text[0], index)
-                background: Rectangle {
-                    color: "transparent"
+                        Text {
+                            text: words[index]
+                            font.pixelSize: 20
+                        }
+                    }
                 }
             }
         }
-    }
 
-    Button {
+        ColumnLayout {
 
-        id: solve
-        anchors {
-            top: grid.bottom
-            horizontalCenter: grid.horizontalCenter
+            Layout.alignment: Qt.AlignCenter
+            Layout.fillHeight: true
 
-        }
+            spacing: 20
+            Text {
 
-        enabled: !mainModule.gridModel.isNotValidInput
+                Layout.alignment: Qt.AlignHCenter
+                text: "Grid size is " + mainModule.gridModel.rows + " X " + mainModule.gridModel.columns
+                font.pixelSize: 20
+                color: "black"
+            }
 
-        text: "Solve!"
-        onClicked: mainModule.solve()
+            Slider {
+                id: slider
 
-    }
+                Layout.alignment: Qt.AlignHCenter
+                from: 3
+                value: 4
+                to: 6
+                stepSize: 1
+                snapMode: Slider.SnapAlways
 
-    Text {
-        anchors {
-            top: solve.bottom
-            horizontalCenter: grid.horizontalCenter
-            topMargin: 15
-        }
+                onMoved: mainModule.gridModel.resizeGrid(value, value);
+            }
 
-        text: "Only a-z and " + mainModule.gridModel.emptyCellChar.toString() + " are allowed"
-        font.pixelSize: 20
-        color: "red"
+            GridView {
 
-        visible: mainModule.gridModel.isNotValidInput
-    }
+                id: grid
+                width: 500
+                height: 500
+                cellHeight: grid.height / mainModule.gridModel.rows
+                cellWidth: grid.width / mainModule.gridModel.columns
 
-    Component {
-        id: sectionHeading
-        Rectangle {
-            width: ListView.view.width
-            height: childrenRect.height
-            color: "lightsteelblue"
+                interactive: false
 
-            required property string section
+                model: mainModule.gridModel
+                delegate: Rectangle {
+                    width: 400 / mainModule.gridModel.rows
+                    height: 400 / mainModule.gridModel.columns
+                    color: "grey"
+
+                    TextField {
+                        anchors.centerIn: parent
+                        maximumLength: 1
+                        color: "black"
+                        font.pixelSize: 26
+                        onTextChanged: mainModule.gridModel.updateGrid(text[0], index)
+                        background: Rectangle {
+                            color: "transparent"
+                        }
+                    }
+                }
+            }
+
+            Button {
+
+                id: solve
+
+                Layout.alignment: Qt.AlignHCenter
+                enabled: !mainModule.gridModel.isNotValidInput
+
+                text: "Solve!"
+                onClicked: mainModule.solve()
+
+            }
 
             Text {
-                text: parent.section + " letters"
-                font.bold: true
-                font.pixelSize: 16
+
+                Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: 15
+                text: "Only a-z and " + mainModule.gridModel.emptyCellChar.toString() + " are allowed"
+                font.pixelSize: 20
+                color: "red"
+
+                visible: mainModule.gridModel.isNotValidInput
             }
+
+
         }
-    }
-
-    ListView {
-
-        height: 1000
-        width: 500
-
-        model: mainModule.resultsModel
-        delegate: Text {
-            text: model.word
-            color: "black"
-            font.pixelSize: 15
-        }
-
-        section.property: "length"
-        section.criteria: ViewSection.FullString
-        section.delegate: sectionHeading
-
     }
 
 }
