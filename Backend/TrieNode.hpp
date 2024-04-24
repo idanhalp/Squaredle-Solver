@@ -6,8 +6,6 @@
 /*
 	This implementation assumes the words inserted to the trie
 	contain only lowercase letters.
-
-	The letters are assigned according to `letter_to_index` in Algorithm.cpp.
 */ 
 class TrieNode
 {
