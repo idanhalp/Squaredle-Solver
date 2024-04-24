@@ -5,14 +5,14 @@
 
 namespace AlgorithmVersionWithoutIndices
 {
-	const std::array<std::pair<int, int>, 8> DIRECTIONS = {std::make_pair(-1, 0),  // up
-														   std::make_pair(1, 0),   // down
-														   std::make_pair(0, -1),  // left
-														   std::make_pair(0, 1),   // right
-														   std::make_pair(-1, -1), // up and left
-														   std::make_pair(-1, 1),  // up and right
-														   std::make_pair(1, -1),  // down and left
-														   std::make_pair(1, 1)};  // down and right
+	const std::array<std::pair<int, int>, 8> DIRECTIONS = {std::make_pair(-1, 0),  // Up
+														   std::make_pair(1, 0),   // Down
+														   std::make_pair(0, -1),  // Left
+														   std::make_pair(0, 1),   // Right
+														   std::make_pair(-1, -1), // Up and left
+														   std::make_pair(-1, 1),  // Up and right
+														   std::make_pair(1, -1),  // Down and left
+														   std::make_pair(1, 1)};  // Down and right
 
 	/**
 	 * @brief Traverses the grid and adds occurring words to found_words.
@@ -48,13 +48,10 @@ namespace AlgorithmVersionWithoutIndices
 		}
 
 		// Try continuing in every direction.
-		for (const auto& direction : DIRECTIONS)
+		for (const auto [row_direction, col_direction] : DIRECTIONS)
 		{
-			const int row_direction = direction.first;
-			const int col_direction = direction.second;
 			const size_t next_row = row + row_direction;
 			const size_t next_col = col + col_direction;
-
 			const bool is_outside_grid = next_row >= grid.size() || next_col >= grid.size();
 
 			if (is_outside_grid)
@@ -93,9 +90,9 @@ namespace AlgorithmVersionWithoutIndices
 		static const Trie trie(dictionary);
 		std::vector<std::string> found_words;
 
-		for (size_t row = 0; row < grid.size(); ++row)
+		for (size_t row = 0u; row < grid.size(); ++row)
 		{
-			for (size_t col = 0; col < grid.size(); ++col)
+			for (size_t col = 0u; col < grid.size(); ++col)
 			{
 				if (grid[row][col] == Parameters::EMPTY_CELL)
 				{
@@ -161,13 +158,10 @@ namespace AlgorithmVersionWithIndices
 		}
 
 		// Try continuing in every direction.
-		for (const auto& direction : DIRECTIONS)
+		for (const auto [row_direction, col_direction] : DIRECTIONS)
 		{
-			const int row_direction = direction.first;
-			const int col_direction = direction.second;
 			const size_t next_row = row + row_direction;
 			const size_t next_col = col + col_direction;
-
 			const bool is_outside_grid = next_row >= grid.size() || next_col >= grid.size();
 
 			if (is_outside_grid)
@@ -206,9 +200,9 @@ namespace AlgorithmVersionWithIndices
 		static const Trie trie(dictionary);
 		std::vector<std::vector<std::pair<size_t, size_t>>> found_words_indices;
 
-		for (size_t row = 0; row < grid.size(); ++row)
+		for (size_t row = 0u; row < grid.size(); ++row)
 		{
-			for (size_t col = 0; col < grid.size(); ++col)
+			for (size_t col = 0u; col < grid.size(); ++col)
 			{
 				if (grid[row][col] == Parameters::EMPTY_CELL)
 				{

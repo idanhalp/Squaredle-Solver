@@ -1,5 +1,5 @@
 # Compiler
-CXX = g++
+CXX = g++ -std=c++17
 
 # Compiler flags
 CXXFLAGS = -Wall -Wextra -pedantic -Werror -O3

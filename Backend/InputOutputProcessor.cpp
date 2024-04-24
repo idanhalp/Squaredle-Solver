@@ -155,7 +155,11 @@ namespace InputOutputProcessor
 	 * they represent
 	 *
 	 * @param found_words_indices 	Lists of indices of words occurring in the input.
-	 * @param grid					The input grid.
+	 * @param grid 					The input grid.
+	 * 
+	 * @return Nothing.
+	 * 
+	 * @result Modifies `found_words_indices`.
 	 */
 	void process_output_with_indices(	std::vector<std::vector<std::pair<size_t, size_t>>>& found_words_indices, 
 										const std::vector<std::vector<char>>& grid)
@@ -166,10 +170,8 @@ namespace InputOutputProcessor
 			std::string output;
 			output.reserve(indices.size());
 
-			for (const auto& row_and_col : indices)
+			for (const auto [row, col] : indices)
 			{
-				const size_t row = row_and_col.first;
-				const size_t col = row_and_col.second;
 				output += grid[row][col];
 			}
 
@@ -211,10 +213,8 @@ namespace InputOutputProcessor
 			const std::string arrow = " ==> ";
 			std::string output;
 
-			for (const auto& row_and_col : indices)
+			for (const auto [row, col] : indices)
 			{
-				const size_t row = row_and_col.first;
-				const size_t col = row_and_col.second;
 				output += "(" + std::to_string(row) + ", " + std::to_string(col) + ")" + arrow;
 			}
 
