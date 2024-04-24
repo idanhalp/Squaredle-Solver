@@ -129,18 +129,22 @@ namespace InputOutputProcessor
 		found_words.erase(std::unique(found_words.begin(), found_words.end()), found_words.end()); // remove duplicates
 
 		// Print the results.
-		std::cout << "Found " << found_words.size() << " words!\n";
+		const int num_of_words_found = static_cast<int>(found_words.size());
+		std::cout << "Found " << num_of_words_found << " words!\n";
 
-		for (size_t i = 0, previous_word_length = 0, word_index = 0; i < found_words.size(); ++i, ++word_index)
+		size_t previous_word_length = 0u;
+		size_t word_index = 0u;
+
+		for (const std::string& word : found_words)
 		{
-			if (found_words[i].length() != previous_word_length)
+			if (word.length() != previous_word_length)
 			{
-				std::cout << "\nwords with " << found_words[i].length() << " letters:\n";
-				previous_word_length = found_words[i].length();
-				word_index = 1;
+				std::cout << "\nWords with " << word.length() << " letters:\n";
+				previous_word_length = word.length();
+				word_index = 1u;
 			}
 
-			std::cout << word_index << ") " << found_words[i] << "\n";
+			std::cout << word_index++ << ") " << word << "\n";
 		}
 	}
 
@@ -154,7 +158,7 @@ namespace InputOutputProcessor
 	 * @param grid					The input grid.
 	 */
 	void process_output_with_indices(	std::vector<std::vector<std::pair<size_t, size_t>>>& found_words_indices, 
-									const std::vector<std::vector<char>>& grid)
+										const std::vector<std::vector<char>>& grid)
 	{
 		// Each list of indices represents a word. This lambda helps recreate it.
 		const auto create_word_from_indices = [&grid] (const auto& indices)
@@ -199,7 +203,8 @@ namespace InputOutputProcessor
 
 		// **FOR DEBUG**
 		// Print the results.
-		std::cout << "Found " << found_words_indices.size() << " words!\n";
+		const int num_of_words_found = static_cast<int>(found_words_indices.size());
+		std::cout << "Found " << num_of_words_found << " words!\n";
 
 		const auto create_string_representing_indices = [](const auto& indices)
 		{
@@ -225,18 +230,16 @@ namespace InputOutputProcessor
 		{
 			if (indices.size() != previous_word_length)
 			{
-				std::cout << "\nwords with " << indices.size() << " letters:\n";
+				std::cout << "\nWords with " << indices.size() << " letters:\n";
 				previous_word_length = indices.size();
-				word_index = 1;
+				word_index = 1u;
 			}
 
 			const std::string representative_word = create_word_from_indices(indices);
 			const std::string indices_as_string = create_string_representing_indices(indices);
 
-			std::cout << word_index << ") " << representative_word << "\n";
+			std::cout << word_index++ << ") " << representative_word << "\n";
 			std::cout << "Indices: " << indices_as_string << "\n";
-
-			++word_index;
 		}
 	}
 }
