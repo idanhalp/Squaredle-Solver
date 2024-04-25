@@ -37,17 +37,9 @@ QVariant GridModel::data(const QModelIndex &index, int role) const
 
 void GridModel::updateGrid(QString c, int index)
 {
-    if (isLetterValid(c.toStdString()[0]))
-    {
-        m_grid[index] = c.toStdString()[0];
-        m_isValidInput = true;
-        emit isValidInputChanged();
-    }
-    else
-    {
-        m_isValidInput = false;
-        emit isValidInputChanged();
-    }
+    m_grid[index] = c.toStdString()[0];
+    m_isValidInput = isLetterValid(m_grid[index]);
+    emit isValidInputChanged();
 }
 
 void GridModel::buildGrid(int rows, int columns)
