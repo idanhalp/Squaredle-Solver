@@ -150,7 +150,12 @@ Window {
                         maximumLength: 1
                         color: "black"
                         font.pixelSize: 26
-                        onTextChanged: mainModule.gridModel.updateGrid(text[0], index)
+                        onTextChanged: {
+                            mainModule.gridModel.updateGrid(text[0], index)
+                            if (text.length === 1) {
+                                nextItemInFocusChain().forceActiveFocus()
+                            }
+                        }
                         background: Rectangle {
                             color: "transparent"
                         }
@@ -163,7 +168,7 @@ Window {
                 id: solve
 
                 Layout.alignment: Qt.AlignHCenter
-                enabled: !mainModule.gridModel.isNotValidInput
+                enabled: mainModule.gridModel.isValidInput
 
                 text: "Solve!"
                 onClicked: mainModule.solve()
@@ -176,7 +181,7 @@ Window {
                 Layout.topMargin: 15
                 text: "Only a-z and " + mainModule.gridModel.emptyCellChar.toString() + " are allowed"
                 font.pixelSize: 20
-                color: mainModule.gridModel.isNotValidInput ? "red" : "transparent"
+                color: !mainModule.gridModel.isValidInput ? "red" : "transparent"
             }
 
 

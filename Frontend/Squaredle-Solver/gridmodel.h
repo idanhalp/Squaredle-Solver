@@ -10,7 +10,7 @@ class GridModel : public QAbstractListModel
     Q_PROPERTY(int rows READ rows WRITE setRows NOTIFY rowsChanged FINAL)
     Q_PROPERTY(int columns READ columns WRITE setColumns NOTIFY columnsChanged FINAL)
     Q_PROPERTY(QChar emptyCellChar READ emptyCellChar WRITE setEmptyCellChar NOTIFY emptyCellCharChanged FINAL)
-    Q_PROPERTY(bool isNotValidInput READ isNotValidInput NOTIFY isNotValidInputChanged FINAL)
+    Q_PROPERTY(bool isValidInput READ isValidInput NOTIFY isValidInputChanged FINAL)
 
 public:
     enum GridRoles{
@@ -34,9 +34,11 @@ public:
     QChar emptyCellChar() const;
     void setEmptyCellChar(QChar newEmptyCellChar);
 
-    bool isNotValidInput() const;
+    bool isValidInput() const;
 
     QList<char> getGrid();
+
+    bool isGridValid();
 
 public slots:
     void updateGrid(QString c, int index);
@@ -49,7 +51,7 @@ signals:
 
     void emptyCellCharChanged();
 
-    void isNotValidInputChanged();
+    void isValidInputChanged();
 
 private:
     QList<char> m_grid;
@@ -57,11 +59,13 @@ private:
     void buildGrid(int rows, int columns);
     void addCell();
     void removeAllRows();
+    bool isLetterValid(char c);
 
     int m_rows;
     int m_columns;
     QChar m_emptyCellChar;
-    bool m_isNotValidInput;
+    bool m_isValidInput;
+
 };
 
 #endif // GRIDMODEL_H
