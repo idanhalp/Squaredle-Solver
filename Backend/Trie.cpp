@@ -1,8 +1,8 @@
 #include "Trie.hpp"
 
-Trie::Trie(const std::vector<std::string>& words) : root(new TrieNode)
+Trie::Trie(const std::vector<std::string> dictionary) : root(new TrieNode)
 {
-	for (const std::string& word : words)
+	for (const std::string& word : dictionary)
 	{
 		insert(word);
 	}

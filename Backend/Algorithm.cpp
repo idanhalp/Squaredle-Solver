@@ -196,8 +196,7 @@ namespace AlgorithmVersionWithIndices
 	 */
 	std::vector<std::vector<std::pair<size_t, size_t>>> find_words_indices(const std::vector<std::vector<char>>& grid)
 	{
-		static const std::vector<std::string> dictionary = InputOutputProcessor::get_list_of_valid_words();
-		static const Trie trie(dictionary);
+		static const Trie trie(InputOutputProcessor::get_list_of_valid_words());
 		std::vector<std::vector<std::pair<size_t, size_t>>> found_words_indices;
 
 		for (size_t row = 0u; row < grid.size(); ++row)
