@@ -1,10 +1,9 @@
 #include "gridmodel.h"
 #include "../../Backend/Parameters.hpp"
-#include <QRegularExpression>
 
 GridModel::GridModel(QObject *parent)
     : QAbstractListModel(parent),
-    m_isNotValidInput(false)
+    m_isValidInput(true)
 {
     setRows(4);
     setColumns(4);
@@ -38,20 +37,16 @@ QVariant GridModel::data(const QModelIndex &index, int role) const
 
 void GridModel::updateGrid(QString c, int index)
 {
-    std::string regex = "[a-z";
-    regex += Parameters::EMPTY_CELL;
-    regex += "]";
-    QRegularExpression re(QString::fromStdString(regex));
-    if (re.match(c).hasMatch())
+    if (isLetterValid(c.toStdString()[0]))
     {
         m_grid[index] = c.toStdString()[0];
-        m_isNotValidInput = false;
-        emit isNotValidInputChanged();
+        m_isValidInput = true;
+        emit isValidInputChanged();
     }
     else
     {
-        m_isNotValidInput = true;
-        emit isNotValidInputChanged();
+        m_isValidInput = false;
+        emit isValidInputChanged();
     }
 }
 
@@ -75,10 +70,15 @@ void GridModel::removeAllRows()
     removeRows(0, rowCount(), index(0,0));
 }
 
+bool GridModel::isLetterValid(char c)
+{
+    return std::islower(c) || c == Parameters::EMPTY_CELL;
+}
+
 void GridModel::resizeGrid(int rows, int columns)
 {
-    m_isNotValidInput = false;
-    emit isNotValidInputChanged();
+    m_isValidInput = true;
+    emit isValidInputChanged();
 
     removeAllRows();
     setRows(rows);
@@ -125,12 +125,31 @@ void GridModel::setEmptyCellChar(QChar newEmptyCellChar)
     emit emptyCellCharChanged();
 }
 
-bool GridModel::isNotValidInput() const
+bool GridModel::isValidInput() const
 {
-    return m_isNotValidInput;
+    return m_isValidInput;
 }
 
 QList<char> GridModel::getGrid()
 {
     return m_grid;
+}
+
+bool GridModel::isGridValid()
+{
+    for (const char c : m_grid)
+    {
+        if (!isLetterValid(c))
+        {
+            m_isValidInput = false;
+            emit isValidInputChanged();
+
+            return false;
+        }
+    }
+
+    m_isValidInput = true;
+    emit isValidInputChanged();
+
+    return true;
 }

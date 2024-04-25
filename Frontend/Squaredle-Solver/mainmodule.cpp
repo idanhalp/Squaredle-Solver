@@ -30,6 +30,11 @@ void MainModule::setResultsModel(ResultsModel *newResultsModel)
 
 void MainModule::solve()
 {
+    if (!m_gridModel->isGridValid())
+    {
+        return;
+    }
+
     std::vector<std::vector<char>> grid(m_gridModel->rows(), std::vector<char>(m_gridModel->rows(), ' '));
     int k = 0;
 
@@ -41,6 +46,7 @@ void MainModule::solve()
             k++;
         }
     }
+
 
     std::vector<std::string> found_words = Algorithm::find_words(grid);
     std::vector<std::string> filtered_words = InputOutputProcessor::process_output(found_words);

@@ -163,7 +163,7 @@ Window {
                 id: solve
 
                 Layout.alignment: Qt.AlignHCenter
-                enabled: !mainModule.gridModel.isNotValidInput
+                enabled: mainModule.gridModel.isValidInput
 
                 text: "Solve!"
                 onClicked: mainModule.solve()
@@ -176,7 +176,7 @@ Window {
                 Layout.topMargin: 15
                 text: "Only a-z and " + mainModule.gridModel.emptyCellChar.toString() + " are allowed"
                 font.pixelSize: 20
-                color: mainModule.gridModel.isNotValidInput ? "red" : "transparent"
+                color: !mainModule.gridModel.isValidInput ? "red" : "transparent"
             }
 
 
