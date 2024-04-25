@@ -1,7 +1,8 @@
 #include "resultsmodel.h"
 
 ResultsModel::ResultsModel(QObject *parent)
-    : QAbstractListModel(parent)
+    : QAbstractListModel(parent),
+    m_totalWordsCount(0)
 {}
 
 int ResultsModel::rowCount(const QModelIndex &parent) const
@@ -34,7 +35,10 @@ QVariant ResultsModel::data(const QModelIndex &index, int role) const
     {
         return result.length;
     }
-
+    else if (role == SectionCountRole)
+    {
+        return result.words.count();
+    }
     return QVariant();
 }
 
@@ -55,6 +59,10 @@ void ResultsModel::createResults(std::vector<std::string> &found_words)
         erasePreviousResults();
     }
 
+    m_totalWordsCount = found_words.size();
+    emit totalWordsCountChanged();
+
+    found_words.push_back(""); // makes sure the longest length words will be shown
     QStringList temp;
     size_t previous_word_length = found_words[0].length();
     for (size_t i = 0; i < found_words.size(); ++i)
@@ -67,6 +75,7 @@ void ResultsModel::createResults(std::vector<std::string> &found_words)
             temp.clear();
             previous_word_length = found_words[i].length();
         }
+        qInfo() << found_words[i];
         temp << QString::fromStdString(found_words[i]);
     }
 }
@@ -76,10 +85,16 @@ QHash<int, QByteArray> ResultsModel::roleNames() const
     QHash<int, QByteArray> roles;
     roles[WordsRole] = "words";
     roles[LengthRole] = "length";
+    roles[SectionCountRole] = "section_count";
     return roles;
 }
 
 void ResultsModel::erasePreviousResults()
 {
     removeRows(0, rowCount(), index(0,0));
+}
+
+int ResultsModel::totalWordsCount() const
+{
+    return m_totalWordsCount;
 }

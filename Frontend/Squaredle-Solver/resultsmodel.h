@@ -13,10 +13,13 @@ class ResultsModel : public QAbstractListModel
 {
     Q_OBJECT
 
+    Q_PROPERTY(int totalWordsCount READ totalWordsCount NOTIFY totalWordsCountChanged FINAL)
+
 public:
     enum {
         WordsRole = Qt::UserRole + 1,
-        LengthRole
+        LengthRole,
+        SectionCountRole
     };
     explicit ResultsModel(QObject *parent = nullptr);
 
@@ -36,11 +39,17 @@ public:
 
     QList<Words> results() const;
 
+    int totalWordsCount() const;
+
+signals:
+    void totalWordsCountChanged();
+
 private:
     QList<Words> m_results;
 
     void erasePreviousResults();
 
+    int m_totalWordsCount;
 };
 
 #endif // RESULTSMODEL_H

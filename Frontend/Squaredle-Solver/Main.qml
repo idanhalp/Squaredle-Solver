@@ -17,16 +17,51 @@ Window {
     RowLayout {
 
         anchors.fill: parent
+        ColumnLayout {
+            Layout.fillHeight: true
+            spacing: 20
 
-        ListView {
-            id: results
-            height: 500
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            width: 500
-            model: delegateModel
-            spacing: 25
-            interactive: false
+            Flickable {
+                interactive: true
+                Layout.fillHeight: true
+                width: 600
+                contentHeight: result.contentHeight + 200
+                Text {
+                    id: wordsCount
+
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        leftMargin: 10
+                    }
+
+                    text: "Found " + mainModule.resultsModel.totalWordsCount + " words"
+                    color: mainModule.resultsModel.totalWordsCount > 0 ? "black" : "transparent"
+                    font.pixelSize: 20
+                    font.bold: true
+                }
+                ListView {
+                    id: result
+
+                    anchors {
+                        top: wordsCount.bottom
+                        bottom: parent.bottom
+                        left: parent.left
+                        topMargin: 15
+                        leftMargin: 10
+                    }
+
+                    width: 600
+                    model: delegateModel
+                    spacing: 25
+                    interactive: false
+                }
+            }
+
+
         }
+
+
 
         DelegateModel {
             id: delegateModel
@@ -38,7 +73,7 @@ Window {
 
                 spacing: 5
                 Text {
-                    text: length + " letters"
+                    text: length + " letters" + " - " + section_count + (section_count == 1 ? " word" : " words")
                     color: "red"
                     font.pixelSize: 30
                 }
@@ -46,12 +81,13 @@ Window {
                 GridLayout {
                     width: 300
                     columns: 5
+                    columnSpacing: 10
                     Repeater {
                         model: words
 
                         Text {
                             text: words[index]
-                            font.pixelSize: 20
+                            font.pixelSize: 15
                         }
                     }
                 }
@@ -64,6 +100,14 @@ Window {
             Layout.fillHeight: true
 
             spacing: 20
+
+            Text {
+                Layout.alignment: Qt.AlignHCenter
+                text: "Type " + "\"" + mainModule.gridModel.emptyCellChar + "\"" + " for an empty cell."
+                font.pixelSize: 20
+                color: "red"
+            }
+
             Text {
 
                 Layout.alignment: Qt.AlignHCenter
