@@ -1,6 +1,8 @@
 # Squaredle Solver
 A fast and easy-to-use solver for the word-finding game [Squaredle](https://squaredle.app/).
 
+Try it [here](https://idanhalp.github.io/Squaredle-Solver/live/).
+
 ## How to use the solver?
 * Choose the desired grid size.
 * Fill the cells with letters; empty cells can be represented using the '-' character.
