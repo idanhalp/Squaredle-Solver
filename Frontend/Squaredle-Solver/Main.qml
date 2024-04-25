@@ -150,7 +150,12 @@ Window {
                         maximumLength: 1
                         color: "black"
                         font.pixelSize: 26
-                        onTextChanged: mainModule.gridModel.updateGrid(text[0], index)
+                        onTextChanged: {
+                            mainModule.gridModel.updateGrid(text[0], index)
+                            if (text.length === 1) {
+                                nextItemInFocusChain().forceActiveFocus()
+                            }
+                        }
                         background: Rectangle {
                             color: "transparent"
                         }
