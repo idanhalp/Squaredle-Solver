@@ -91,10 +91,22 @@ namespace InputOutputProcessor
 		*/
 
 		// Squaredle of 15.4.2024
-		const std::vector<std::vector<char>> grid{{'n', 'm', 'a', 'b'},
-												  {'i', 'b', 'n', 'g'},
-												  {'a', 'u', 'e', 'n'},
-												  {'n', 'q', 'a', 't'}};
+		// const std::vector<std::vector<char>> grid{{'f', 'a', 'z', 'e'},
+		// 										  {'e', 'a', 'u', 'n'},
+		// 										  {'d', 'l', 'e', 't'},
+		// 										  {'y', 'm', 'i', 'a'}};
+
+		// Giant Squaredle
+		const std::vector<std::vector<char>> grid {{'r','g','e','r','i','r','e','w','a','t'},
+													{'u','o','d','j','l','f','p','r','b','e'},
+													{'a','n','g','o','k','e','o','o','m','r'},
+													{'r','u','r','a','c','r','r','x','o','e'},
+													{'b','d','n','c','f','i','r','e','b','w'},
+													{'l','a','e','r','i','f','b','p','o','t'},
+													{'e','m','r','b','d','r','y','a','l','u'},
+													{'u','o','t','s','e','g','l','c','t','g'},
+													{'z','s','h','g','i','f','a','l','e','s'},
+													{'e','a','b','e','r','e','w','o','r','k'}};
 
 		if (std::any_of(grid.begin(), grid.end(), [&](const auto& row) { return row.size() != grid.size(); }))
 		{
