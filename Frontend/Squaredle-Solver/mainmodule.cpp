@@ -48,8 +48,8 @@ void MainModule::solve()
     }
 
 
-    std::vector<std::string> found_words = Algorithm::find_words(grid);
-    std::vector<std::string> filtered_words = InputOutputProcessor::process_output(found_words);
+    std::vector<std::string> found_words = AlgorithmVersionWithoutIndices::find_words(grid);
+    std::vector<std::string> filtered_words = InputOutputProcessor::process_output_without_indices(found_words);
 
     m_resultsModel->createResults(filtered_words);
 }
