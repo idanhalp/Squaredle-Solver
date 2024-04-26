@@ -17,7 +17,7 @@ class Trie
 public:
 	TrieNode* const root;
 
-	Trie(const std::vector<std::string>& words);
+	Trie(const std::vector<std::string> dictionary);
 	~Trie();
 	void insert(const std::string& word);
 };
