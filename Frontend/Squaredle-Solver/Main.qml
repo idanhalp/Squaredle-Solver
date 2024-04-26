@@ -143,7 +143,7 @@ Window {
                 delegate: Rectangle {
                     width: 400 / mainModule.gridModel.rows
                     height: 400 / mainModule.gridModel.columns
-                    color: "grey"
+                    color: mainModule.gridModel.validIndices[index] ? "grey" : "red"
 
                     TextField {
                         anchors.centerIn: parent

@@ -61,7 +61,10 @@ void GridModel::buildGrid(int rows, int columns)
     for (int i = 0; i < m_rows * m_columns; i++)
     {
         addCell();
+        m_validIndices << true;
     }
+
+    emit validIndicesChanged();
 }
 
 void GridModel::addCell()
@@ -94,6 +97,7 @@ void GridModel::clearGrid()
     emit isValidInputChanged();
 
     removeAllRows();
+    m_validIndices.clear();
     buildGrid(m_rows, m_columns);
 }
 
@@ -148,19 +152,35 @@ QList<char> GridModel::getGrid()
 
 bool GridModel::isGridValid()
 {
-    for (const char c : m_grid)
+    for (int i = 0; i < m_grid.count(); i++)
     {
-        if (!isLetterValid(c))
+        if (!isLetterValid(m_grid[i]))
         {
             m_isValidInput = false;
             emit isValidInputChanged();
 
-            return false;
+            m_validIndices[i] = false;
+            emit validIndicesChanged();
         }
+        else
+        {
+            m_validIndices[i] = true;
+            emit validIndicesChanged();
+        }
+    }
+
+    if (!m_isValidInput)
+    {
+        return false;
     }
 
     m_isValidInput = true;
     emit isValidInputChanged();
 
     return true;
+}
+
+QList<bool> GridModel::validIndices() const
+{
+    return m_validIndices;
 }
