@@ -1,6 +1,6 @@
 #include "Trie.hpp"
 
-Trie::Trie(const std::vector<std::string> words) : root(new TrieNode)
+Trie::Trie(const std::vector<std::string>& words) : root(new TrieNode)
 {
 	for (const std::string& word : words)
 	{
@@ -19,13 +19,13 @@ void Trie::insert(const std::string& word)
 
 	for (const char c : word)
 	{
-		if (!node->children[c - 'a']) // if the prefix appears for the first time
+		if (!node->children[TrieNode::letter_to_index(c)]) // If the prefix appears for the first time
 		{
-			node->children[c - 'a'] = new TrieNode();
+			node->children[TrieNode::letter_to_index(c)] = new TrieNode();
 		}
 
-		node = node->children[c - 'a'];
+		node = node->children[TrieNode::letter_to_index(c)];
 	}
 
-	node->is_full_word = true;
+	node->is_complete_word = true;
 }
