@@ -10,7 +10,7 @@
 class TrieNode
 {
 private:
-	static const size_t NUM_OF_LETTERS = 26;
+	static const size_t NUM_OF_LETTERS = 26u;
 
 public:
 	bool is_complete_word;
