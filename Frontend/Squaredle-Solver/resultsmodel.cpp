@@ -75,7 +75,7 @@ void ResultsModel::createResults(std::vector<std::string> &found_words)
             temp.clear();
             previous_word_length = found_words[i].length();
         }
-        qInfo() << found_words[i];
+
         temp << QString::fromStdString(found_words[i]);
     }
 }
@@ -91,6 +91,9 @@ QHash<int, QByteArray> ResultsModel::roleNames() const
 
 void ResultsModel::erasePreviousResults()
 {
+    m_totalWordsCount = 0;
+    emit totalWordsCountChanged();
+
     removeRows(0, rowCount(), index(0,0));
 }
 

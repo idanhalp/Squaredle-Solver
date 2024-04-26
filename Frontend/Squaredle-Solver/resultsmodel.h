@@ -41,13 +41,13 @@ public:
 
     int totalWordsCount() const;
 
+    void erasePreviousResults();
+
 signals:
     void totalWordsCountChanged();
 
 private:
     QList<Words> m_results;
-
-    void erasePreviousResults();
 
     int m_totalWordsCount;
 };

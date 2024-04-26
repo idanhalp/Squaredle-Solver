@@ -32,6 +32,7 @@ void MainModule::solve()
 {
     if (!m_gridModel->isGridValid())
     {
+        m_resultsModel->erasePreviousResults();
         return;
     }
 
