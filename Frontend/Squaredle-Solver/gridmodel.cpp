@@ -28,11 +28,25 @@ bool GridModel::removeRows(int row, int count, const QModelIndex &parent)
 
 QVariant GridModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid())
+    if (index.row() < 0 || index.row() >= m_grid.count())
+    {
         return QVariant();
+    }
 
-    // FIXME: Implement me!
+    char letter = m_grid[index.row()];
+    if (role == LetterRole)
+    {
+        return QChar(letter);
+    }
+
     return QVariant();
+}
+
+QHash<int, QByteArray> GridModel::roleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[LetterRole] = "letter";
+    return roles;
 }
 
 void GridModel::updateGrid(QString c, int index)
@@ -69,13 +83,18 @@ bool GridModel::isLetterValid(char c)
 
 void GridModel::resizeGrid(int rows, int columns)
 {
+    setRows(rows);
+    setColumns(columns);
+    clearGrid();
+}
+
+void GridModel::clearGrid()
+{
     m_isValidInput = true;
     emit isValidInputChanged();
 
     removeAllRows();
-    setRows(rows);
-    setColumns(columns);
-    buildGrid(rows, columns);
+    buildGrid(m_rows, m_columns);
 }
 
 int GridModel::rows() const

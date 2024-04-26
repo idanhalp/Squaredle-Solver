@@ -150,6 +150,7 @@ Window {
                         maximumLength: 1
                         color: "black"
                         font.pixelSize: 26
+                        text: letter == ' ' ? '' : letter
                         onTextChanged: {
                             mainModule.gridModel.updateGrid(text[0], index)
                             if (text.length === 1) {
@@ -163,17 +164,29 @@ Window {
                 }
             }
 
-            Button {
-
-                id: solve
-
+            Row {
                 Layout.alignment: Qt.AlignHCenter
-                enabled: mainModule.gridModel.isValidInput
+                spacing: 20
+                Button {
 
-                text: "Solve!"
-                onClicked: mainModule.solve()
+                    id: solve
 
+                    enabled: mainModule.gridModel.isValidInput
+
+                    text: "Solve!"
+                    onClicked: mainModule.solve()
+
+                }
+
+                Button {
+                    id: clear
+
+                    text: "Clear grid"
+                    onClicked: mainModule.gridModel.clearGrid()
+                }
             }
+
+
 
             Text {
 

@@ -14,7 +14,7 @@ class GridModel : public QAbstractListModel
 
 public:
     enum GridRoles{
-        Role = Qt::UserRole + 1
+        LetterRole = Qt::UserRole + 1
     };
     explicit GridModel(QObject *parent = nullptr);
 
@@ -24,6 +24,8 @@ public:
     bool removeRows(int row, int count, const QModelIndex &parent) override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+
+    QHash<int, QByteArray> roleNames() const override;
 
     int rows() const;
     void setRows(int newRows);
@@ -43,6 +45,7 @@ public:
 public slots:
     void updateGrid(QString c, int index);
     void resizeGrid(int rows, int columns);
+    void clearGrid();
 
 signals:
     void rowsChanged();
