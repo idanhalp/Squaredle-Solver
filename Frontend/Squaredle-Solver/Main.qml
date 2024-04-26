@@ -122,7 +122,7 @@ Window {
                 Layout.alignment: Qt.AlignHCenter
                 from: 3
                 value: 4
-                to: 6
+                to: 10
                 stepSize: 1
                 snapMode: Slider.SnapAlways
 
