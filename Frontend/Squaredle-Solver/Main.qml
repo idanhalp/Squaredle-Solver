@@ -181,7 +181,7 @@ Window {
                 Button {
                     id: clear
 
-                    text: "Clear grid"
+                    text: "Clear"
                     onClicked: mainModule.gridModel.clearGrid()
                 }
             }
