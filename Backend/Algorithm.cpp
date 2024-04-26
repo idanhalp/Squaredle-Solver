@@ -1,6 +1,6 @@
 #include "Algorithm.hpp"
 #include "InputOutputProcessor.hpp"
-#include "Parameters.hpp"
+#include "../Parameters.hpp"
 #include "Trie.hpp"
 
 namespace AlgorithmVersionWithoutIndices

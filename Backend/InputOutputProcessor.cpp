@@ -1,5 +1,5 @@
 #include "InputOutputProcessor.hpp"
-#include "Parameters.hpp"
+#include "../Parameters.hpp"
 #include <fstream>
 #include <iostream>
 #include <algorithm>
