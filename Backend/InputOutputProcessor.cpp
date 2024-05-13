@@ -124,7 +124,8 @@ namespace InputOutputProcessor
 	 *
 	 * @param found_words The words occurring in the input.
 	 */
-    std::vector<std::string> process_output_without_indices(std::vector<std::string>& found_words)
+	[[deprecated]]
+	void process_output_without_indices(std::vector<std::string>& found_words)
 	{
 		// Sort the words by length (tie break by lexicographic order) and remove duplicates.
 		std::sort(found_words.begin(), found_words.end(), [](const std::string& word1, const std::string& word2)
@@ -176,6 +177,7 @@ namespace InputOutputProcessor
 	 * 
 	 * @result Modifies `found_words_indices`.
 	 */
+	[[deprecated]]
 	void process_output_with_indices(	std::vector<std::vector<std::pair<size_t, size_t>>>& found_words_indices, 
 										const std::vector<std::vector<char>>& grid)
 	{
@@ -255,6 +257,44 @@ namespace InputOutputProcessor
 
 			std::cout << word_index++ << ") " << representative_word << "\n";
 			std::cout << "Indices: " << indices_as_string << "\n";
+		}
+	}
+
+	void process_output(const std::map<	std::string,											// Key
+										AlgorithmVersionWithIndices::indices_t, 				// Value
+										decltype(AlgorithmVersionWithIndices::compare_words)>& 	// Comparator
+										word_to_indices)
+	{
+		size_t previous_word_length = 0u;
+		size_t word_index = 0u;
+
+		const auto create_string_representing_indices = [](const auto& indices)
+		{
+			const std::string arrow = " ==> ";
+			std::string output;
+
+			for (const auto [row, col] : indices)
+			{
+				output += "(" + std::to_string(row) + ", " + std::to_string(col) + ")" + arrow;
+			}
+
+			output.erase(output.length() - arrow.length()); // Remove the last arrow.
+
+			return output;			
+		};
+
+		for (const auto& [word, indices] : word_to_indices)
+		{
+			
+			if (indices.size() != previous_word_length)
+			{
+				std::cout << "\nWords with " << indices.size() << " letters:\n";
+				previous_word_length = indices.size();
+				word_index = 1u;
+			}
+
+			std::cout << word_index++ << ") " << word << "\n";
+			std::cout << "Indices: " << create_string_representing_indices(indices) << "\n";
 		}
 	}
 }

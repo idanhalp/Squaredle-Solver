@@ -12,8 +12,8 @@ int main()
 	
 	if (should_print_indices)
 	{
-		auto found_words_indices = AlgorithmVersionWithIndices::find_words_indices(grid);
-		InputOutputProcessor::process_output_with_indices(found_words_indices, grid);
+		const auto word_to_indices = AlgorithmVersionWithIndices::find_words(grid);
+		InputOutputProcessor::process_output(word_to_indices);		
 	}
 	else
 	{
