@@ -20,8 +20,8 @@ namespace AlgorithmVersionWithIndices
 {
 	typedef std::vector<std::pair<size_t, size_t>> indices_t;
 
-	const std::function<bool(const std::string&, const std::string&)> compare_words = 
-	[] (const std::string& word1, const std::string& word2)
+    inline std::function<bool(const std::string&, const std::string&)> compare_words =
+    [] (const std::string& word1, const std::string& word2)
 	{
 		if (word1.length() != word2.length())
 		{

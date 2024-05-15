@@ -125,7 +125,7 @@ namespace InputOutputProcessor
 	 * @param found_words The words occurring in the input.
 	 */
 	[[deprecated]]
-	void process_output_without_indices(std::vector<std::string>& found_words)
+    std::vector<std::string> process_output_without_indices(std::vector<std::string>& found_words)
 	{
 		// Sort the words by length (tie break by lexicographic order) and remove duplicates.
 		std::sort(found_words.begin(), found_words.end(), [](const std::string& word1, const std::string& word2)

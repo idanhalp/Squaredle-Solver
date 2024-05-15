@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import SquaredleSolver
 
+
 Window {
     width: 640
     height: 480
@@ -13,6 +14,11 @@ Window {
         id: mainModule
     }
 
+    function showIndices(word)
+    {
+        mainModule.showIndices(word)
+        timer.start()
+    }
 
     RowLayout {
 
@@ -88,6 +94,14 @@ Window {
                         Text {
                             text: words[index]
                             font.pixelSize: 15
+
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: showIndices(text)
+                                hoverEnabled: true
+                                onEntered: color = "green"
+                                onExited: color = "black"
+                            }
                         }
                     }
                 }
@@ -198,6 +212,29 @@ Window {
             }
 
 
+        }
+    }
+
+    Timer {
+        id: timer
+        property int i: 0
+        property int prevIndex: i
+        interval: 500
+        repeat: true
+        onTriggered: {
+            if (i === mainModule.resultsModel.wordIndices.length)
+            {
+                grid.itemAtIndex(mainModule.resultsModel.wordIndices[prevIndex]).color = "grey";
+                i = 0;
+                prevIndex = i;
+                timer.running = false;
+            }
+            else {
+                grid.itemAtIndex(mainModule.resultsModel.wordIndices[prevIndex]).color = "grey";
+                grid.itemAtIndex(mainModule.resultsModel.wordIndices[i]).color = "green";
+                prevIndex = i;
+                i++;
+            }
         }
     }
 

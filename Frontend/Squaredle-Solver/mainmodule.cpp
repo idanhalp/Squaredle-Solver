@@ -49,8 +49,12 @@ void MainModule::solve()
     }
 
 
-    std::vector<std::string> found_words = AlgorithmVersionWithoutIndices::find_words(grid);
-    std::vector<std::string> filtered_words = InputOutputProcessor::process_output_without_indices(found_words);
+    const auto& found_words = AlgorithmVersionWithIndices::find_words(grid);
 
-    m_resultsModel->createResults(filtered_words);
+    m_resultsModel->createResults(found_words);
+}
+
+void MainModule::showIndices(QString word)
+{
+    m_resultsModel->showWordIndices(word, m_gridModel->rows());
 }

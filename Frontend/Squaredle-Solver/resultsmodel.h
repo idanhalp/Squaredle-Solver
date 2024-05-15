@@ -3,6 +3,8 @@
 
 #include <QAbstractListModel>
 #include <QStringListModel>
+#include <map>
+#include "../../Backend/Algorithm.hpp"
 
 struct Words {
     int length;
@@ -14,6 +16,7 @@ class ResultsModel : public QAbstractListModel
     Q_OBJECT
 
     Q_PROPERTY(int totalWordsCount READ totalWordsCount NOTIFY totalWordsCountChanged FINAL)
+    Q_PROPERTY(QList<int> wordIndices READ wordIndices NOTIFY wordIndicesChanged FINAL)
 
 public:
     enum {
@@ -33,7 +36,9 @@ public:
 
     void setResults(const QList<Words> &newResults);
 
-    void createResults(std::vector<std::string>& found_words);
+    void createResults(const std::map<std::string,
+                        AlgorithmVersionWithIndices::indices_t,
+                        decltype(AlgorithmVersionWithIndices::compare_words)>& word_to_indices);
 
     QHash<int, QByteArray> roleNames() const override;
 
@@ -43,13 +48,25 @@ public:
 
     void erasePreviousResults();
 
+    QList<int> wordIndices() const;
+
+public slots:
+    void showWordIndices(QString word, int rows);
+
 signals:
     void totalWordsCountChanged();
 
+    void wordIndicesChanged();
+
 private:
     QList<Words> m_results;
+    std::map<std::string,
+             AlgorithmVersionWithIndices::indices_t,
+             decltype(AlgorithmVersionWithIndices::compare_words)> word_to_indices;
+
 
     int m_totalWordsCount;
+    QList<int> m_wordIndices;
 };
 
 #endif // RESULTSMODEL_H

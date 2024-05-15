@@ -24,6 +24,8 @@ public:
 public slots:
     void solve();
 
+    void showIndices(QString word);
+
 signals:
     void gridModelChanged();
 
