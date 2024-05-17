@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import SquaredleSolver
 
+
 Window {
     width: 640
     height: 480
@@ -13,6 +14,11 @@ Window {
         id: mainModule
     }
 
+    function showIndices(word)
+    {
+        mainModule.showIndices(word)
+        timer.start()
+    }
 
     RowLayout {
 
@@ -88,6 +94,14 @@ Window {
                         Text {
                             text: words[index]
                             font.pixelSize: 15
+
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: showIndices(text)
+                                hoverEnabled: true
+                                onEntered: color = "green"
+                                onExited: color = "black"
+                            }
                         }
                     }
                 }
@@ -122,7 +136,7 @@ Window {
                 Layout.alignment: Qt.AlignHCenter
                 from: 3
                 value: 4
-                to: 6
+                to: 10
                 stepSize: 1
                 snapMode: Slider.SnapAlways
 
@@ -143,13 +157,14 @@ Window {
                 delegate: Rectangle {
                     width: 400 / mainModule.gridModel.rows
                     height: 400 / mainModule.gridModel.columns
-                    color: "grey"
+                    color: mainModule.gridModel.validIndices[index] ? "grey" : "red"
 
                     TextField {
                         anchors.centerIn: parent
                         maximumLength: 1
                         color: "black"
                         font.pixelSize: 26
+                        text: letter == ' ' ? '' : letter
                         onTextChanged: {
                             mainModule.gridModel.updateGrid(text[0], index)
                             if (text.length === 1) {
@@ -163,17 +178,29 @@ Window {
                 }
             }
 
-            Button {
-
-                id: solve
-
+            Row {
                 Layout.alignment: Qt.AlignHCenter
-                enabled: mainModule.gridModel.isValidInput
+                spacing: 20
+                Button {
 
-                text: "Solve!"
-                onClicked: mainModule.solve()
+                    id: solve
 
+                    enabled: mainModule.gridModel.isValidInput
+
+                    text: "Solve!"
+                    onClicked: mainModule.solve()
+
+                }
+
+                Button {
+                    id: clear
+
+                    text: "Clear"
+                    onClicked: mainModule.gridModel.clearGrid()
+                }
             }
+
+
 
             Text {
 
@@ -185,6 +212,29 @@ Window {
             }
 
 
+        }
+    }
+
+    Timer {
+        id: timer
+        property int i: 0
+        property int prevIndex: i
+        interval: 500
+        repeat: true
+        onTriggered: {
+            if (i === mainModule.resultsModel.wordIndices.length)
+            {
+                grid.itemAtIndex(mainModule.resultsModel.wordIndices[prevIndex]).color = "grey";
+                i = 0;
+                prevIndex = i;
+                timer.running = false;
+            }
+            else {
+                grid.itemAtIndex(mainModule.resultsModel.wordIndices[prevIndex]).color = "grey";
+                grid.itemAtIndex(mainModule.resultsModel.wordIndices[i]).color = "green";
+                prevIndex = i;
+                i++;
+            }
         }
     }
 

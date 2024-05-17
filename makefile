@@ -1,8 +1,8 @@
 # Compiler
-CXX = g++
+CXX = g++ 
 
 # Compiler flags
-CXXFLAGS = -Wall -Wextra -pedantic -Werror -O3
+CXXFLAGS = -Wall -Wextra -pedantic -Werror -O3 -std=c++17
 
 # Source files
 SRCS = Backend/main.cpp Backend/InputOutputProcessor.cpp Backend/Trie.cpp Backend/Algorithm.cpp

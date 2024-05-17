@@ -18,7 +18,7 @@ qt_add_executable(appSquaredle-Solver
     ../../Backend/InputOutputProcessor.cpp ../../Backend/InputOutputProcessor.hpp
     ../../Backend/Trie.cpp ../../Backend/Trie.hpp
     ../../Backend/TrieNode.hpp
-    ../../Backend/Parameters.hpp
+    ../../Parameters.hpp
     Resources.qrc
 )
 

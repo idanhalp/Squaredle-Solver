@@ -1,5 +1,5 @@
 #include "gridmodel.h"
-#include "../../Backend/Parameters.hpp"
+#include "../../Parameters.hpp"
 
 GridModel::GridModel(QObject *parent)
     : QAbstractListModel(parent),
@@ -28,11 +28,25 @@ bool GridModel::removeRows(int row, int count, const QModelIndex &parent)
 
 QVariant GridModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid())
+    if (index.row() < 0 || index.row() >= m_grid.count())
+    {
         return QVariant();
+    }
 
-    // FIXME: Implement me!
+    char letter = m_grid[index.row()];
+    if (role == LetterRole)
+    {
+        return QChar(letter);
+    }
+
     return QVariant();
+}
+
+QHash<int, QByteArray> GridModel::roleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[LetterRole] = "letter";
+    return roles;
 }
 
 void GridModel::updateGrid(QString c, int index)
@@ -47,7 +61,10 @@ void GridModel::buildGrid(int rows, int columns)
     for (int i = 0; i < m_rows * m_columns; i++)
     {
         addCell();
+        m_validIndices << true;
     }
+
+    emit validIndicesChanged();
 }
 
 void GridModel::addCell()
@@ -69,13 +86,19 @@ bool GridModel::isLetterValid(char c)
 
 void GridModel::resizeGrid(int rows, int columns)
 {
+    setRows(rows);
+    setColumns(columns);
+    clearGrid();
+}
+
+void GridModel::clearGrid()
+{
     m_isValidInput = true;
     emit isValidInputChanged();
 
     removeAllRows();
-    setRows(rows);
-    setColumns(columns);
-    buildGrid(rows, columns);
+    m_validIndices.clear();
+    buildGrid(m_rows, m_columns);
 }
 
 int GridModel::rows() const
@@ -129,19 +152,35 @@ QList<char> GridModel::getGrid()
 
 bool GridModel::isGridValid()
 {
-    for (const char c : m_grid)
+    for (int i = 0; i < m_grid.count(); i++)
     {
-        if (!isLetterValid(c))
+        if (!isLetterValid(m_grid[i]))
         {
             m_isValidInput = false;
             emit isValidInputChanged();
 
-            return false;
+            m_validIndices[i] = false;
+            emit validIndicesChanged();
         }
+        else
+        {
+            m_validIndices[i] = true;
+            emit validIndicesChanged();
+        }
+    }
+
+    if (!m_isValidInput)
+    {
+        return false;
     }
 
     m_isValidInput = true;
     emit isValidInputChanged();
 
     return true;
+}
+
+QList<bool> GridModel::validIndices() const
+{
+    return m_validIndices;
 }

@@ -11,10 +11,11 @@ class GridModel : public QAbstractListModel
     Q_PROPERTY(int columns READ columns WRITE setColumns NOTIFY columnsChanged FINAL)
     Q_PROPERTY(QChar emptyCellChar READ emptyCellChar WRITE setEmptyCellChar NOTIFY emptyCellCharChanged FINAL)
     Q_PROPERTY(bool isValidInput READ isValidInput NOTIFY isValidInputChanged FINAL)
+    Q_PROPERTY(QList<bool> validIndices READ validIndices NOTIFY validIndicesChanged FINAL)
 
 public:
     enum GridRoles{
-        Role = Qt::UserRole + 1
+        LetterRole = Qt::UserRole + 1
     };
     explicit GridModel(QObject *parent = nullptr);
 
@@ -24,6 +25,8 @@ public:
     bool removeRows(int row, int count, const QModelIndex &parent) override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+
+    QHash<int, QByteArray> roleNames() const override;
 
     int rows() const;
     void setRows(int newRows);
@@ -40,9 +43,12 @@ public:
 
     bool isGridValid();
 
+    QList<bool> validIndices() const;
+
 public slots:
     void updateGrid(QString c, int index);
     void resizeGrid(int rows, int columns);
+    void clearGrid();
 
 signals:
     void rowsChanged();
@@ -52,6 +58,8 @@ signals:
     void emptyCellCharChanged();
 
     void isValidInputChanged();
+
+    void validIndicesChanged();
 
 private:
     QList<char> m_grid;
@@ -66,6 +74,7 @@ private:
     QChar m_emptyCellChar;
     bool m_isValidInput;
 
+    QList<bool> m_validIndices;
 };
 
 #endif // GRIDMODEL_H

@@ -1,4 +1,5 @@
 #include "resultsmodel.h"
+#include <iostream>
 
 ResultsModel::ResultsModel(QObject *parent)
     : QAbstractListModel(parent),
@@ -52,32 +53,38 @@ void ResultsModel::setResults(const QList<Words> &newResults)
     m_results = newResults;
 }
 
-void ResultsModel::createResults(std::vector<std::string> &found_words)
+void ResultsModel::createResults(const std::map<std::string,
+                                AlgorithmVersionWithIndices::indices_t,
+                                decltype(AlgorithmVersionWithIndices::compare_words)>& map)
 {
     if (m_results.count() > 0)
     {
         erasePreviousResults();
     }
 
-    m_totalWordsCount = found_words.size();
+    word_to_indices = map;
+    m_totalWordsCount = word_to_indices.size();
     emit totalWordsCountChanged();
 
-    found_words.push_back(""); // makes sure the longest length words will be shown
     QStringList temp;
-    size_t previous_word_length = found_words[0].length();
-    for (size_t i = 0; i < found_words.size(); ++i)
+    size_t previous_word_length = word_to_indices.begin()->first.length();
+    for (const auto& [word, indices] : word_to_indices)
     {
-        if (found_words[i].length() != previous_word_length)
+        if (word.length() != previous_word_length)
         {
             beginInsertRows(QModelIndex(), rowCount(), rowCount());
             m_results << Words{static_cast<int>(previous_word_length), temp};
             endInsertRows();
             temp.clear();
-            previous_word_length = found_words[i].length();
+            previous_word_length = word.length();
         }
-        qInfo() << found_words[i];
-        temp << QString::fromStdString(found_words[i]);
+        temp << QString::fromStdString(word);
     }
+
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    m_results << Words{static_cast<int>(previous_word_length), temp};
+    endInsertRows();
+    temp.clear();
 }
 
 QHash<int, QByteArray> ResultsModel::roleNames() const
@@ -91,10 +98,32 @@ QHash<int, QByteArray> ResultsModel::roleNames() const
 
 void ResultsModel::erasePreviousResults()
 {
+    m_totalWordsCount = 0;
+    emit totalWordsCountChanged();
+
     removeRows(0, rowCount(), index(0,0));
 }
 
 int ResultsModel::totalWordsCount() const
 {
     return m_totalWordsCount;
+}
+
+QList<int> ResultsModel::wordIndices() const
+{
+    return m_wordIndices;
+}
+
+void ResultsModel::showWordIndices(QString word, int gridRows)
+{
+    m_wordIndices.clear();
+
+    const auto& indices = word_to_indices[word.toStdString()];
+
+    for (const auto [row, col] : indices)
+    {
+        m_wordIndices << (row * gridRows) + col;
+    }
+
+    emit wordIndicesChanged();
 }

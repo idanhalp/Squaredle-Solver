@@ -6,24 +6,17 @@
 /*
 	This implementation assumes the words inserted to the trie
 	contain only lowercase letters.
-
-	The letter 'a' is assigned to the child node at index 0,
-	the letter 'b' is assigned to the child node at index 1,
-	.
-	.
-	.
-	the letter 'z' is assigned to the child node at index 25.
 */ 
 class TrieNode
 {
 private:
-	static const size_t NUM_OF_LETTERS = 26;
+	static const size_t NUM_OF_LETTERS = 26u;
 
 public:
-	bool is_full_word;
+	bool is_complete_word;
 	std::array<TrieNode* , NUM_OF_LETTERS> children;
 
-	TrieNode() : is_full_word(false)
+	TrieNode() : is_complete_word(false)
 	{
 		std::fill(children.begin(), children.end(), nullptr);
 	}
@@ -38,6 +31,22 @@ public:
 				child = nullptr;
 			}
 		}
+	}
+
+	/**
+	 * @brief Given a lowercase alphabetic letter, return its index in the alphabet.
+	 * 
+	 * @param letter A lowercase alphabetic letter.
+	 * 
+	 * @return Its index in the alphabet (Starting from 0).
+	 * 
+	 * @example letter_to_index('a') == 0
+	 * @example letter_to_index('b') == 1
+	 * @example letter_to_index('z') == 25
+	*/
+	static inline size_t letter_to_index(char letter)
+	{
+		return letter - 'a';
 	}
 };
 
