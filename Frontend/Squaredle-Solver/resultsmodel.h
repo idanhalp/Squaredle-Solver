@@ -46,12 +46,11 @@ public:
 
     int totalWordsCount() const;
 
-    void erasePreviousResults();
-
     QList<int> wordIndices() const;
 
 public slots:
     void showWordIndices(QString word, int rows);
+    void erasePreviousResults();
 
 signals:
     void totalWordsCountChanged();

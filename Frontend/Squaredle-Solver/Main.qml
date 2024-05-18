@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import SquaredleSolver
+import 'https://cloudflare-cors-anywhere.oranhero.workers.dev/?https://squaredle.app/api/today-puzzle-config.js' as Script
 
 
 Window {
@@ -115,6 +116,32 @@ Window {
 
             spacing: 20
 
+            Row {
+                Layout.alignment: Qt.AlignHCenter
+                spacing: 15
+                Button {
+                    id: today
+
+                    text: "Today's normal puzzle"
+                    onClicked: {
+                        mainModule.resultsModel.erasePreviousResults()
+                        let puzzles = Script.gPuzzleConfig["puzzles"];
+                        mainModule.gridModel.fillGrid(puzzles[Object.keys(puzzles)[1]]["board"])
+                    }
+                }
+
+                Button {
+                    id: express
+
+                    text: "Today's express puzzle"
+                    onClicked: {
+                        mainModule.resultsModel.erasePreviousResults()
+                        let puzzles = Script.gPuzzleConfig["puzzles"];
+                        mainModule.gridModel.fillGrid(puzzles[Object.keys(puzzles)[0]]["board"])
+                    }
+                }
+            }
+
             Text {
                 Layout.alignment: Qt.AlignHCenter
                 text: "Type " + "\"" + mainModule.gridModel.emptyCellChar + "\"" + " for an empty cell."
@@ -135,12 +162,15 @@ Window {
 
                 Layout.alignment: Qt.AlignHCenter
                 from: 3
-                value: 4
+                value: mainModule.gridModel.rows
                 to: 10
                 stepSize: 1
                 snapMode: Slider.SnapAlways
 
-                onMoved: mainModule.gridModel.resizeGrid(value, value);
+                onMoved: {
+                    mainModule.gridModel.resizeGrid(value, value)
+                    mainModule.resultsModel.erasePreviousResults()
+                }
             }
 
             GridView {
@@ -166,6 +196,7 @@ Window {
                         font.pixelSize: 26
                         text: letter == ' ' ? '' : letter
                         onTextChanged: {
+                            mainModule.resultsModel.erasePreviousResults()
                             mainModule.gridModel.updateGrid(text[0], index)
                             if (text.length === 1) {
                                 nextItemInFocusChain().forceActiveFocus()
@@ -196,7 +227,10 @@ Window {
                     id: clear
 
                     text: "Clear"
-                    onClicked: mainModule.gridModel.clearGrid()
+                    onClicked: {
+                        mainModule.resultsModel.erasePreviousResults()
+                        mainModule.gridModel.clearGrid()
+                    }
                 }
             }
 
