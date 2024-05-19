@@ -1,5 +1,4 @@
 #include "resultsmodel.h"
-#include <iostream>
 
 ResultsModel::ResultsModel(QObject *parent)
     : QAbstractListModel(parent),
@@ -57,10 +56,7 @@ void ResultsModel::createResults(const std::map<std::string,
                                 AlgorithmVersionWithIndices::indices_t,
                                 decltype(AlgorithmVersionWithIndices::compare_words)>& map)
 {
-    if (m_results.count() > 0)
-    {
-        erasePreviousResults();
-    }
+    erasePreviousResults();
 
     word_to_indices = map;
     m_totalWordsCount = word_to_indices.size();
@@ -98,10 +94,13 @@ QHash<int, QByteArray> ResultsModel::roleNames() const
 
 void ResultsModel::erasePreviousResults()
 {
-    m_totalWordsCount = 0;
-    emit totalWordsCountChanged();
+    if (m_results.count() > 0)
+    {
+        m_totalWordsCount = 0;
+        emit totalWordsCountChanged();
 
-    removeRows(0, rowCount(), index(0,0));
+        removeRows(0, rowCount(), index(0,0));
+    }
 }
 
 int ResultsModel::totalWordsCount() const

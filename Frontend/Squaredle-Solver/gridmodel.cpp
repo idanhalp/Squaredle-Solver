@@ -34,6 +34,7 @@ QVariant GridModel::data(const QModelIndex &index, int role) const
     }
 
     char letter = m_grid[index.row()];
+
     if (role == LetterRole)
     {
         return QChar(letter);
@@ -99,6 +100,32 @@ void GridModel::clearGrid()
     removeAllRows();
     m_validIndices.clear();
     buildGrid(m_rows, m_columns);
+}
+
+void GridModel::fillGrid(const QList<QString>& tPuzzle)
+{
+    if (tPuzzle.length() != m_rows)
+    {
+        resizeGrid(tPuzzle.length(), tPuzzle.length());
+    }
+
+    int k = 0;
+    for (int i = 0; i < tPuzzle.length(); i++)
+    {
+        for (int j = 0; j < tPuzzle[i].length(); j++)
+        {
+            if (tPuzzle[i][j] == ' ')
+            {
+                updateGrid("-", k);
+            }
+            else
+            {
+                updateGrid(tPuzzle[i][j], k);
+            }
+            emit dataChanged(index(k, 0), index(k, 0), {LetterRole});
+            k++;
+        }
+    }
 }
 
 int GridModel::rows() const
