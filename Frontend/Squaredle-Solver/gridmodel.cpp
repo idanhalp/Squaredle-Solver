@@ -34,7 +34,7 @@ QVariant GridModel::data(const QModelIndex &index, int role) const
     }
 
     char letter = m_grid[index.row()];
-    qDebug() << letter;
+
     if (role == LetterRole)
     {
         return QChar(letter);
