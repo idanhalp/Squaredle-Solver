@@ -11,3 +11,10 @@ Currently, access from mobile is not supported.
 * Press the Solve button.
 
 The words that were found in the grid will appear at the left of the screen, sorted by their length and lexicographic order.
+
+## New Features:
+*  The cells of words found in the grid can be marked by clicking on them.
+*  Today's puzzles can be easily imported using the "Today's normal puzzle" and "Today's express puzzle" buttons.
+*  A "clear" button was added.
+*  Every grid size from 3x3 to 10x10 is enabled.
+
