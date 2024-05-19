@@ -34,6 +34,7 @@ QVariant GridModel::data(const QModelIndex &index, int role) const
     }
 
     char letter = m_grid[index.row()];
+    qDebug() << letter;
     if (role == LetterRole)
     {
         return QChar(letter);
@@ -121,6 +122,7 @@ void GridModel::fillGrid(const QList<QString>& tPuzzle)
             {
                 updateGrid(tPuzzle[i][j], k);
             }
+            emit dataChanged(index(k, 0), index(k, 0), {LetterRole});
             k++;
         }
     }

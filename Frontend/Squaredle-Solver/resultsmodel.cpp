@@ -56,6 +56,7 @@ void ResultsModel::createResults(const std::map<std::string,
                                 AlgorithmVersionWithIndices::indices_t,
                                 decltype(AlgorithmVersionWithIndices::compare_words)>& map)
 {
+    erasePreviousResults();
 
     word_to_indices = map;
     m_totalWordsCount = word_to_indices.size();
