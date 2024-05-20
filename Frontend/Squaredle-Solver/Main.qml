@@ -22,28 +22,24 @@ Window {
         timer.start()
     }
 
-    ScrollView {
+    Flickable {
 
         id: scroller
         anchors.fill: parent
-        height: root.height
+        contentHeight: main.height
+        contentWidth: main.width
         GridLayout {
             id: main
-            height: scroller.height
+            height: scroller.width > 600 ? scroller.height : children.length * 800
             width: scroller.width
 
             columns: 2
-
-            Component.onCompleted: {
-                console.log(flick.contentHeight)
-            }
 
             states: [
                 State {
                     when: root.width <= 600
                     PropertyChanges {target: left; Layout.row: 1}
                     PropertyChanges {target: right; Layout.row: 0}
-                    PropertyChanges {target: scroller; contentHeight: left.height + flick.contentHeight}
                 },
                 State {
                     when: root.width > 600
@@ -60,7 +56,7 @@ Window {
                     id: flick
                     interactive: true
                     Layout.fillHeight: true
-                    width: 600
+                    width: root.width > 600 ? 600 : (0.75 * root.width)
                     contentHeight: result.contentHeight + 200
                     clip: true
                     Text {
@@ -88,13 +84,12 @@ Window {
                             leftMargin: 10
                         }
 
-                        width: 600
+                        width: flick.width
                         model: delegateModel
                         spacing: 25
                         interactive: false
                     }
 
-                    onContentHeightChanged: console.log(contentHeight)
                 }
 
 
@@ -130,7 +125,10 @@ Window {
 
                                 MouseArea {
                                     anchors.fill: parent
-                                    onClicked: showIndices(text)
+                                    onClicked: {
+                                        scroller.contentY = 0
+                                        showIndices(text)
+                                    }
                                     hoverEnabled: true
                                     onEntered: color = "green"
                                     onExited: color = "black"
