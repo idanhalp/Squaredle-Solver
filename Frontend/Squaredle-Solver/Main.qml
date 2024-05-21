@@ -31,7 +31,7 @@ Window {
         GridLayout {
             id: main
             height: scroller.width > 600 ? scroller.height : children.length * 800
-            width: scroller.width
+            width: scroller.width > 600 ? scroller.width : grid.width
 
             columns: 2
 
@@ -141,13 +141,15 @@ Window {
 
             ColumnLayout {
                 id: right
-                Layout.alignment: Qt.AlignCenter
+                Layout.alignment: scroller.width > 600 ? Qt.AlignCenter : Qt.AlignLeft
+                Layout.fillWidth: scroller.width <= 600 ? true : false
                 Layout.fillHeight: true
 
                 spacing: 20
 
                 Row {
                     Layout.alignment: Qt.AlignHCenter
+
                     spacing: 15
                     Button {
                         id: today
