@@ -13,7 +13,7 @@ This document details the changes planned for the new version (2.0).
 - [X] Move `Backend` and `Frontend` into `Source` directory.
 - [X] Remove the `Frontend/Squardle- Solver` directory.
 - [X] Move `CMakeLists.txt` to the root.
-- [ ] Full addresses (in `CMakeLists.txt` and code files).
+- [X] Full addresses (in `CMakeLists.txt` and code files).
 - [ ] Fix alignment of tabs and spaces.
 - [ ] Remove dead code.
 - [ ] Change namespaces name.
