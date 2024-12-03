@@ -1,5 +1,5 @@
-#include "mainmodule.h"
-#include "../Backend/Algorithm.hpp"
+#include "Source/Backend/Algorithm.hpp"
+#include "Source/Frontend/mainmodule.h"
 
 MainModule::MainModule(QObject *parent)
     : QObject{parent},

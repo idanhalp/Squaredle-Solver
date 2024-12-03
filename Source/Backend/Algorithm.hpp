@@ -1,10 +1,10 @@
 #ifndef ALGORITHM_HPP
 #define ALGORITHM_HPP
 
-#include <vector>
-#include <string>
-#include <map>
 #include <functional>
+#include <map>
+#include <string>
+#include <vector>
 
 namespace AlgorithmVersionWithoutIndices
 {

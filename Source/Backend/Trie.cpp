@@ -1,4 +1,4 @@
-#include "Trie.hpp"
+#include "Source/Backend/Trie.hpp"
 
 Trie::Trie(const std::vector<std::string> dictionary) : root(new TrieNode)
 {

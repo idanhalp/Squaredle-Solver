@@ -50,6 +50,7 @@ qt_add_qml_module(appSquaredle-Solver
 )
 
 target_include_directories(appSquaredle-Solver PRIVATE
+    ${CMAKE_SOURCE_DIR} # Addresses should be relative to the root.
     ${CMAKE_SOURCE_DIR}/Source/Frontend
 )
 

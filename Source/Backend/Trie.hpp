@@ -1,9 +1,9 @@
 #ifndef TRIE_HPP
 #define TRIE_HPP
 
-#include "TrieNode.hpp" 
-#include <vector>
+#include "Source/Backend/TrieNode.hpp"
 #include <string>
+#include <vector>
 
 /*
 	Trie is a data structure used for efficiently storing and finding words.

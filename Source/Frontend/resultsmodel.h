@@ -1,10 +1,10 @@
 #ifndef RESULTSMODEL_H
 #define RESULTSMODEL_H
 
+#include "Source/Backend/Algorithm.hpp"
 #include <QAbstractListModel>
 #include <QStringListModel>
 #include <map>
-#include "../Backend/Algorithm.hpp"
 
 struct Words {
     int length;

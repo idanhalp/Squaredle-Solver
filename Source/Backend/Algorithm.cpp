@@ -1,7 +1,7 @@
-#include "Algorithm.hpp"
-#include "InputOutputProcessor.hpp"
-#include "../Parameters.hpp"
-#include "Trie.hpp"
+#include "Source/Backend/Algorithm.hpp"
+#include "Source/Backend/InputOutputProcessor.hpp"
+#include "Source/Backend/Trie.hpp"
+#include "Source/Parameters.hpp"
 
 namespace AlgorithmVersionWithoutIndices
 {

@@ -1,10 +1,10 @@
 #ifndef MAINMODULE_H
 #define MAINMODULE_H
 
+#include "Source/Frontend/gridmodel.h"
+#include "Source/Frontend/resultsmodel.h"
 #include <QObject>
-#include "gridmodel.h"
-#include "resultsmodel.h"
-#include "qqml.h"
+#include <QQmlEngine>
 
 class MainModule : public QObject
 {
