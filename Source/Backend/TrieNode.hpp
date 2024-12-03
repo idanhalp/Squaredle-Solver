@@ -44,7 +44,7 @@ public:
 	 * @example letter_to_index('b') == 1
 	 * @example letter_to_index('z') == 25
 	*/
-	static inline size_t letter_to_index(char letter)
+	static size_t letter_to_index(char letter)
 	{
 		return letter - 'a';
 	}
