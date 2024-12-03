@@ -10,25 +10,47 @@ qt_standard_project_setup(REQUIRES 6.5)
 
 set(CMAKE_AUTORCC ON)
 
+set(BACKEND_FILES
+    ${CMAKE_SOURCE_DIR}/Source/Backend/Algorithm.cpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/Algorithm.hpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/InputOutputProcessor.cpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/InputOutputProcessor.hpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/Trie.cpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/Trie.hpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/TrieNode.hpp
+)
+
+set(FRONTEND_FILES
+    ${CMAKE_SOURCE_DIR}/Source/Frontend/gridmodel.h
+    ${CMAKE_SOURCE_DIR}/Source/Frontend/gridmodel.cpp
+    ${CMAKE_SOURCE_DIR}/Source/Frontend/main.cpp
+    ${CMAKE_SOURCE_DIR}/Source/Frontend/resultsmodel.h
+    ${CMAKE_SOURCE_DIR}/Source/Frontend/resultsmodel.cpp
+    ${CMAKE_SOURCE_DIR}/Source/Frontend/Resources.qrc
+)
+
+set(SOURCES
+    ${BACKEND_FILES}
+    ${FRONTEND_FILES}
+    ${CMAKE_SOURCE_DIR}/Source/Parameters.hpp
+)
+
 qt_add_executable(appSquaredle-Solver
-    main.cpp
-    gridmodel.h gridmodel.cpp
-    resultsmodel.h resultsmodel.cpp
-    ../../Backend/Algorithm.cpp ../../Backend/Algorithm.hpp
-    ../../Backend/InputOutputProcessor.cpp ../../Backend/InputOutputProcessor.hpp
-    ../../Backend/Trie.cpp ../../Backend/Trie.hpp
-    ../../Backend/TrieNode.hpp
-    ../../Parameters.hpp
-    Resources.qrc
+    ${SOURCES}
 )
 
 qt_add_qml_module(appSquaredle-Solver
     URI SquaredleSolver
     VERSION 1.0
     QML_FILES
-        Main.qml
-        SOURCES mainmodule.h mainmodule.cpp
+	Source/Frontend/Main.qml
+	SOURCES
+	${CMAKE_SOURCE_DIR}/Source/Frontend/mainmodule.h
+	${CMAKE_SOURCE_DIR}/Source/Frontend/mainmodule.cpp
+)
 
+target_include_directories(appSquaredle-Solver PRIVATE
+    ${CMAKE_SOURCE_DIR}/Source/Frontend
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

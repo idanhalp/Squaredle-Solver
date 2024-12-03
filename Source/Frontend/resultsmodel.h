@@ -4,7 +4,7 @@
 #include <QAbstractListModel>
 #include <QStringListModel>
 #include <map>
-#include "../../Backend/Algorithm.hpp"
+#include "../Backend/Algorithm.hpp"
 
 struct Words {
     int length;

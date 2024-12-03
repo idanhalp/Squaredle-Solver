@@ -1,5 +1,5 @@
 #include "gridmodel.h"
-#include "../../Parameters.hpp"
+#include "../Parameters.hpp"
 
 GridModel::GridModel(QObject *parent)
     : QAbstractListModel(parent),
