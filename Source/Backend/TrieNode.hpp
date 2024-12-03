@@ -3,10 +3,10 @@
 
 #include <array>
 
-/*
-	This implementation assumes the words inserted to the trie
-	contain only lowercase letters.
-*/ 
+/**
+* This implementation assumes the words inserted to the trie
+* contain only lowercase letters.
+*/
 class TrieNode
 {
 private:
@@ -34,15 +34,13 @@ public:
 	}
 
 	/**
-	 * @brief Given a lowercase alphabetic letter, return its index in the alphabet.
-	 * 
-	 * @param letter A lowercase alphabetic letter.
-	 * 
-	 * @return Its index in the alphabet (Starting from 0).
-	 * 
-	 * @example letter_to_index('a') == 0
-	 * @example letter_to_index('b') == 1
-	 * @example letter_to_index('z') == 25
+	* @brief Given a lowercase alphabetic letter, return its index in the alphabet.
+	* @param letter A lowercase alphabetic letter.
+	* @return Its index in the alphabet (Starting from 0).
+	*
+	* @example letter_to_index('a') == 0
+	* @example letter_to_index('b') == 1
+	* @example letter_to_index('z') == 25
 	*/
 	static size_t letter_to_index(char letter)
 	{

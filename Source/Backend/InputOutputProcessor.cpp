@@ -4,29 +4,26 @@
 #include <QDebug>
 #include <stdexcept>
 
-namespace InputOutputProcessor
+std::vector<std::string> InputOutputProcessor::get_list_of_valid_words()
 {
-    std::vector<std::string> get_list_of_valid_words()
-    {
-        QFile input(":/words.txt");
+	QFile input(":/words.txt");
 
-        if (!input.open(QIODevice::ReadOnly | QIODevice::Text))
-        {
-            throw std::invalid_argument("Cannot open " + input.fileName().toStdString() + "!\n");
-        }
+	if (!input.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		throw std::invalid_argument("Cannot open " + input.fileName().toStdString() + "!\n");
+	}
 
-        std::vector<std::string> words;
-        QTextStream in(&input);
+	std::vector<std::string> words;
+	QTextStream in(&input);
 
-        while(!in.atEnd())
-        {
-            QString line = in.readLine();
-            if (line.length() >= Parameters::MIN_WORD_LENGTH)
-            {
-                words.push_back(line.toStdString());
-            }
-        }
+	while(!in.atEnd())
+	{
+		QString line = in.readLine();
+		if (line.length() >= Parameters::MIN_WORD_LENGTH)
+		{
+			words.push_back(line.toStdString());
+		}
+	}
 
-        return words;
-    }
+	return words;
 }
