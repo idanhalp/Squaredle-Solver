@@ -37,7 +37,7 @@ std::string AlgorithmVersionWithIndices::create_word_from_indices(const indices_
  * @param col              Current column.
  * @param indices          List of indices of the current path in the grid.
  * @param trie_node        Current position in the trie.
- * @param visited          Indicates wether some cell was already visited
+ * @param visited          Indicates whether some cell was already visited
  * @param word_to_indices  Map of words to their indices.
  * @param grid             Input grid.
  *
