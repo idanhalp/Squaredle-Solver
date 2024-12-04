@@ -16,10 +16,11 @@ GridView {
     delegate: Rectangle {
         width: 400 / mainModule.gridModel.rows
         height: 400 / mainModule.gridModel.columns
-        color: mainModule.gridModel.validIndices[index] ? "grey" : "red"
+        color: mainModule.gridModel.validIndices[index] ? "#D3D3D3" : "red"
 
         TextField {
-            anchors.centerIn: parent
+            anchors.fill: parent
+            horizontalAlignment: TextField.AlignHCenter
             maximumLength: 1
             color: "black"
             font.pixelSize: 26
