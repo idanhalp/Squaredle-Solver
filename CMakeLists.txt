@@ -36,12 +36,12 @@ set(SOURCES
 )
 
 set(QML_FILES
-    Source/Frontend/Components/Results.qml
     Source/Frontend/Components/GameGrid.qml
+    Source/Frontend/Components/HighlightTimer.qml
     Source/Frontend/Components/Popups/ErrorPopup.qml
     Source/Frontend/Components/Popups/GetPuzzlePopup.qml
     Source/Frontend/Components/Popups/Popups.qml
-    Source/Frontend/Components/HighlightTimer.qml
+    Source/Frontend/Components/Results.qml
     Source/Frontend/Main.qml
 )
 
