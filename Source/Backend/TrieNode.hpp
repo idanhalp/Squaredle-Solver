@@ -18,7 +18,7 @@ public:
 
 	TrieNode() : is_complete_word(false)
 	{
-		std::fill(children.begin(), children.end(), nullptr);
+		children.fill(nullptr);
 	}
 
 	~TrieNode()
