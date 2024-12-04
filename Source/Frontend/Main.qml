@@ -3,7 +3,8 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import SquaredleSolver
 import 'https://cloudflare-cors-anywhere.oranhero.workers.dev/?https://squaredle.app/api/today-puzzle-config.js' as Script
-import "GetPuzzle.js" as Puzzle
+import "Components"
+import "Components/Popups"
 
 Window {
     id: root
@@ -19,7 +20,7 @@ Window {
     function showIndices(word)
     {
         mainModule.showIndices(word)
-        timer.start()
+        highlightTimer.start()
     }
 
     Flickable {
@@ -31,7 +32,7 @@ Window {
         GridLayout {
             id: main
             height: scroller.width > 600 ? scroller.height : children.length * 800
-            width: scroller.width > 600 ? scroller.width : grid.width
+            width: scroller.width > 600 ? scroller.width : gameGrid.width
 
             columns: 2
 
@@ -47,6 +48,7 @@ Window {
                     PropertyChanges {target: right; Layout.column: 1}
                 }
             ]
+
             ColumnLayout {
                 id: left
                 Layout.fillHeight: true
@@ -57,45 +59,21 @@ Window {
                     interactive: true
                     Layout.fillHeight: true
                     width: root.width > 600 ? 600 : (0.75 * root.width)
-                    contentHeight: result.contentHeight + 200
+                    contentHeight: results.result.contentHeight + 200
                     clip: true
-                    Text {
-                        id: wordsCount
 
+                    Results {
+                        id: results
+                        height: flick.contentHeight
                         anchors {
                             top: parent.top
                             left: parent.left
                             leftMargin: 10
                         }
-
-                        text: "Found " + mainModule.resultsModel.totalWordsCount + " words"
-                        color: mainModule.resultsModel.totalWordsCount > 0 ? "black" : "transparent"
-                        font.pixelSize: 20
-                        font.bold: true
-                    }
-                    ListView {
-                        id: result
-
-                        anchors {
-                            top: wordsCount.bottom
-                            bottom: parent.bottom
-                            left: parent.left
-                            topMargin: 15
-                            leftMargin: 10
-                        }
-
-                        width: flick.width
-                        model: delegateModel
-                        spacing: 25
-                        interactive: false
                     }
 
                 }
-
-
             }
-
-
 
             DelegateModel {
                 id: delegateModel
@@ -180,7 +158,7 @@ Window {
 
                     text: "Puzzle by id"
 
-                    onClicked: sendIdPopup.open()
+                    onClicked: popups.sendIdPopup.open()
                 }
 
                 Text {
@@ -214,40 +192,8 @@ Window {
                     }
                 }
 
-                GridView {
-
-                    id: grid
-                    width: 500
-                    height: 500
-                    cellHeight: grid.height / mainModule.gridModel.rows
-                    cellWidth: grid.width / mainModule.gridModel.columns
-
-                    interactive: false
-
-                    model: mainModule.gridModel
-                    delegate: Rectangle {
-                        width: 400 / mainModule.gridModel.rows
-                        height: 400 / mainModule.gridModel.columns
-                        color: mainModule.gridModel.validIndices[index] ? "grey" : "red"
-
-                        TextField {
-                            anchors.centerIn: parent
-                            maximumLength: 1
-                            color: "black"
-                            font.pixelSize: 26
-                            text: letter == ' ' ? '' : letter
-                            onTextChanged: {
-                                mainModule.resultsModel.erasePreviousResults()
-                                mainModule.gridModel.updateGrid(text[0], index)
-                                if (text.length === 1) {
-                                    nextItemInFocusChain().forceActiveFocus()
-                                }
-                            }
-                            background: Rectangle {
-                                color: "transparent"
-                            }
-                        }
-                    }
+                GameGrid {
+                    id: gameGrid
                 }
 
                 Row {
@@ -285,123 +231,17 @@ Window {
                     font.pixelSize: 20
                     color: !mainModule.gridModel.isValidInput ? "red" : "transparent"
                 }
-
-
             }
         }
     }
 
-
-
-    Timer {
-        id: timer
-        property int i: 0
-        property int prevIndex: i
-        interval: 500
-        repeat: true
-        onTriggered: {
-            if (i === mainModule.resultsModel.wordIndices.length)
-            {
-                grid.itemAtIndex(mainModule.resultsModel.wordIndices[prevIndex]).color = "grey";
-                i = 0;
-                prevIndex = i;
-                timer.running = false;
-            }
-            else {
-                grid.itemAtIndex(mainModule.resultsModel.wordIndices[prevIndex]).color = "grey";
-                grid.itemAtIndex(mainModule.resultsModel.wordIndices[i]).color = "green";
-                prevIndex = i;
-                i++;
-            }
-        }
+    HighlightTimer {
+        id: highlightTimer
     }
 
-    Popup {
-        id: sendIdPopup
-        width: 550
-        height: 250
+    Popups {
+        id: popups
 
         anchors.centerIn: parent
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
-
-        Rectangle {
-            width: parent.width
-            height: parent.height
-            color: "#FFFFC5"
-            border.color: "black"
-
-            Text {
-                id: link
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                    left: parent.left
-                    leftMargin: 5
-                }
-
-                text: "https://squaredle.app/?puzzle="
-
-                font {
-                    bold: true
-                    pixelSize: 20
-                }
-            }
-
-            TextField {
-                id: keyInput
-                anchors {
-                    left: link.right
-                    verticalCenter: link.verticalCenter
-                }
-
-                color: "black"
-            }
-
-            Button {
-                id: sendId
-                anchors {
-                    top: link.bottom
-                    topMargin: 15
-                    horizontalCenter: parent.horizontalCenter
-                }
-
-                text: "Submit"
-
-                onClicked: {
-                    if (keyInput.text !== '') {
-                        mainModule.resultsModel.erasePreviousResults()
-                        Puzzle.getPuzzleById(keyInput.text)
-                        sendIdPopup.close()
-                    }
-                }
-            }
-
-        }
-    }
-
-    Popup {
-        id: errorPopup
-
-        width: 450
-        height: 250
-
-        anchors.centerIn: parent
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
-
-        Rectangle {
-            width: parent.width
-            height: parent.height
-            color: "red"
-            border.color: "black"
-
-            Text {
-                text: "Error: Invalid puzzle key!"
-                anchors.centerIn: parent
-
-                font {
-                    bold: true
-                    pixelSize: 30
-                }
-            }
-        }
     }
 }

@@ -1,4 +1,4 @@
-#include "Source/Frontend/resultsmodel.h"
+#include "Source/Frontend/ResultsModel/resultsmodel.h"
 
 ResultsModel::ResultsModel(QObject *parent)
     : QAbstractListModel(parent),
