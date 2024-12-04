@@ -21,11 +21,11 @@ set(BACKEND_FILES
 )
 
 set(FRONTEND_FILES
-    ${CMAKE_SOURCE_DIR}/Source/Frontend/gridmodel.h
-    ${CMAKE_SOURCE_DIR}/Source/Frontend/gridmodel.cpp
+    ${CMAKE_SOURCE_DIR}/Source/Frontend/GridModel/gridmodel.h
+    ${CMAKE_SOURCE_DIR}/Source/Frontend/GridModel/gridmodel.cpp
     ${CMAKE_SOURCE_DIR}/Source/Frontend/main.cpp
-    ${CMAKE_SOURCE_DIR}/Source/Frontend/resultsmodel.h
-    ${CMAKE_SOURCE_DIR}/Source/Frontend/resultsmodel.cpp
+    ${CMAKE_SOURCE_DIR}/Source/Frontend/ResultsModel/resultsmodel.h
+    ${CMAKE_SOURCE_DIR}/Source/Frontend/ResultsModel/resultsmodel.cpp
     ${CMAKE_SOURCE_DIR}/Source/Frontend/Resources.qrc
 )
 
@@ -33,6 +33,16 @@ set(SOURCES
     ${BACKEND_FILES}
     ${FRONTEND_FILES}
     ${CMAKE_SOURCE_DIR}/Source/Parameters.hpp
+)
+
+set(QML_FILES
+    Source/Frontend/Components/Results.qml
+    Source/Frontend/Components/GameGrid.qml
+    Source/Frontend/Components/Popups/ErrorPopup.qml
+    Source/Frontend/Components/Popups/GetPuzzlePopup.qml
+    Source/Frontend/Components/Popups/Popups.qml
+    Source/Frontend/Components/HighlightTimer.qml
+    Source/Frontend/Main.qml
 )
 
 qt_add_executable(appSquaredle-Solver
@@ -43,16 +53,19 @@ qt_add_qml_module(appSquaredle-Solver
     URI SquaredleSolver
     VERSION 1.0
     QML_FILES
-	Source/Frontend/Main.qml
+        ${QML_FILES}
         Source/Frontend/GetPuzzle.js
-	SOURCES
-	${CMAKE_SOURCE_DIR}/Source/Frontend/mainmodule.h
-	${CMAKE_SOURCE_DIR}/Source/Frontend/mainmodule.cpp
+
+
+    SOURCES
+        ${CMAKE_SOURCE_DIR}/Source/Frontend/MainModule/mainmodule.h
+        ${CMAKE_SOURCE_DIR}/Source/Frontend/MainModule/mainmodule.cpp
+
 )
 
 target_include_directories(appSquaredle-Solver PRIVATE
     ${CMAKE_SOURCE_DIR} # Addresses should be relative to the root.
-    ${CMAKE_SOURCE_DIR}/Source/Frontend
+    ${CMAKE_SOURCE_DIR}/Source/Frontend/MainModule
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

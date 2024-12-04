@@ -1,8 +1,8 @@
 #ifndef MAINMODULE_H
 #define MAINMODULE_H
 
-#include "Source/Frontend/gridmodel.h"
-#include "Source/Frontend/resultsmodel.h"
+#include "Source/Frontend/GridModel/gridmodel.h"
+#include "Source/Frontend/ResultsModel/resultsmodel.h"
 #include <QObject>
 #include <QQmlEngine>
 

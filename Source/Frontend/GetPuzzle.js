@@ -8,7 +8,7 @@ function getPuzzleById(id) {
             if (puzzleData)
                 mainModule.gridModel.fillGrid(puzzleData.puzzle.board)
             else
-                errorPopup.open()
+                popups.errorPopup.open()
         }
     }
     xhr.send(JSON.stringify({
