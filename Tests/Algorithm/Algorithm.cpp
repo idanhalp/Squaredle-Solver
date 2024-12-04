@@ -46,7 +46,7 @@ auto AlgorithmTests::test_grid_1() const -> void
 		"navigation"
 	};
 
-	const auto solution = AlgorithmVersionWithIndices::find_words(grid);
+	const auto solution = Algorithm::find_words(grid);
 	const auto word_was_found = [&] (const std::string& word) -> bool { return solution.contains(word); };
 	const bool all_words_were_found = std::ranges::all_of(obligatory_words, word_was_found);
 
@@ -123,7 +123,7 @@ auto AlgorithmTests::test_grid_2() const -> void
 		"remedial"
 	};
 
-	const auto solution = AlgorithmVersionWithIndices::find_words(grid);
+	const auto solution = Algorithm::find_words(grid);
 	const auto word_was_found = [&] (const std::string& word) -> bool { return solution.contains(word); };
 	const bool all_words_were_found = std::ranges::all_of(obligatory_words, word_was_found);
 
@@ -187,7 +187,7 @@ auto AlgorithmTests::test_grid_3() const -> void
 		"sone"
 	};
 
-	const auto solution = AlgorithmVersionWithIndices::find_words(grid);
+	const auto solution = Algorithm::find_words(grid);
 	const auto word_was_found = [&] (const std::string& word) -> bool { return solution.contains(word); };
 	const bool all_obligatory_words_were_found = std::ranges::all_of(obligatory_words, word_was_found);
 	const bool all_bonus_words_were_found = std::ranges::all_of(bonus_words, word_was_found);

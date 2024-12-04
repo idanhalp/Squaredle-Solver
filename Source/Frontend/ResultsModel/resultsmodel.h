@@ -37,8 +37,8 @@ public:
     void setResults(const QList<Words> &newResults);
 
     void createResults(const std::map<std::string,
-                        AlgorithmVersionWithIndices::indices_t,
-                        decltype(AlgorithmVersionWithIndices::compare_words)>& word_to_indices);
+			Algorithm::indices_t,
+			decltype(Algorithm::compare_words)>& word_to_indices);
 
     QHash<int, QByteArray> roleNames() const override;
 
@@ -60,8 +60,8 @@ signals:
 private:
     QList<Words> m_results;
     std::map<std::string,
-             AlgorithmVersionWithIndices::indices_t,
-             decltype(AlgorithmVersionWithIndices::compare_words)> word_to_indices;
+	     Algorithm::indices_t,
+	     decltype(Algorithm::compare_words)> word_to_indices;
 
 
     int m_totalWordsCount;

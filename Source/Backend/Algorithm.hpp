@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-namespace AlgorithmVersionWithIndices
+namespace Algorithm
 {
 	typedef std::vector<std::pair<size_t, size_t>> indices_t;
 

@@ -3,7 +3,7 @@
 #include "Source/Backend/Trie.hpp"
 #include "Source/Parameters.hpp"
 
-namespace AlgorithmVersionWithIndices
+namespace Algorithm
 {
 	std::string create_word_from_indices(const indices_t& indices, const std::vector<std::vector<char>>& grid);
 
@@ -17,7 +17,7 @@ namespace AlgorithmVersionWithIndices
 		const std::vector<std::vector<char>>& grid);
 }
 
-std::string AlgorithmVersionWithIndices::create_word_from_indices(const indices_t& indices, const std::vector<std::vector<char>>& grid)
+std::string Algorithm::create_word_from_indices(const indices_t& indices, const std::vector<std::vector<char>>& grid)
 {
 	std::string output;
 	output.reserve(indices.size());
@@ -43,7 +43,7 @@ std::string AlgorithmVersionWithIndices::create_word_from_indices(const indices_
  *
  * @return Nothing. The output is inserted to `word_to_indices`.
 */
-void AlgorithmVersionWithIndices::dfs(
+void Algorithm::dfs(
 	const size_t row,
 	const size_t col,
 	indices_t& indices,
@@ -115,7 +115,7 @@ void AlgorithmVersionWithIndices::dfs(
  * @param  grid 2d grid filled with letters.
  * @return A map whose keys are the words in the grid, and the values are their respective indices.
 */
-auto AlgorithmVersionWithIndices::find_words(const std::vector<std::vector<char>>& grid) ->
+auto Algorithm::find_words(const std::vector<std::vector<char>>& grid) ->
 	std::map<std::string, indices_t, decltype(compare_words)>
 {
 	static const Trie trie(InputOutputProcessor::get_list_of_valid_words());

@@ -53,8 +53,8 @@ void ResultsModel::setResults(const QList<Words> &newResults)
 }
 
 void ResultsModel::createResults(const std::map<std::string,
-                                AlgorithmVersionWithIndices::indices_t,
-                                decltype(AlgorithmVersionWithIndices::compare_words)>& map)
+                                Algorithm::indices_t,
+                                decltype(Algorithm::compare_words)>& map)
 {
     erasePreviousResults();
 

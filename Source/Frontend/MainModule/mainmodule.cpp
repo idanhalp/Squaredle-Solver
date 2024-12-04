@@ -48,7 +48,7 @@ void MainModule::solve()
     }
 
 
-    const auto& found_words = AlgorithmVersionWithIndices::find_words(grid);
+    const auto& found_words = Algorithm::find_words(grid);
 
     m_resultsModel->createResults(found_words);
 }
