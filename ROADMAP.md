@@ -7,7 +7,7 @@ This document details the changes planned for the new version (2.0).
 - [ ] Improved squares clickability.
 
 ## Backend
-- [ ] Add tests.
+- [X] Add tests.
 
 ## Refactoring
 - [X] Move `Backend` and `Frontend` into `Source` directory.

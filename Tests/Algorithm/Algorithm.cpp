@@ -129,3 +129,69 @@ auto AlgorithmTests::test_grid_2() const -> void
 
 	QVERIFY(all_words_were_found);
 }
+
+auto AlgorithmTests::test_grid_3() const -> void
+{
+	const std::vector<std::vector<char>>grid
+	{
+		{'o','i','e'},
+		{'s','n','o'},
+		{'e','d','p'}
+	};
+
+	const std::vector<std::string> obligatory_words
+	{
+		"dens",
+		"done",
+		"dons",
+		"ends",
+		"eons",
+		"ions",
+		"node",
+		"nods",
+		"nose",
+		"odes",
+		"ones",
+		"pods",
+		"pond",
+		"send",
+		"sine",
+		"nodes",
+		"noise",
+		"nosed",
+		"poise",
+		"ponds",
+		"onesie",
+		"poised",
+		"poison",
+		"poisoned",
+	};
+
+	const std::vector<std::string> bonus_words
+	{
+		"dene",
+		"deni",
+		"desi",
+		"donsie",
+		"esne",
+		"noised",
+		"onos",
+		"poind",
+		"poinds",
+		"pois",
+		"pone",
+		"pons",
+		"sene",
+		"sned",
+		"sonde",
+		"sone"
+	};
+
+	const auto solution = AlgorithmVersionWithIndices::find_words(grid);
+	const auto word_was_found = [&] (const std::string& word) -> bool { return solution.contains(word); };
+	const bool all_obligatory_words_were_found = std::ranges::all_of(obligatory_words, word_was_found);
+	const bool all_bonus_words_were_found = std::ranges::all_of(bonus_words, word_was_found);
+
+	QVERIFY(all_obligatory_words_were_found);
+	QVERIFY(all_bonus_words_were_found);
+}

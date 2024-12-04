@@ -11,6 +11,7 @@ class AlgorithmTests : public QObject
 private slots:
 	auto test_grid_1() const -> void;
 	auto test_grid_2() const -> void;
+	auto test_grid_3() const -> void;
 };
 
 #endif // TESTS_ALGORITHM_HPP
