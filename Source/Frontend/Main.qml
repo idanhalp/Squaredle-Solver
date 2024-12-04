@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import SquaredleSolver
 import 'https://cloudflare-cors-anywhere.oranhero.workers.dev/?https://squaredle.app/api/today-puzzle-config.js' as Script
-
+import "GetPuzzle.js" as Puzzle
 
 Window {
     id: root
@@ -174,6 +174,15 @@ Window {
                     }
                 }
 
+                Button {
+                    Layout.alignment: Qt.AlignHCenter
+                    id: puzzleById
+
+                    text: "Puzzle by id"
+
+                    onClicked: sendIdPopup.open()
+                }
+
                 Text {
                     Layout.alignment: Qt.AlignHCenter
                     text: "Type " + "\"" + mainModule.gridModel.emptyCellChar + "\"" + " for an empty cell."
@@ -307,4 +316,92 @@ Window {
         }
     }
 
+    Popup {
+        id: sendIdPopup
+        width: 550
+        height: 250
+
+        anchors.centerIn: parent
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+
+        Rectangle {
+            width: parent.width
+            height: parent.height
+            color: "#FFFFC5"
+            border.color: "black"
+
+            Text {
+                id: link
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                    leftMargin: 5
+                }
+
+                text: "https://squaredle.app/?puzzle="
+
+                font {
+                    bold: true
+                    pixelSize: 20
+                }
+            }
+
+            TextField {
+                id: keyInput
+                anchors {
+                    left: link.right
+                    verticalCenter: link.verticalCenter
+                }
+
+                color: "black"
+            }
+
+            Button {
+                id: sendId
+                anchors {
+                    top: link.bottom
+                    topMargin: 15
+                    horizontalCenter: parent.horizontalCenter
+                }
+
+                text: "Submit"
+
+                onClicked: {
+                    if (keyInput.text !== '') {
+                        mainModule.resultsModel.erasePreviousResults()
+                        Puzzle.getPuzzleById(keyInput.text)
+                        sendIdPopup.close()
+                    }
+                }
+            }
+
+        }
+    }
+
+    Popup {
+        id: errorPopup
+
+        width: 450
+        height: 250
+
+        anchors.centerIn: parent
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+
+        Rectangle {
+            width: parent.width
+            height: parent.height
+            color: "red"
+            border.color: "black"
+
+            Text {
+                text: "Error: Invalid puzzle key!"
+                anchors.centerIn: parent
+
+                font {
+                    bold: true
+                    pixelSize: 30
+                }
+            }
+        }
+    }
 }

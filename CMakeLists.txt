@@ -61,6 +61,7 @@ qt_add_qml_module(appSquaredle-Solver
     VERSION 1.0
     QML_FILES
 	Source/Frontend/Main.qml
+        Source/Frontend/GetPuzzle.js
 	SOURCES
 	${CMAKE_SOURCE_DIR}/Source/Frontend/mainmodule.h
 	${CMAKE_SOURCE_DIR}/Source/Frontend/mainmodule.cpp
