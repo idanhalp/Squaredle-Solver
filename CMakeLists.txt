@@ -9,6 +9,10 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
+set(WARNING_FLAGS "-Wall -Wextra -Wpedantic")
+set(CMAKE_CXX_FLAGS_DEBUG "${WARNING_FLAGS} -O0")
+set(CMAKE_CXX_FLAGS_RELEASE "${WARNING_FLAGS} -O3")
+
 set(CMAKE_AUTORCC ON)
 
 set(BACKEND_FILES
@@ -31,7 +35,6 @@ set(FRONTEND_FILES
 )
 
 set(TEST_FILES
-   ${CMAKE_SOURCE_DIR}/Source/Frontend/Resources.qrc
    ${CMAKE_SOURCE_DIR}/Tests/Algorithm/Algorithm.cpp
    ${CMAKE_SOURCE_DIR}/Tests/Algorithm/Algorithm.hpp
    ${CMAKE_SOURCE_DIR}/Tests/Main.cpp
@@ -40,6 +43,7 @@ set(TEST_FILES
 set(TEST_SOURCES
     ${BACKEND_FILES}
     ${TEST_FILES}
+    ${CMAKE_SOURCE_DIR}/Source/Frontend/Resources.qrc
 )
 
 set(SOURCES
