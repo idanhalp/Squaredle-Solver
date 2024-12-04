@@ -52,19 +52,23 @@ void ResultsModel::setResults(const QList<Words> &newResults)
     m_results = newResults;
 }
 
-void ResultsModel::createResults(const std::map<std::string,
-                                Algorithm::indices_t,
-                                decltype(Algorithm::compare_words)>& map)
+void ResultsModel::createResults(const std::vector<Algorithm::WordInfo>& wordsAndIndices)
 {
     erasePreviousResults();
 
-    word_to_indices = map;
-    m_totalWordsCount = word_to_indices.size();
+    for (const auto& [word, indices] : wordsAndIndices)
+    {
+	m_words.push_back(QString::fromStdString(word));
+	m_indices.push_back(indices);
+    }
+
+    m_totalWordsCount = wordsAndIndices.size();
     emit totalWordsCountChanged();
 
     QStringList temp;
-    size_t previous_word_length = word_to_indices.begin()->first.length();
-    for (const auto& [word, indices] : word_to_indices)
+    size_t previous_word_length = m_words.front().size();
+
+    for (const auto& [word, indices] : wordsAndIndices)
     {
         if (word.length() != previous_word_length)
         {
@@ -117,7 +121,9 @@ void ResultsModel::showWordIndices(QString word, int gridRows)
 {
     m_wordIndices.clear();
 
-    const auto& indices = word_to_indices[word.toStdString()];
+    const auto word_position = std::ranges::lower_bound(m_words, word);
+    const size_t word_index = std::ranges::distance(m_words.begin(), word_position);
+    const auto& indices = m_indices[word_index];
 
     for (const auto [row, col] : indices)
     {

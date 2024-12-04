@@ -1,8 +1,7 @@
 #ifndef ALGORITHM_HPP
 #define ALGORITHM_HPP
 
-#include <functional>
-#include <map>
+#include <compare>
 #include <string>
 #include <vector>
 
@@ -10,20 +9,23 @@ namespace Algorithm
 {
 	typedef std::vector<std::pair<size_t, size_t>> indices_t;
 
-	inline std::function<bool(const std::string&, const std::string&)> compare_words =
-	[] (const std::string& word1, const std::string& word2)
+	struct WordInfo
 	{
-		if (word1.length() != word2.length())
+		std::string word;
+		indices_t indices;
+
+		auto operator<=>(const WordInfo& other) const -> std::strong_ordering
 		{
-			return word1.length() < word2.length();
+			return std::make_pair(word.length(), word) <=> std::make_pair(other.word.length(), other.word);
 		}
-		else
+
+		auto operator==(const WordInfo& other) const -> bool
 		{
-			return word1 < word2; // By lexicographic order.
+			return word == other.word;
 		}
 	};
 
-	std::map<std::string, indices_t, decltype(compare_words)> find_words(const std::vector<std::vector<char>>& grid);
+	auto find_words(const std::vector<std::vector<char>>& grid) -> std::vector<WordInfo>;
 }
 
 #endif

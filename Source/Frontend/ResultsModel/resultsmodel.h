@@ -4,7 +4,6 @@
 #include "Source/Backend/Algorithm.hpp"
 #include <QAbstractListModel>
 #include <QStringListModel>
-#include <map>
 
 struct Words {
     int length;
@@ -36,9 +35,7 @@ public:
 
     void setResults(const QList<Words> &newResults);
 
-    void createResults(const std::map<std::string,
-			Algorithm::indices_t,
-			decltype(Algorithm::compare_words)>& word_to_indices);
+    void createResults(const std::vector<Algorithm::WordInfo>& wordsAndIndices);
 
     QHash<int, QByteArray> roleNames() const override;
 
@@ -59,10 +56,8 @@ signals:
 
 private:
     QList<Words> m_results;
-    std::map<std::string,
-	     Algorithm::indices_t,
-	     decltype(Algorithm::compare_words)> word_to_indices;
-
+    QList<QString> m_words;
+    QList<Algorithm::indices_t> m_indices;
 
     int m_totalWordsCount;
     QList<int> m_wordIndices;
