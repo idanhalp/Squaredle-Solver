@@ -2,7 +2,7 @@
 This document details the changes planned for the new version (2.0).
 
 ## Frontend
-- [ ] Import puzzles by ID.
+- [X] Import puzzles by ID.
 - [ ] Prettier grid.
 - [ ] Improved squares clickability.
 
@@ -16,6 +16,7 @@ This document details the changes planned for the new version (2.0).
 - [X] Full addresses (in `CMakeLists.txt` and code files).
 - [X] Fix alignment of tabs and spaces.
 - [X] Remove redundant code.
+- [X] Reorganize components
 - [ ] Change namespaces name.
 
 ## README
