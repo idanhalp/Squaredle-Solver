@@ -3,6 +3,7 @@
 
 #include "Source/Backend/Algorithm.hpp"
 #include <QAbstractListModel>
+#include <QHash>
 #include <QStringListModel>
 
 struct Words {
@@ -56,8 +57,7 @@ signals:
 
 private:
     QList<Words> m_results;
-    QList<QString> m_words;
-    QList<Algorithm::indices_t> m_indices;
+    QHash<QString, Algorithm::indices_t> m_wordsToIndices;
 
     int m_totalWordsCount;
     QList<int> m_wordIndices;
