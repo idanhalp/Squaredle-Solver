@@ -9,13 +9,13 @@ Timer {
     onTriggered: {
         if (i === mainModule.resultsModel.wordIndices.length)
         {
-            gameGrid.itemAtIndex(mainModule.resultsModel.wordIndices[prevIndex]).color = "grey";
+            gameGrid.itemAtIndex(mainModule.resultsModel.wordIndices[prevIndex]).color = "#D3D3D3";
             i = 0;
             prevIndex = i;
             timer.running = false;
         }
         else {
-            gameGrid.itemAtIndex(mainModule.resultsModel.wordIndices[prevIndex]).color = "grey";
+            gameGrid.itemAtIndex(mainModule.resultsModel.wordIndices[prevIndex]).color = "#D3D3D3";
             gameGrid.itemAtIndex(mainModule.resultsModel.wordIndices[i]).color = "green";
             prevIndex = i;
             i++;
