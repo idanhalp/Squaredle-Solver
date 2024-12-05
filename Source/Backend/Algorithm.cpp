@@ -55,9 +55,9 @@ auto Algorithm::dfs(
 	std::vector<WordInfo>& words_and_indices,
 	const std::vector<std::vector<char>>& grid) -> void
 {
-	const bool prefix_not_in_dictionary = trie_node == nullptr;
+	const bool prefix_is_in_dictionary = trie_node != nullptr;
 
-	if (prefix_not_in_dictionary)
+	if (!prefix_is_in_dictionary)
 	{
 		return;
 	}
@@ -65,22 +65,24 @@ auto Algorithm::dfs(
 	visited[row][col] = true;
 	indices.push_back(std::make_pair(row, col));
 
-	if (trie_node->is_complete_word)
+	const bool complete_word_found = trie_node->is_complete_word;
+
+	if (complete_word_found)
 	{
 		const std::string word = create_word_from_indices(indices, grid);
 		words_and_indices.emplace_back(word, indices);
 	}
 
-	static const std::array<std::pair<int, int>, 8> DIRECTIONS =
+	static const std::array DIRECTIONS =
 	{
-		std::make_pair(-1, 0),  // Up
-		std::make_pair(1, 0),   // Down
-		std::make_pair(0, -1),  // Left
-		std::make_pair(0, 1),   // Right
+		std::make_pair(-1, +0), // Up
+		std::make_pair(+1, +0), // Down
+		std::make_pair(+0, -1), // Left
+		std::make_pair(+0, +1), // Right
 		std::make_pair(-1, -1), // Up and left
-		std::make_pair(-1, 1),  // Up and right
-		std::make_pair(1, -1),  // Down and left
-		std::make_pair(1, 1),	// Down and right
+		std::make_pair(-1, +1), // Up and right
+		std::make_pair(+1, -1), // Down and left
+		std::make_pair(+1, +1),	// Down and right
 	};
 
 	// Try continuing in every direction.
@@ -88,17 +90,17 @@ auto Algorithm::dfs(
 	{
 		const size_t next_row = row + row_direction;
 		const size_t next_col = col + col_direction;
-		const bool is_outside_grid = next_row >= grid.size() || next_col >= grid.size();
+		const bool cell_is_outside_grid = next_row >= grid.size() || next_col >= grid.size();
 
-		if (is_outside_grid)
+		if (cell_is_outside_grid)
 		{
 			continue;
 		}
 
-		const bool is_empty_cell = grid[next_row][next_col] == Parameters::EMPTY_CELL;
-		const bool is_already_visited = visited[next_row][next_col];
+		const bool cell_is_empty = grid[next_row][next_col] == Parameters::EMPTY_CELL;
+		const bool cell_was_already_visited = visited[next_row][next_col];
 
-		if (is_empty_cell || is_already_visited)
+		if (cell_is_empty || cell_was_already_visited)
 		{
 			continue;
 		}
@@ -132,9 +134,9 @@ auto Algorithm::find_words(const std::vector<std::vector<char>>& grid) -> std::v
 	static const Trie trie(InputOutputProcessor::get_list_of_valid_words());
 	std::vector<WordInfo> words_and_indices;
 
-	for (size_t row = 0u; row < grid.size(); ++row)
+	for (size_t row = 0; row < grid.size(); ++row)
 	{
-		for (size_t col = 0u; col < grid.size(); ++col)
+		for (size_t col = 0; col < grid.size(); ++col)
 		{
 			if (grid[row][col] == Parameters::EMPTY_CELL)
 			{
