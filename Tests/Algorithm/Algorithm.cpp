@@ -1,6 +1,7 @@
 #include "Source/Backend/Algorithm.hpp"
 #include "Tests/Algorithm/Algorithm.hpp"
 #include <algorithm>
+#include <ranges>
 #include <string>
 #include <vector>
 
@@ -46,8 +47,10 @@ auto AlgorithmTests::test_grid_1() const -> void
 		"navigation"
 	};
 
-	const auto solution = AlgorithmVersionWithIndices::find_words(grid);
-	const auto word_was_found = [&] (const std::string& word) -> bool { return solution.contains(word); };
+	const std::vector solution = Algorithm::find_words(grid);
+	const auto get_word = [] (const Algorithm::WordInfo word_info) { return word_info.word; };
+	const std::vector found_words = solution | std::views::transform(get_word) | std::ranges::to<std::vector>();
+	const auto word_was_found = [&] (const std::string& word) -> bool { return std::ranges::find(found_words, word) != found_words.end(); };
 	const bool all_words_were_found = std::ranges::all_of(obligatory_words, word_was_found);
 
 	QVERIFY(all_words_were_found);
@@ -123,8 +126,10 @@ auto AlgorithmTests::test_grid_2() const -> void
 		"remedial"
 	};
 
-	const auto solution = AlgorithmVersionWithIndices::find_words(grid);
-	const auto word_was_found = [&] (const std::string& word) -> bool { return solution.contains(word); };
+	const std::vector solution = Algorithm::find_words(grid);
+	const auto get_word = [] (const Algorithm::WordInfo word_info) { return word_info.word; };
+	const std::vector found_words = solution | std::views::transform(get_word) | std::ranges::to<std::vector>();
+	const auto word_was_found = [&] (const std::string& word) -> bool { return std::ranges::find(found_words, word) != found_words.end(); };
 	const bool all_words_were_found = std::ranges::all_of(obligatory_words, word_was_found);
 
 	QVERIFY(all_words_were_found);
@@ -187,8 +192,10 @@ auto AlgorithmTests::test_grid_3() const -> void
 		"sone"
 	};
 
-	const auto solution = AlgorithmVersionWithIndices::find_words(grid);
-	const auto word_was_found = [&] (const std::string& word) -> bool { return solution.contains(word); };
+	const std::vector solution = Algorithm::find_words(grid);
+	const auto get_word = [] (const Algorithm::WordInfo word_info) { return word_info.word; };
+	const std::vector found_words = solution | std::views::transform(get_word) | std::ranges::to<std::vector>();
+	const auto word_was_found = [&] (const std::string& word) -> bool { return std::ranges::find(found_words, word) != found_words.end(); };
 	const bool all_obligatory_words_were_found = std::ranges::all_of(obligatory_words, word_was_found);
 	const bool all_bonus_words_were_found = std::ranges::all_of(bonus_words, word_was_found);
 
