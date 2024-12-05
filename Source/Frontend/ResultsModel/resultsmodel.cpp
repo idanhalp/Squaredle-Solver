@@ -100,6 +100,8 @@ void ResultsModel::erasePreviousResults()
 {
     if (m_results.count() > 0)
     {
+	m_words.clear();
+	m_indices.clear();
         m_totalWordsCount = 0;
         emit totalWordsCountChanged();
 
@@ -121,7 +123,7 @@ void ResultsModel::showWordIndices(QString word, int gridRows)
 {
     m_wordIndices.clear();
 
-    const auto word_position = std::ranges::lower_bound(m_words, word);
+    const auto word_position = std::ranges::find(m_words, word);
     const size_t word_index = std::ranges::distance(m_words.begin(), word_position);
     const auto& indices = m_indices[word_index];
 
