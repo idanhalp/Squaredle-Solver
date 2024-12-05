@@ -19,7 +19,7 @@ public:
 
 	Trie(const std::vector<std::string> dictionary);
 	~Trie();
-	void insert(const std::string& word);
+	auto insert(const std::string& word) -> void;
 };
 
 #endif

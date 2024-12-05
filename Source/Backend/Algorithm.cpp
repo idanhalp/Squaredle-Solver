@@ -6,21 +6,21 @@
 
 namespace Algorithm
 {
-	std::string create_word_from_indices(const indices_t& indices, const std::vector<std::vector<char>>& grid);
+	auto create_word_from_indices(const indices_t& indices, const std::vector<std::vector<char>>& grid) -> std::string;
 
-	void dfs(
+	auto dfs(
 		const size_t row,
 		const size_t col,
 		indices_t& indices,
 		const TrieNode* const trie_node,
 		std::vector<std::vector<bool>>& visited,
 		std::vector<WordInfo>& words_and_indices,
-		const std::vector<std::vector<char>>& grid);
+		const std::vector<std::vector<char>>& grid) -> void;
 
 	auto process_output(std::vector<WordInfo>& words_and_indices) -> void;
 }
 
-std::string Algorithm::create_word_from_indices(const indices_t& indices, const std::vector<std::vector<char>>& grid)
+auto Algorithm::create_word_from_indices(const indices_t& indices, const std::vector<std::vector<char>>& grid) -> std::string
 {
 	std::string output;
 	output.reserve(indices.size());
@@ -46,14 +46,14 @@ std::string Algorithm::create_word_from_indices(const indices_t& indices, const 
  *
  * @return Nothing. The output is inserted to `words_and_indices`.
 */
-void Algorithm::dfs(
+auto Algorithm::dfs(
 	const size_t row,
 	const size_t col,
 	indices_t& indices,
 	const TrieNode* const trie_node,
 	std::vector<std::vector<bool>>& visited,
 	std::vector<WordInfo>& words_and_indices,
-	const std::vector<std::vector<char>>& grid)
+	const std::vector<std::vector<char>>& grid) -> void
 {
 	const bool prefix_not_in_dictionary = trie_node == nullptr;
 

@@ -13,7 +13,7 @@ Trie::~Trie()
 	delete root;
 }
 
-void Trie::insert(const std::string& word)
+auto Trie::insert(const std::string& word) -> void
 {
 	TrieNode* node = root;
 

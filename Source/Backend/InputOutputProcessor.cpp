@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <stdexcept>
 
-std::vector<std::string> InputOutputProcessor::get_list_of_valid_words()
+auto InputOutputProcessor::get_list_of_valid_words() -> std::vector<std::string>
 {
 	QFile input(":/words.txt");
 

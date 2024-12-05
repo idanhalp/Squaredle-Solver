@@ -6,7 +6,7 @@
 
 namespace InputOutputProcessor
 {
-	std::vector<std::string> get_list_of_valid_words();
+	auto get_list_of_valid_words() -> std::vector<std::string>;
 }
 
 #endif
