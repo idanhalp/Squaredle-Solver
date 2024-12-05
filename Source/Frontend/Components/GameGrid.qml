@@ -28,10 +28,8 @@ GridView {
             onTextChanged: {
                 mainModule.resultsModel.erasePreviousResults()
                 mainModule.gridModel.updateGrid(text[0], index)
-                if (text.length === 1) {
-                    nextItemInFocusChain().forceActiveFocus()
-                }
             }
+
             background: Rectangle {
                 color: "transparent"
             }
