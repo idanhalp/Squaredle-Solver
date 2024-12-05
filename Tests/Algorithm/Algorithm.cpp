@@ -54,6 +54,10 @@ auto AlgorithmTests::test_grid_1() const -> void
 	const bool all_words_were_found = std::ranges::all_of(obligatory_words, word_was_found);
 
 	QVERIFY(all_words_were_found);
+
+	const size_t expected_num_of_words = 63;
+	const bool num_of_words_is_correct = found_words.size() == expected_num_of_words;
+	QVERIFY(num_of_words_is_correct);
 }
 
 auto AlgorithmTests::test_grid_2() const -> void
@@ -133,6 +137,10 @@ auto AlgorithmTests::test_grid_2() const -> void
 	const bool all_words_were_found = std::ranges::all_of(obligatory_words, word_was_found);
 
 	QVERIFY(all_words_were_found);
+
+	const size_t expected_num_of_words = 104;
+	const bool num_of_words_is_correct = found_words.size() == expected_num_of_words;
+	QVERIFY(num_of_words_is_correct);
 }
 
 auto AlgorithmTests::test_grid_3() const -> void
@@ -201,4 +209,8 @@ auto AlgorithmTests::test_grid_3() const -> void
 
 	QVERIFY(all_obligatory_words_were_found);
 	QVERIFY(all_bonus_words_were_found);
+
+	const size_t expected_num_of_words = 41;
+	const bool num_of_words_is_correct = found_words.size() == expected_num_of_words;
+	QVERIFY(num_of_words_is_correct);
 }
