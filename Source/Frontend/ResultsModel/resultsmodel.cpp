@@ -62,8 +62,6 @@ void ResultsModel::createResults(const std::vector<Algorithm::WordInfo>& wordsAn
 	m_indices.push_back(indices);
     }
 
-    qDebug() << "Length == " << m_words.size() << " == " << m_indices.size();
-
     m_totalWordsCount = wordsAndIndices.size();
     emit totalWordsCountChanged();
 
