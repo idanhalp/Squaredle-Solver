@@ -8,7 +8,7 @@ This document details the changes planned for the new version (2.0).
 - [X] Improved squares clickability.
 - [ ] Support mobile.
 - [ ] Bug: Grid error color not cleared after changing a cell.
-- [ ] Bug: Cursor remains in cell after inserting a letter.
+- [X] Bug: Cursor remains in cell after inserting a letter.
  
 ## Backend
 - [X] Add tests.
