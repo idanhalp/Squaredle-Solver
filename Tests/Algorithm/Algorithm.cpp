@@ -233,8 +233,6 @@ auto AlgorithmTests::test_grid_with_empty_cells() const -> void
 	const size_t expected_num_of_words = 134;
 	const bool num_of_words_is_correct = solution.size() == expected_num_of_words;
 
-
-	qDebug() << "Found " << solution.size() << " words";
 	QVERIFY(num_of_words_is_correct);
 }
 
