@@ -1,4 +1,5 @@
 #include "Source/Backend/Algorithm/Algorithm.hpp"
+#include "Source/Parameters.hpp"
 #include "Tests/Algorithm/Algorithm.hpp"
 #include <algorithm>
 #include <ranges>
@@ -213,4 +214,41 @@ auto AlgorithmTests::test_grid_3() const -> void
 	const size_t expected_num_of_words = 41;
 	const bool num_of_words_is_correct = found_words.size() == expected_num_of_words;
 	QVERIFY(num_of_words_is_correct);
+}
+
+auto AlgorithmTests::test_grid_with_empty_cells() const -> void
+{
+	const char XXX = Parameters::EMPTY_CELL;
+
+	const std::vector<std::vector<char>>grid
+	{
+		{XXX,'p','l',XXX,XXX},
+		{'e','t','a','u','o'},
+		{'d','i','t','m','l'},
+		{'u','t','l','p','e'},
+		{XXX,XXX,'i','n',XXX}
+	};
+
+	const auto solution = Algorithm::find_words(grid);
+	const size_t expected_num_of_words = 134;
+	const bool num_of_words_is_correct = solution.size() == expected_num_of_words;
+
+
+	qDebug() << "Found " << solution.size() << " words";
+	QVERIFY(num_of_words_is_correct);
+}
+
+auto AlgorithmTests::test_grid_without_words() const -> void
+{
+	const std::vector<std::vector<char>>grid
+	{
+		{'a','a','a'},
+		{'a','a','a'},
+		{'a','a','a'}
+	};
+
+	const auto solution = Algorithm::find_words(grid);
+	const bool no_words_found = solution.empty();
+
+	QVERIFY(no_words_found);
 }
