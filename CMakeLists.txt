@@ -35,9 +35,11 @@ set(FRONTEND_FILES
 )
 
 set(TEST_FILES
-   ${CMAKE_SOURCE_DIR}/Tests/Algorithm/Algorithm.cpp
-   ${CMAKE_SOURCE_DIR}/Tests/Algorithm/Algorithm.hpp
-   ${CMAKE_SOURCE_DIR}/Tests/Main.cpp
+    ${CMAKE_SOURCE_DIR}/Tests/Algorithm/Algorithm.cpp
+    ${CMAKE_SOURCE_DIR}/Tests/Algorithm/Algorithm.hpp
+    ${CMAKE_SOURCE_DIR}/Tests/Main.cpp
+    ${CMAKE_SOURCE_DIR}/Tests/Trie/Trie.cpp
+    ${CMAKE_SOURCE_DIR}/Tests/Trie/Trie.hpp
 )
 
 set(TEST_SOURCES
