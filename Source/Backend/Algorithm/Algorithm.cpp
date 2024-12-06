@@ -32,7 +32,6 @@ namespace Algorithm
  * @param col                Current column.
  * @param word               Word created by the current path.
  * @param indices            List of indices of the current path.
- * @param trie_node          Current position in the trie.
  * @param visited            Indicates whether some cell was already visited
  * @param words_and_indices  List of words and their indices.
  * @param grid               Input grid.
