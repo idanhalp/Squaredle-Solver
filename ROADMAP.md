@@ -23,8 +23,8 @@ This document details the changes planned for the new version (2.0).
 - [X] Fix alignment of tabs and spaces.
 - [X] Remove redundant code.
 - [X] Reorganize components
-- [ ] Change namespaces name.
-- [ ] Improve code.
+- [X] Change namespaces name.
+- [X] Improve code.
 
 ## README
 - [ ] Add pictures to `README.MD` file.

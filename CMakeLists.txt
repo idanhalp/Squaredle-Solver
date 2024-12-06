@@ -18,11 +18,11 @@ set(CMAKE_AUTORCC ON)
 set(BACKEND_FILES
     ${CMAKE_SOURCE_DIR}/Source/Backend/Algorithm.cpp
     ${CMAKE_SOURCE_DIR}/Source/Backend/Algorithm.hpp
-    ${CMAKE_SOURCE_DIR}/Source/Backend/InputOutputProcessor.cpp
-    ${CMAKE_SOURCE_DIR}/Source/Backend/InputOutputProcessor.hpp
     ${CMAKE_SOURCE_DIR}/Source/Backend/Trie.cpp
     ${CMAKE_SOURCE_DIR}/Source/Backend/Trie.hpp
     ${CMAKE_SOURCE_DIR}/Source/Backend/TrieNode.hpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/WordProcessing.cpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/WordProcessing.hpp
 )
 
 set(FRONTEND_FILES
