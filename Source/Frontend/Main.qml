@@ -86,7 +86,7 @@ Window {
                     spacing: 5
                     Text {
                         text: length + " letters" + " - " + section_count + (section_count == 1 ? " word" : " words")
-                        color: "red"
+                        color: length > 0 ? "red" : "transparent"
                         font.pixelSize: 30
                     }
 

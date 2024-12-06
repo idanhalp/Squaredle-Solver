@@ -33,7 +33,9 @@ QVariant ResultsModel::data(const QModelIndex &index, int role) const
     }
     else if (role == LengthRole)
     {
-        return result.length;
+        if (m_totalWordsCount > 0)
+            return result.length;
+        return 0;
     }
     else if (role == SectionCountRole)
     {
