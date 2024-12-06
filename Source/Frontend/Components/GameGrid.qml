@@ -27,6 +27,7 @@ GridView {
             text: letter == ' ' ? '' : letter
             onTextChanged: {
                 mainModule.resultsModel.erasePreviousResults()
+                mainModule.gridModel.resetAllErrors()
                 mainModule.gridModel.updateGrid(text[0], index)
             }
 

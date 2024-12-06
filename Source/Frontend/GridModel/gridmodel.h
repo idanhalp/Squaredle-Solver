@@ -50,6 +50,7 @@ public slots:
     void resizeGrid(int rows, int columns);
     void clearGrid();
     void fillGrid(const QList<QString>& tPuzzle);
+    void resetAllErrors();
 
 signals:
     void rowsChanged();

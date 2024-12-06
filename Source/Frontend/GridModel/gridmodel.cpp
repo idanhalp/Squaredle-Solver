@@ -128,6 +128,16 @@ void GridModel::fillGrid(const QList<QString>& tPuzzle)
     }
 }
 
+void GridModel::resetAllErrors()
+{
+    m_isValidInput = true;
+    emit isValidInputChanged();
+
+    m_validIndices.clear();
+    m_validIndices.fill(true, m_rows * m_columns);
+    emit validIndicesChanged();
+}
+
 int GridModel::rows() const
 {
     return m_rows;
