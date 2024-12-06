@@ -1,7 +1,7 @@
 #ifndef RESULTSMODEL_H
 #define RESULTSMODEL_H
 
-#include "Source/Backend/Algorithm.hpp"
+#include "Source/Backend/Algorithm/Algorithm.hpp"
 #include <QAbstractListModel>
 #include <QHash>
 #include <QStringListModel>
