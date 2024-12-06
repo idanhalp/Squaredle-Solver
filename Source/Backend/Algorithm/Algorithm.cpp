@@ -1,6 +1,6 @@
-#include "Source/Backend/Algorithm.hpp"
-#include "Source/Backend/Trie.hpp"
-#include "Source/Backend/WordProcessing.hpp"
+#include "Source/Backend/Algorithm/Algorithm.hpp"
+#include "Source/Backend/Trie/Trie.hpp"
+#include "Source/Backend/WordProcessing/WordProcessing.hpp"
 #include "Source/Parameters.hpp"
 #include <algorithm>
 

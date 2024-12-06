@@ -1,4 +1,4 @@
-#include "Source/Backend/WordProcessing.hpp"
+#include "Source/Backend/WordProcessing/WordProcessing.hpp"
 #include <QFile>
 #include <QDebug>
 #include <stdexcept>

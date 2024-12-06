@@ -16,13 +16,13 @@ set(CMAKE_CXX_FLAGS_RELEASE "${WARNING_FLAGS} -O3")
 set(CMAKE_AUTORCC ON)
 
 set(BACKEND_FILES
-    ${CMAKE_SOURCE_DIR}/Source/Backend/Algorithm.cpp
-    ${CMAKE_SOURCE_DIR}/Source/Backend/Algorithm.hpp
-    ${CMAKE_SOURCE_DIR}/Source/Backend/Trie.cpp
-    ${CMAKE_SOURCE_DIR}/Source/Backend/Trie.hpp
-    ${CMAKE_SOURCE_DIR}/Source/Backend/TrieNode.hpp
-    ${CMAKE_SOURCE_DIR}/Source/Backend/WordProcessing.cpp
-    ${CMAKE_SOURCE_DIR}/Source/Backend/WordProcessing.hpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/Algorithm/Algorithm.cpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/Algorithm/Algorithm.hpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/Trie/Trie.cpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/Trie/Trie.hpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/Trie/TrieNode.hpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/WordProcessing/WordProcessing.cpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/WordProcessing/WordProcessing.hpp
 )
 
 set(FRONTEND_FILES

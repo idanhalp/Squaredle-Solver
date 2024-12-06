@@ -1,4 +1,4 @@
-#include "Source/Backend/Trie.hpp"
+#include "Source/Backend/Trie/Trie.hpp"
 #include "Tests/Trie/Trie.hpp"
 
 auto TrieTests::test_trie() const -> void

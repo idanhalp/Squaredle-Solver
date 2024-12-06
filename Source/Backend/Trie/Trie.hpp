@@ -1,7 +1,7 @@
 #ifndef TRIE_HPP
 #define TRIE_HPP
 
-#include "Source/Backend/TrieNode.hpp"
+#include "Source/Backend/Trie/TrieNode.hpp"
 #include <string>
 #include <string_view>
 #include <vector>
