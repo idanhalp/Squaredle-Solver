@@ -31,6 +31,13 @@ GridView {
                 mainModule.gridModel.updateGrid(text[0], index)
             }
 
+            validator: RegularExpressionValidator {
+                regularExpression: {
+                    const re = new RegExp(`^[a-z\\${mainModule.gridModel.emptyCellChar}]+$`);
+                    return re;
+                }
+            }
+
             background: Rectangle {
                 color: "transparent"
             }

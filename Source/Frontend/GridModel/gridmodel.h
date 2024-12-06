@@ -69,7 +69,6 @@ private:
     void buildGrid(int rows, int columns);
     void addCell();
     void removeAllRows();
-    bool isLetterValid(char c);
 
     int m_rows;
     int m_columns;
