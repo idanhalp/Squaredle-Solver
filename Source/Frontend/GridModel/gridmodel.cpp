@@ -53,8 +53,6 @@ QHash<int, QByteArray> GridModel::roleNames() const
 void GridModel::updateGrid(QString c, int index)
 {
     m_grid[index] = c.toStdString()[0];
-    m_isValidInput = isLetterValid(m_grid[index]);
-    emit isValidInputChanged();
 }
 
 void GridModel::buildGrid(int rows, int columns)
@@ -78,11 +76,6 @@ void GridModel::addCell()
 void GridModel::removeAllRows()
 {
     removeRows(0, rowCount(), index(0,0));
-}
-
-bool GridModel::isLetterValid(char c)
-{
-    return std::islower(c) || c == Parameters::EMPTY_CELL;
 }
 
 void GridModel::resizeGrid(int rows, int columns)
@@ -191,7 +184,7 @@ bool GridModel::isGridValid()
 {
     for (int i = 0; i < m_grid.count(); i++)
     {
-        if (!isLetterValid(m_grid[i]))
+        if (m_grid[i] == ' ' || static_cast<int>(m_grid[i]) == 0)
         {
             m_isValidInput = false;
             emit isValidInputChanged();
