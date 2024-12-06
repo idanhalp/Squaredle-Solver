@@ -4,7 +4,7 @@ This document details the changes planned for the new version (2.0).
 ## Frontend
 - [X] Import puzzles by ID.
 - [ ] Prettier grid.
-- [ ] Improve cell validator.
+- [X] Improve cell validator.
 - [X] Improved squares clickability.
 - [ ] Support mobile.
 - [X] Bug: Grid error color not cleared after changing a cell.
