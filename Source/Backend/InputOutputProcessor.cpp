@@ -1,28 +1,24 @@
 #include "Source/Backend/InputOutputProcessor.hpp"
-#include "Source/Parameters.hpp"
 #include <QFile>
 #include <QDebug>
 #include <stdexcept>
 
-std::vector<std::string> InputOutputProcessor::get_list_of_valid_words()
+auto InputOutputProcessor::get_list_of_valid_words() -> std::vector<std::string>
 {
-	QFile input(":/words.txt");
+	QFile words_file(":/words.txt");
 
-	if (!input.open(QIODevice::ReadOnly | QIODevice::Text))
+	if (!words_file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		throw std::invalid_argument("Cannot open " + input.fileName().toStdString() + "!\n");
+		throw std::invalid_argument("Cannot open " + words_file.fileName().toStdString() + "!\n");
 	}
 
+	QTextStream input_stream(&words_file);
 	std::vector<std::string> words;
-	QTextStream in(&input);
 
-	while(!in.atEnd())
+	while (!input_stream.atEnd())
 	{
-		QString line = in.readLine();
-		if (line.length() >= Parameters::MIN_WORD_LENGTH)
-		{
-			words.push_back(line.toStdString());
-		}
+		std::string word = input_stream.readLine().toStdString();
+		words.push_back(std::move(word));
 	}
 
 	return words;
