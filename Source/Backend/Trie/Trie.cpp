@@ -19,7 +19,7 @@ auto Trie::insert(const std::string_view word) -> void
 
 	for (const char letter : word)
 	{
-		if (!node->check_if_child_exists(letter)) // If the prefix appears for the first time.
+		if (!node->check_if_child_exists(letter)) // Prefix appears for the first time.
 		{
 			node->add_child(letter);
 		}

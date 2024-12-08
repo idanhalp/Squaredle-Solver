@@ -29,7 +29,7 @@ auto TrieNode::set_is_complete_word(const bool is_complete_word) -> void
 	this->is_complete_word = is_complete_word;
 }
 
-auto TrieNode::add_child(char letter) -> void
+auto TrieNode::add_child(const char letter) -> void
 {
 	children[letter - 'a'] = new TrieNode;
 }
