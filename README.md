@@ -3,7 +3,7 @@
 
 A fast and easy-to-use solver for the word-finding game [Squaredle](https://squaredle.app/).
 
-Try it [here](https://idanhalp.github.io/Squaredle-Solver/live/).
+Try it [here](https://idanhalp.github.io/Squaredle-Solver/Live/).
 
 Currently, access from mobile is not supported.
 
