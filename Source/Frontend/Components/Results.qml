@@ -14,7 +14,7 @@ Item {
             leftMargin: 10
         }
 
-        text: "Found " + mainModule.resultsModel.totalWordsCount + " words"
+        text: "Found " + mainModule.resultsModel.totalWordsCount + (mainModule.resultsModel.totalWordsCount === 1 ? " word" : " words")
         color: mainModule.resultsModel.totalWordsCount > 0 ? "black" : "transparent"
         font.pixelSize: 30
         font.bold: true
