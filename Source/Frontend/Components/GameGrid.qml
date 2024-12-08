@@ -17,6 +17,7 @@ GridView {
         width: 400 / mainModule.gridModel.rows
         height: 400 / mainModule.gridModel.columns
         color: mainModule.gridModel.validIndices[index] ? "#D3D3D3" : "red"
+        radius: 10
 
         TextField {
             anchors.fill: parent
