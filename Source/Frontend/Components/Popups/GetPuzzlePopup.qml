@@ -5,8 +5,8 @@ import "../../GetPuzzle.js" as Puzzle
 
 Popup {
     id: sendIdPopup
-	width: 400
-	height: 200
+    width: 400
+    height: 200
 
     anchors.centerIn: parent
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
@@ -17,39 +17,39 @@ Popup {
         color: "#FFFFC5"
         border.color: "black"
 
-		Text {
-			id: textExplanation
+        Text {
+            id: textExplanation
 
-			anchors {
-				horizontalCenter: parent.horizontalCenter
-				top: parent.top
-				topMargin: 20
-			}
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                topMargin: 20
+            }
 
-			text: "Insert ID (e.g waffle):"
+            text: "Insert ID (e.g waffle):"
 
-			font {
-				bold: true
-				pixelSize: 20
-			}
-		}
+            font {
+                bold: true
+                pixelSize: 20
+            }
+        }
 
-		TextField {
-			id: keyInput
+        TextField {
+            id: keyInput
 
-			anchors {
-				horizontalCenter: parent.horizontalCenter
-				top: textExplanation.bottom
-				topMargin: 20
-			}
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: textExplanation.bottom
+                topMargin: 20
+            }
 
-			color: "black"
-		}
+            color: "black"
+        }
 
         Button {
             id: sendId
             anchors {
-				top: keyInput.bottom
+                top: keyInput.bottom
                 topMargin: 15
                 horizontalCenter: parent.horizontalCenter
             }
@@ -60,7 +60,7 @@ Popup {
                 if (keyInput.text !== '') {
                     mainModule.resultsModel.erasePreviousResults()
                     Puzzle.getPuzzleById(keyInput.text)
-					keyInput.clear()
+                    keyInput.clear()
                     sendIdPopup.close()
                 }
             }
