@@ -20,6 +20,7 @@ set(BACKEND_FILES
     ${CMAKE_SOURCE_DIR}/Source/Backend/Algorithm/Algorithm.hpp
     ${CMAKE_SOURCE_DIR}/Source/Backend/Trie/Trie.cpp
     ${CMAKE_SOURCE_DIR}/Source/Backend/Trie/Trie.hpp
+    ${CMAKE_SOURCE_DIR}/Source/Backend/Trie/TrieNode.cpp
     ${CMAKE_SOURCE_DIR}/Source/Backend/Trie/TrieNode.hpp
     ${CMAKE_SOURCE_DIR}/Source/Backend/WordProcessing/WordProcessing.cpp
     ${CMAKE_SOURCE_DIR}/Source/Backend/WordProcessing/WordProcessing.hpp

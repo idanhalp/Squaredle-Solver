@@ -17,33 +17,31 @@ auto Trie::insert(const std::string_view word) -> void
 {
 	TrieNode* node = root;
 
-	for (const char c : word)
+	for (const char letter : word)
 	{
-		if (!node->children[TrieNode::letter_to_index(c)]) // If the prefix appears for the first time
+		if (!node->check_if_child_exists(letter)) // If the prefix appears for the first time.
 		{
-			node->children[TrieNode::letter_to_index(c)] = new TrieNode();
+			node->add_child(letter);
 		}
 
-		node = node->children[TrieNode::letter_to_index(c)];
+		node = node->get_child(letter);
 	}
 
-	node->is_complete_word = true;
+	node->set_is_complete_word(true);
 }
 
 auto Trie::check_if_prefix_exists(const std::string_view prefix) const -> bool
 {
 	TrieNode* node = root;
 
-	for (const char c : prefix)
+	for (const char letter : prefix)
 	{
-		const bool child_exists = node->children[TrieNode::letter_to_index(c)] != nullptr;
-
-		if (!child_exists)
+		if (!node->check_if_child_exists(letter))
 		{
 			return false;
 		}
 
-		node = node->children[TrieNode::letter_to_index(c)];
+		node = node->get_child(letter);
 	}
 
 	return true;
@@ -53,17 +51,15 @@ auto Trie::check_if_complete_word_exists(const std::string_view word) const -> b
 {
 	TrieNode* node = root;
 
-	for (const char c : word)
+	for (const char letter : word)
 	{
-		const bool child_exists = node->children[TrieNode::letter_to_index(c)] != nullptr;
-
-		if (!child_exists)
+		if (!node->check_if_child_exists(letter))
 		{
 			return false;
 		}
 
-		node = node->children[TrieNode::letter_to_index(c)];
+		node = node->get_child(letter);
 	}
 
-	return node->is_complete_word;
+	return node->get_is_complete_word();
 }
