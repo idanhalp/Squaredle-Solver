@@ -1,11 +1,12 @@
 import QtQuick 2.15
 import QtQuick.Controls
+import QtQuick.Layouts
 import "../../GetPuzzle.js" as Puzzle
 
 Popup {
     id: sendIdPopup
-    width: 550
-    height: 250
+	width: 400
+	height: 200
 
     anchors.centerIn: parent
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
@@ -16,36 +17,39 @@ Popup {
         color: "#FFFFC5"
         border.color: "black"
 
-        Text {
-            id: link
-            anchors {
-                verticalCenter: parent.verticalCenter
-                left: parent.left
-                leftMargin: 5
-            }
+		Text {
+			id: textExplanation
 
-            text: "https://squaredle.app/?puzzle="
+			anchors {
+				horizontalCenter: parent.horizontalCenter
+				top: parent.top
+				topMargin: 20
+			}
 
-            font {
-                bold: true
-                pixelSize: 20
-            }
-        }
+			text: "Insert ID (e.g waffle):"
 
-        TextField {
-            id: keyInput
-            anchors {
-                left: link.right
-                verticalCenter: link.verticalCenter
-            }
+			font {
+				bold: true
+				pixelSize: 20
+			}
+		}
 
-            color: "black"
-        }
+		TextField {
+			id: keyInput
+
+			anchors {
+				horizontalCenter: parent.horizontalCenter
+				top: textExplanation.bottom
+				topMargin: 20
+			}
+
+			color: "black"
+		}
 
         Button {
             id: sendId
             anchors {
-                top: link.bottom
+				top: keyInput.bottom
                 topMargin: 15
                 horizontalCenter: parent.horizontalCenter
             }
@@ -56,6 +60,7 @@ Popup {
                 if (keyInput.text !== '') {
                     mainModule.resultsModel.erasePreviousResults()
                     Puzzle.getPuzzleById(keyInput.text)
+					keyInput.clear()
                     sendIdPopup.close()
                 }
             }
