@@ -9,13 +9,14 @@ Item {
 
         anchors {
             top: parent.top
+            topMargin: 10
             left: parent.left
             leftMargin: 10
         }
 
         text: "Found " + mainModule.resultsModel.totalWordsCount + " words"
         color: mainModule.resultsModel.totalWordsCount > 0 ? "black" : "transparent"
-        font.pixelSize: 20
+        font.pixelSize: 30
         font.bold: true
     }
 

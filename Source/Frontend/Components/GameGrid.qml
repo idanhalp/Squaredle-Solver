@@ -5,7 +5,7 @@ import QtQuick.Layouts
 GridView {
 
     id: grid
-    width: 500
+    width: 450
     height: 500
     cellHeight: grid.height / mainModule.gridModel.rows
     cellWidth: grid.width / mainModule.gridModel.columns
