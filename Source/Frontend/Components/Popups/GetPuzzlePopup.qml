@@ -11,6 +11,8 @@ Popup {
     anchors.centerIn: parent
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
+    property bool isLoading: false
+
     Rectangle {
         width: parent.width
         height: parent.height
@@ -21,12 +23,13 @@ Popup {
             id: textExplanation
 
             anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: parent.top
-                topMargin: 20
+                horizontalCenter: isLoading ? undefined : parent.horizontalCenter
+                top: isLoading ? undefined : parent.top
+                topMargin: isLoading ? 0 : 20
+                centerIn: isLoading ? parent : undefined
             }
 
-            text: "Insert ID (e.g waffle):"
+            text: isLoading ? "Loading puzzle..." : "Insert ID (e.g waffle):"
 
             font {
                 bold: true
@@ -36,6 +39,8 @@ Popup {
 
         TextField {
             id: keyInput
+
+            visible: !isLoading
 
             anchors {
                 horizontalCenter: parent.horizontalCenter
@@ -48,6 +53,9 @@ Popup {
 
         Button {
             id: sendId
+
+            visible: !isLoading
+
             anchors {
                 top: keyInput.bottom
                 topMargin: 15
@@ -59,9 +67,11 @@ Popup {
             onClicked: {
                 if (keyInput.text !== '') {
                     mainModule.resultsModel.erasePreviousResults()
-                    Puzzle.getPuzzleById(keyInput.text)
+
+                    isLoading = true
+                    Puzzle.getPuzzleById(keyInput.text) // `isLoading` is set to false once this function terminates.
+
                     keyInput.clear()
-                    sendIdPopup.close()
                 }
             }
         }
