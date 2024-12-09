@@ -5,10 +5,14 @@ function getPuzzleById(id) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             const responseData = JSON.parse(xhr.response)
             const puzzleData = responseData.data
-            if (puzzleData)
+            if (puzzleData) {
                 mainModule.gridModel.fillGrid(puzzleData.puzzle.board)
-            else
+            } else {
                 popups.errorPopup.open()
+            }
+
+            popups.sendIdPopup.close()
+            popups.sendIdPopup.isLoading = false
         }
     }
     xhr.send(JSON.stringify({

@@ -3,7 +3,7 @@ This document details the changes planned for the new version (2.0).
 
 ## Frontend
 - [X] Import puzzles by ID.
-- [ ] Prettier grid.
+- [X] Prettier grid.
 - [X] Improve cell validator.
 - [X] Improved squares clickability.
 - [ ] Support mobile.

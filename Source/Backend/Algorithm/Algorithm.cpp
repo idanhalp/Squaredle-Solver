@@ -26,13 +26,13 @@ namespace Algorithm
 }
 
 /**
- * @brief Traverses the grid and adds occurring words to found_words.
+ * @brief Traverses the grid and adds occurring words to `words_and_indices`.
  *
  * @param row                Current row.
  * @param col                Current column.
  * @param word               Word created by the current path.
  * @param indices            List of indices of the current path.
- * @param visited            Indicates whether some cell was already visited
+ * @param visited            Table indicating whether some cell was already visited
  * @param words_and_indices  List of words and their indices.
  * @param grid               Input grid.
  *
@@ -106,7 +106,6 @@ auto Algorithm::dfs(
 	backtrack(row, col, word, indices, visited);
 }
 
-
 auto Algorithm::backtrack(
 	const size_t row,
 	const size_t col,
@@ -129,9 +128,9 @@ auto Algorithm::process_output(std::vector<WordInfo>& words_and_indices) -> void
 }
 
 /**
- * @brief  Finds the words that occur in the letters grid and their indices.
+ * @brief  Finds the words that occur in the grid and their indices.
  * @param  grid 2d grid filled with letters.
- * @return A map whose keys are the words in the grid, and the values are their respective indices.
+ * @return A vector of words and their respective indices, sorted by shortlex order.
 */
 auto Algorithm::find_words(const std::vector<std::vector<char>>& grid) -> std::vector<WordInfo>
 {

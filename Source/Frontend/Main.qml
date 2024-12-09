@@ -12,6 +12,7 @@ Window {
     height: 480
     visible: true
     title: qsTr("Hello World")
+    color: "#A0A0A0"
 
     MainModule {
         id: mainModule
@@ -86,7 +87,7 @@ Window {
                     spacing: 5
                     Text {
                         text: length + " letters" + " - " + section_count + (section_count == 1 ? " word" : " words")
-                        color: length > 0 ? "red" : "transparent"
+                        color: length > 0 ? "#00224b" : "transparent"
                         font.pixelSize: 30
                     }
 

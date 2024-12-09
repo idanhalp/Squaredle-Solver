@@ -5,7 +5,7 @@ import QtQuick.Layouts
 GridView {
 
     id: grid
-    width: 500
+    width: 450
     height: 500
     cellHeight: grid.height / mainModule.gridModel.rows
     cellWidth: grid.width / mainModule.gridModel.columns
@@ -17,6 +17,7 @@ GridView {
         width: 400 / mainModule.gridModel.rows
         height: 400 / mainModule.gridModel.columns
         color: mainModule.gridModel.validIndices[index] ? "#D3D3D3" : "red"
+        radius: 10
 
         TextField {
             anchors.fill: parent
