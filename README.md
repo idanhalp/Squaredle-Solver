@@ -1,5 +1,5 @@
 # Squaredle Solver
-![squardle-solver_view](link_to_image_of_solver)
+<img title="SquaredleSolver" src="./Media/SquaredleSolver.png" width=300/>
 
 A fast and easy-to-use solver for the word-finding game [Squaredle](https://squaredle.app/).
 
