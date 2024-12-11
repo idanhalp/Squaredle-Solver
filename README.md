@@ -25,11 +25,11 @@ Currently, access from mobile is not supported.
 	</details>
 
 2.	<details>
-	<summary>Press the *solve* button, and the list of the words found in the grid will appear</summary>
+	<summary>Press the 'solve' button, and the list of the words found in the grid will appear</summary>
 	<img title="Solve Demonstration" src="Media/SolveDemonstration.gif" width=600/>
 	</details>
 
 3.	<details>
 	<summary>Click on a word to highlight its squares</summary>
-	<img title="Highlighting Demonstration" src="Media/HiglightingDemonstration.gif" width=600/>
+	<img title="Highlighting Demonstration" src="Media/HighlightingDemonstration.gif" width=600/>
 	</details>
