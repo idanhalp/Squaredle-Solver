@@ -10,17 +10,17 @@ Currently, access from mobile is not supported.
 ## How to use the solver?
 1. Insert the input. Currently, several methods are supported: 
 	<details>
-	<summary>Manually writing into cells</summary>
+	<summary>Manually writing into cells.</summary>
 	<img title="Insert Manually" src="Media/InsertManually.gif" width=400 height=400/>
 	</details>
      
 	<details>
-	<summary>Importing by puzzle ID by pressing the relevant button above the grid</summary>
+	<summary>Importing by puzzle ID.</summary>
 	<img title="Import by ID" src="Media/ImportById.gif" width=400 height=400/>
 	</details>
          
 	<details>
-	<summary>Importing the daily normal and express puzzle by pressing their respective buttons above the grid</summary>
+	<summary>Importing the daily normal and express puzzle.</summary>
 	<img title="Import Daily" src="Media/ImportDaily.gif" width=400 height=400/>
 	</details>
 
