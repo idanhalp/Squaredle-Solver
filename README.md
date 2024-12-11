@@ -1,5 +1,5 @@
 # Squaredle Solver
-<img title="SquaredleSolver" src="./Media/SquaredleSolver.png" width=300/>
+<img title="Squaredle Solver" src="./Media/SquaredleSolver.png" width=300/>
 
 A fast and easy-to-use solver for the word-finding game [Squaredle](https://squaredle.app/).
 
@@ -11,7 +11,11 @@ Currently, access from mobile is not supported.
 1. Insert the input. Currently, several methods are supported:
    * Manually writing into cells.
   
-     ![insert_manually](link_to_gif_of_inserting_puzzle_manually)
+     <details>
+     <summary>How to insert values manually</summary>
+     <img title="Insert Manually" src="Media/InsertManually.gif" width=300/>
+     </details>
+     
    * Importing by puzzle ID by pressing the relevant button above the grid.
      
      ![import_by_id_button](link_to_image_of_import_by_id_button)
@@ -21,6 +25,6 @@ Currently, access from mobile is not supported.
 2. Press the *solve* button, and the list of the words found in the grid will appear.
 
    ![solve_button](link_to_gif_of_pressing_solve_button_and_solution_appearing)
-4. Click on a word to highlight its squares.
+3. Click on a word to highlight its squares.
 
     ![highlight_squares](link_to_gif_of_highlighting_squares)
