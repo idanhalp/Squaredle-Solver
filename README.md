@@ -1,5 +1,5 @@
 # Squaredle Solver
-<img title="Squaredle Solver" src="./Media/SquaredleSolver.png" width=300/>
+<img title="Squaredle Solver" src="./Media/SquaredleSolver.png" width=300 height=400/>
 
 A fast and easy-to-use solver for the word-finding game [Squaredle](https://squaredle.app/).
 
@@ -11,17 +11,17 @@ Currently, access from mobile is not supported.
 1. Insert the input. Currently, several methods are supported: 
 	<details>
 	<summary>Manually writing into cells</summary>
-	<img title="Insert Manually" src="Media/InsertManually.gif" width=300/>
+	<img title="Insert Manually" src="Media/InsertManually.gif" width=400 height=400/>
 	</details>
      
 	<details>
 	<summary>Importing by puzzle ID by pressing the relevant button above the grid</summary>
-	<img title="Import by ID" src="Media/ImportById.gif" width=400/>
+	<img title="Import by ID" src="Media/ImportById.gif" width=400 height=400/>
 	</details>
          
 	<details>
 	<summary>Importing the daily normal and express puzzle by pressing their respective buttons above the grid</summary>
-	<img title="Import Daily" src="Media/ImportDaily.gif" width=300/>
+	<img title="Import Daily" src="Media/ImportDaily.gif" width=400 height=400/>
 	</details>
 
 2.	<details>
