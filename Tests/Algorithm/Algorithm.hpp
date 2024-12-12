@@ -14,6 +14,7 @@ private slots:
 	auto test_grid_3() const -> void;
 	auto test_grid_with_empty_cells() const -> void;
 	auto test_grid_without_words() const -> void;
+	auto test_large_grid() const -> void;
 };
 
 #endif // TESTS_ALGORITHM_HPP

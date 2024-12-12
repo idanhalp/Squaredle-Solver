@@ -63,7 +63,7 @@ auto AlgorithmTests::test_grid_1() const -> void
 
 auto AlgorithmTests::test_grid_2() const -> void
 {
-	const std::vector<std::vector<char>>grid
+	const std::vector<std::vector<char>> grid
 	{
 		{'v','i','n','e'},
 		{'a','d','m','r'},
@@ -146,7 +146,7 @@ auto AlgorithmTests::test_grid_2() const -> void
 
 auto AlgorithmTests::test_grid_3() const -> void
 {
-	const std::vector<std::vector<char>>grid
+	const std::vector<std::vector<char>> grid
 	{
 		{'o','i','e'},
 		{'s','n','o'},
@@ -220,7 +220,7 @@ auto AlgorithmTests::test_grid_with_empty_cells() const -> void
 {
 	const char XXX = Parameters::EMPTY_CELL;
 
-	const std::vector<std::vector<char>>grid
+	const std::vector<std::vector<char>> grid
 	{
 		{XXX,'p','l',XXX,XXX},
 		{'e','t','a','u','o'},
@@ -238,7 +238,7 @@ auto AlgorithmTests::test_grid_with_empty_cells() const -> void
 
 auto AlgorithmTests::test_grid_without_words() const -> void
 {
-	const std::vector<std::vector<char>>grid
+	const std::vector<std::vector<char>> grid
 	{
 		{'a','a','a'},
 		{'a','a','a'},
@@ -249,4 +249,27 @@ auto AlgorithmTests::test_grid_without_words() const -> void
 	const bool no_words_found = solution.empty();
 
 	QVERIFY(no_words_found);
+}
+
+auto AlgorithmTests::test_large_grid() const -> void
+{
+	const std::vector<std::vector<char>> grid
+	{
+		{'x','y','h','w','i','t','s','i','i','n'},
+		{'c','e','l','n','s','e','c','n','d','s'},
+		{'e','y','g','u','i','r','o','t','t','e'},
+		{'t','l','a','s','p','n','e','i','t','x'},
+		{'s','b','t','h','c','a','t','u','t','j'},
+		{'o','i','l','i','c','h','l','c','i','o'},
+		{'i','n','r','o','t','a','l','a','n','c'},
+		{'t','y','a','k','u','y','r','l','t','d'},
+		{'i','u','l','n','t','e','r','i','z','e'},
+		{'x','e','n','o','v','e','q','u','s','a'}
+	};
+
+	const auto solution = Algorithm::find_words(grid);
+	const size_t expected_num_of_words = 2'057;
+	const bool num_of_words_is_correct = solution.size() == expected_num_of_words;
+
+	QVERIFY(num_of_words_is_correct);
 }
