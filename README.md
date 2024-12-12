@@ -33,3 +33,11 @@ Currently, access from mobile is not supported.
 	<summary>Click on a word to highlight its squares</summary>
 	<img title="Highlighting Demonstration" src="Media/HighlightingDemonstration.gif" width=600/>
 	</details>
+
+## Why use this specific solver?
+Our Solver has many advantages:
+* Very accessible: No need to download anything, just click the link to the website.
+* Very easy to use: Simple and intuitive UI.
+* Supports importing puzzles: Applying the daily and past puzzles is as simple as pressing a button.
+* Supports word highlighting: Can't find a word? Click it and it will be displayed. 
+
