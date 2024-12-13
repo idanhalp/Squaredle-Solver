@@ -19,6 +19,8 @@ int GridModel::rowCount(const QModelIndex &parent) const
 
 bool GridModel::removeRows(int row, int count, const QModelIndex &parent)
 {
+    Q_UNUSED(parent);
+
     beginRemoveRows(QModelIndex(), row, row + count - 1);
     m_grid.clear();
     endRemoveRows();
@@ -57,6 +59,9 @@ void GridModel::updateGrid(QString c, int index)
 
 void GridModel::buildGrid(int rows, int columns)
 {
+    Q_UNUSED(rows);
+    Q_UNUSED(columns);
+
     for (int i = 0; i < m_rows * m_columns; i++)
     {
         addCell();

@@ -13,6 +13,8 @@ int ResultsModel::rowCount(const QModelIndex &parent) const
 
 bool ResultsModel::removeRows(int row, int count, const QModelIndex &parent)
 {
+    Q_UNUSED(parent);
+
     beginRemoveRows(QModelIndex(), row, row + count - 1);
     m_results.clear();
     endRemoveRows();
