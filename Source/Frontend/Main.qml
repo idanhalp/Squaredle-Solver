@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import SquaredleSolver
-import 'https://cloudflare-cors-anywhere.oranhero.workers.dev/?https://squaredle.app/api/today-puzzle-config.js' as Script
+import 'https://squaredle.app/api/today-puzzle-config.js' as Script
 import "Components"
 import "Components/Popups"
 
